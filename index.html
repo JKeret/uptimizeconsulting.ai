@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uptimize Consulting AI — AI Solutions for Local & Mid-Market Businesses</title>
+<meta name="description" content="We help local and mid-market businesses harness AI to automate operations, cut costs, and compete — without the enterprise price tag.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F1937;--blue:#1E8CDC;--teal:#00C3A5;--white:#EFF4F9;--light:#E4EDF6;--gray:#64748B;--dark-text:#1E293B}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Montserrat',system-ui,sans-serif;color:var(--dark-text);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,25,55,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+nav .logo img{height:40px}
+nav ul{list-style:none;display:flex;gap:32px}
+nav ul li a{color:rgba(255,255,255,.75);font-size:.85rem;font-weight:500;letter-spacing:.02em;transition:color .2s}
+nav ul li a:hover{color:var(--teal)}
+nav .cta-nav{background:var(--teal);color:var(--navy);padding:10px 22px;border-radius:8px;font-weight:700;font-size:.85rem;transition:transform .2s,box-shadow .2s}
+nav .cta-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,195,165,.35)}
+.menu-toggle{display:none;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer}
+
+/* HERO */
+.hero{background:linear-gradient(165deg,#0a1128 0%,var(--navy) 40%,#132347 100%);padding:160px 0 120px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(30,140,220,.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,195,165,.08) 0%,transparent 70%);pointer-events:none}
+.hero .container{position:relative;z-index:1;max-width:820px}
+.hero h1{color:var(--white);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;line-height:1.15;margin-bottom:24px;letter-spacing:-.02em}
+.hero p{color:rgba(255,255,255,.7);font-size:clamp(1rem,2vw,1.2rem);max-width:640px;margin-bottom:40px;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--navy);padding:16px 32px;border-radius:10px;font-weight:700;font-size:1rem;transition:all .25s;border:none;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,195,165,.3)}
+.btn-outline{background:transparent;border:2px solid rgba(255,255,255,.25);color:var(--white);margin-left:16px}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
+
+/* PROBLEM */
+.problem{padding:100px 0;background:var(--white)}
+.problem .container{max-width:800px;text-align:center}
+.problem p{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--gray);line-height:1.8}
+.problem p strong{color:var(--dark-text)}
+
+/* SECTION COMMON */
+.section-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px;color:var(--navy)}
+.section-sub{color:var(--gray);font-size:1.05rem;max-width:600px;line-height:1.7}
+
+/* SERVICES */
+.services{padding:100px 0;background:var(--light)}
+.services .header{text-align:center;margin-bottom:64px}
+.services .header .section-sub{margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.card{background:#FFFFFF;border-radius:16px;padding:40px 32px;border:1px solid #E2E8F0;transition:all .3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(15,25,55,.08);border-color:transparent}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:0;transition:opacity .3s}
+.card:hover::after{opacity:1}
+.card-icon{font-size:2.5rem;margin-bottom:20px;display:inline-block}
+.card h3{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+.card p{color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:20px}
+.card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.card ul li{background:var(--light);color:var(--dark-text);font-size:.8rem;font-weight:500;padding:6px 14px;border-radius:100px}
+
+/* USE CASES */
+.use-cases{padding:100px 0;background:var(--white)}
+.use-cases .header{text-align:center;margin-bottom:64px}
+.use-cases .header .section-sub{margin:0 auto}
+.use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+.use-item{background:linear-gradient(135deg,rgba(15,25,55,.03),rgba(30,140,220,.04));border:1px solid rgba(30,140,220,.1);border-radius:14px;padding:32px 28px;transition:all .3s}
+.use-item:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(15,25,55,.06);border-color:var(--teal)}
+.use-item .use-industry{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.use-item h4{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.use-item p{color:var(--gray);font-size:.88rem;line-height:1.7}
+
+/* CASE STUDY */
+.case-study{padding:100px 0;background:var(--white)}
+.case-study .inner{background:linear-gradient(135deg,var(--navy),#1a2d5a);border-radius:20px;padding:64px;display:flex;align-items:center;gap:48px;position:relative;overflow:hidden}
+.case-study .inner::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,195,165,.15),transparent 70%);pointer-events:none}
+.case-study .badge{display:inline-block;background:rgba(0,195,165,.15);color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:20px}
+.case-study h3{font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--white);font-weight:700;line-height:1.4;margin-bottom:16px}
+.case-study p{color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:28px}
+.case-study .stat{display:inline-flex;align-items:baseline;gap:8px;background:rgba(255,255,255,.07);padding:12px 20px;border-radius:10px;margin-right:12px;margin-bottom:12px}
+.case-study .stat strong{font-size:1.6rem;color:var(--teal);font-weight:800}
+.case-study .stat span{font-size:.85rem;color:rgba(255,255,255,.5)}
+
+/* WHY US */
+.why-us{padding:100px 0;background:var(--light)}
+.why-us .header{text-align:center;margin-bottom:64px}
+.why-us .header .section-sub{margin:0 auto}
+.reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
+.reason{text-align:center}
+.reason .icon-wrap{width:56px;height:56px;background:linear-gradient(135deg,rgba(30,140,220,.1),rgba(0,195,165,.1));border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px}
+.reason h4{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.reason p{color:var(--gray);font-size:.9rem;line-height:1.7}
+
+/* HOW IT WORKS */
+.how-it-works{padding:100px 0;background:var(--white)}
+.how-it-works .header{text-align:center;margin-bottom:64px}
+.how-it-works .header .section-sub{margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;position:relative}
+.step{text-align:center;position:relative}
+.step-num{width:48px;height:48px;background:linear-gradient(135deg,var(--blue),var(--teal));color:var(--white);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;margin-bottom:20px}
+.step h4{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.step p{color:var(--gray);font-size:.9rem;line-height:1.7}
+
+/* ABOUT */
+.about{padding:100px 0;background:var(--light)}
+.about .container{max-width:800px}
+.about .header{text-align:center;margin-bottom:40px}
+.about p{color:var(--gray);font-size:1.05rem;line-height:1.8;margin-bottom:20px}
+.about p strong{color:var(--dark-text)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;justify-content:center}
+.tags span{background:#FFFFFF;border:1px solid #E2E8F0;padding:8px 18px;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--navy)}
+
+/* CONTACT CTA */
+.contact{padding:120px 0;background:linear-gradient(165deg,var(--navy),#132347);text-align:center;position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:1000px;background:radial-gradient(circle,rgba(0,195,165,.06),transparent 60%);pointer-events:none}
+.contact .container{position:relative;z-index:1}
+.contact h2{color:var(--white);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin-bottom:16px}
+.contact p{color:rgba(255,255,255,.6);font-size:1.1rem;max-width:540px;margin:0 auto 40px;line-height:1.7}
+.contact .info{margin-top:40px;display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+.contact .info span{color:rgba(255,255,255,.45);font-size:.9rem}
+
+/* FOOTER */
+footer{background:#0a1128;padding:40px 0;border-top:1px solid rgba(255,255,255,.05)}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer p{color:rgba(255,255,255,.35);font-size:.8rem}
+footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav ul.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(15,25,55,.98);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid rgba(255,255,255,.06)}
+  nav ul.nav-links.open{display:flex}
+  .menu-toggle{display:block}
+  .hero{padding:130px 0 80px}
+  .btn-outline{margin-left:0;margin-top:12px}
+  .hero .btns{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+  .case-study .inner{flex-direction:column;padding:40px 28px}
+  .contact .info{flex-direction:column;gap:16px}
+  footer .container{flex-direction:column;text-align:center}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="#" class="logo"><img src="logo.jpg" alt="Uptimize Consulting AI"></a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#case-study">Results</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#how">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="cta-nav">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>AI Solutions for the Businesses That Need It Most</h1>
+    <p>We help local and mid-market businesses harness AI to automate operations, cut costs, and compete with the big guys — without the enterprise price tag.</p>
+    <div class="btns">
+      <a href="#contact" class="btn">Book a Free Consultation →</a>
+      <a href="#services" class="btn btn-outline">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / WHAT WE DO -->
+<section class="problem">
+  <div class="container">
+    <p>Big companies are spending millions on AI. Your business doesn't have millions — but you still need to keep up. <strong>The problem isn't that AI is too complex. It's that no one's building it for businesses like yours.</strong></p>
+    <br>
+    <p>We bring enterprise-grade AI to local businesses. Not theory. Not hype. <strong>Real automation that saves you time and money — starting week one.</strong></p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Three Pillars of Transformation</h2>
+      <p class="section-sub">Enterprise-grade AI, built for businesses that actually need it.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <h3>AI Automation &amp; Workflows</h3>
+        <p>Repetitive tasks eating your team's time? We build AI agents that handle the boring stuff — scheduling, data entry, customer communications — so your people can focus on what matters.</p>
+        <ul>
+          <li>Process automation</li>
+          <li>AI customer service</li>
+          <li>Document processing</li>
+          <li>Workflow optimization</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔄</span>
+        <h3>Digital Transformation</h3>
+        <p>Still running on spreadsheets and paper? We modernize your operations with custom digital tools — from digital signage to automated marketing to smart inventory systems.</p>
+        <ul>
+          <li>Digital signage</li>
+          <li>Automated content</li>
+          <li>Catalog management</li>
+          <li>POS integration</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="card-icon">🧭</span>
+        <h3>AI Strategy &amp; Advisory</h3>
+        <p>Not sure where to start? We assess your business, identify the highest-ROI opportunities for AI, and build a roadmap you can actually execute.</p>
+        <ul>
+          <li>AI readiness assessment</li>
+          <li>Technology roadmap</li>
+          <li>Vendor evaluation</li>
+          <li>Advisory retainer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="use-cases" id="use-cases">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">Use Cases</span>
+      <h2 class="section-title">AI at Work — Across Industries</h2>
+      <p class="section-sub">Real examples of how local businesses use AI to save time, reduce costs, and grow.</p>
+    </div>
+    <div class="use-grid">
+      <div class="use-item">
+        <div class="use-industry">🛒 Grocery & Specialty Retail</div>
+        <h4>Automated Weekly Ad & Promotional Content</h4>
+        <p>AI generates weekly promotional ads, digital signage, and product catalogs from your inventory — cutting hours of manual design work to minutes.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-industry">🍽️ Restaurants & Food Service</div>
+        <h4>Smart Inventory & Waste Reduction</h4>
+        <p>AI tracks ingredient usage patterns, predicts demand based on historical sales and events, and auto-generates reorder lists — reducing food waste by up to 30%.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-industry">⚖️ Professional Services</div>
+        <h4>Automated Client Intake & Document Processing</h4>
+        <p>AI handles initial client inquiries, extracts key data from documents, routes requests to the right team member, and drafts follow-up communications.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-industry">🏥 Medical & Dental Offices</div>
+        <h4>Patient Communication & Scheduling</h4>
+        <p>AI agents manage appointment reminders, handle rescheduling, answer common patient questions, and process intake forms — freeing front desk staff for patient care.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-industry">🏗️ Contractors & Trades</div>
+        <h4>Estimate Generation & Job Scheduling</h4>
+        <p>AI analyzes project specs and photos to generate preliminary estimates, optimizes crew scheduling across jobs, and sends automated status updates to clients.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-industry">🏬 Multi-Location Retail</div>
+        <h4>Unified Operations & Reporting</h4>
+        <p>AI consolidates data across locations into real-time dashboards, identifies performance trends, flags inventory discrepancies, and automates inter-store transfers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-study" id="case-study">
+  <div class="container">
+    <div class="inner">
+      <div>
+        <span class="badge">Case Study — Curacao</span>
+        <h3>AI-Powered Customer Service Across 15 Retail Locations</h3>
+        <p>Curacao, a major Southern California retail chain with 15 locations averaging 100,000 sq ft each, needed to scale customer support without scaling headcount. We designed and deployed an AI assistant that handles customer inquiries, account payments, and product questions — with 100% accuracy backed by real-time access to their product catalog, support docs, and customer database.</p>
+        <div>
+          <span class="stat"><strong>15</strong><span>locations served</span></span>
+          <span class="stat"><strong>100%</strong><span>answer accuracy</span></span>
+          <span class="stat"><strong>50%</strong><span>satisfaction increase</span></span>
+          <span class="stat"><strong>24/7</strong><span>availability</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="why-us">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">Why Uptimize AI</span>
+      <h2 class="section-title">Built Different, On Purpose</h2>
+      <p class="section-sub">We're not a faceless agency. We're your neighbors who happen to build enterprise-grade AI.</p>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <div class="icon-wrap">🔐</div>
+        <h4>We Speak Both Languages</h4>
+        <p>Enterprise infrastructure and cybersecurity background — Fortune 500 expertise, delivered to your business.</p>
+      </div>
+      <div class="reason">
+        <div class="icon-wrap">📍</div>
+        <h4>We're Local</h4>
+        <p>Based in Naperville, IL. We're your neighbors, not a faceless agency on the other side of the country.</p>
+      </div>
+      <div class="reason">
+        <div class="icon-wrap">🛠️</div>
+        <h4>We Build, Not Just Advise</h4>
+        <p>Most consultants hand you a PDF and wish you luck. We build the actual tools and systems. If it doesn't work, we fix it.</p>
+      </div>
+      <div class="reason">
+        <div class="icon-wrap">🌱</div>
+        <h4>We Start Small</h4>
+        <p>No six-figure contracts required. We find one high-impact problem, solve it, and grow from there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">Our Process</span>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">From first call to measurable results in weeks, not months.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Discovery Call</h4>
+        <p>Free, 30 minutes. Tell us what's eating your time. We'll tell you if AI can help.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Assessment</h4>
+        <p>We map your operations and identify the biggest opportunities for automation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Build &amp; Deploy</h4>
+        <p>We build the solution, train your team, and go live. No endless planning cycles.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Optimize</h4>
+        <p>Monthly check-ins to measure impact, gather feedback, and improve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">About</span>
+      <h2 class="section-title">The Story Behind Uptimize</h2>
+    </div>
+    <p>Uptimize AI was founded by Jonathan Keret, an IT infrastructure and cybersecurity veteran with 15+ years of experience helping enterprise companies deploy complex technology.</p>
+    <p>After years of watching billion-dollar companies invest millions in AI while local businesses got left behind, the mission became clear: <strong>bring the same caliber of AI solutions to the businesses that drive our communities.</strong></p>
+    <p>We're based in Naperville, Illinois — and we believe the local restaurant, the neighborhood grocery store, and the family-owned retail shop deserve the same technology advantages as the Fortune 500.</p>
+    <div class="tags">
+      <span>Enterprise Infrastructure</span>
+      <span>Cybersecurity &amp; SASE</span>
+      <span>Cloud &amp; AI Deployment</span>
+      <span>Solution Engineering</span>
+      <span>15+ Years Experience</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2>Ready to See What AI Can Do for Your Business?</h2>
+    <p>Book a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about whether AI makes sense for you right now.</p>
+    <a href="mailto:hello@uptimizeconsulting.ai" class="btn">Book a Free Consultation →</a>
+    <div class="info">
+      <span>📧 hello@uptimizeconsulting.ai</span>
+      <span>📍 Naperville, IL</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 Uptimize Consulting AI — Naperville, IL</p>
+    <p class="formerly">Formerly Uptimize Consulting</p>
+  </div>
+</footer>
+
+<script>
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
