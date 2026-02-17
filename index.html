@@ -424,7 +424,8 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div id="form-content">
       <h3>Book a Free Consultation</h3>
       <p>Tell us a bit about your business — we'll get back to you within 24 hours.</p>
-      <form id="consultation-form">
+      <form id="consultation-form" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="bot-field">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Email Address" required>
         <textarea name="message" placeholder="How can we help your business?"></textarea>
@@ -439,21 +440,23 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 </div>
 
 <script>
-// Form submission → mailto
-document.getElementById('consultation-form').addEventListener('submit',function(e){
+// Form submission → Netlify
+document.getElementById('consultation-form').addEventListener('submit',async function(e){
   e.preventDefault();
-  const name=this.name.value;const email=this.email.value;const msg=this.message.value;
-  const subject=encodeURIComponent('Consultation Request from '+name);
-  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+msg);
-  window.location='mailto:hello@uptimizeconsulting.ai?subject='+subject+'&body='+body;
-  document.getElementById('form-content').style.display='none';
-  document.getElementById('form-success').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('consultation-modal').style.display='none';
-    document.getElementById('form-content').style.display='block';
-    document.getElementById('form-success').style.display='none';
-    this.reset();
-  },3000);
+  const form=this;const data=new URLSearchParams(new FormData(form));
+  try{
+    const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()});
+    if(res.ok){
+      document.getElementById('form-content').style.display='none';
+      document.getElementById('form-success').style.display='block';
+      setTimeout(()=>{
+        document.getElementById('consultation-modal').style.display='none';
+        document.getElementById('form-content').style.display='block';
+        document.getElementById('form-success').style.display='none';
+        form.reset();
+      },3000);
+    }else{window.location='mailto:hello@uptimizeconsulting.ai';}
+  }catch(err){window.location='mailto:hello@uptimizeconsulting.ai';}
 });
 
 // Close mobile nav on link click
