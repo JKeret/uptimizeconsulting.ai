@@ -132,6 +132,22 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 footer p{color:rgba(255,255,255,.35);font-size:.8rem}
 footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,17,40,.75);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center;padding:24px}
+.modal{background:#fff;border-radius:20px;padding:48px 40px;max-width:480px;width:100%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.3)}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.6rem;color:var(--gray);cursor:pointer;transition:color .2s}
+.modal-close:hover{color:var(--navy)}
+.modal h3{font-size:1.5rem;font-weight:800;color:var(--navy);margin-bottom:8px}
+.modal p{color:var(--gray);font-size:.95rem;margin-bottom:28px;line-height:1.6}
+.modal form{display:flex;flex-direction:column;gap:16px}
+.modal input,.modal textarea{font-family:'Montserrat',system-ui,sans-serif;font-size:.95rem;padding:14px 18px;border:1.5px solid #E2E8F0;border-radius:10px;outline:none;transition:border-color .2s;color:var(--dark-text);background:#F8FAFC}
+.modal input:focus,.modal textarea:focus{border-color:var(--blue)}
+.modal textarea{resize:vertical;min-height:100px}
+.modal .btn{width:100%;justify-content:center;font-size:1rem;padding:16px}
+.modal .success-msg{display:none;text-align:center;padding:40px 0}
+.modal .success-msg h4{font-size:1.3rem;color:var(--navy);margin-bottom:8px}
+.modal .success-msg p{color:var(--gray)}
+
 /* RESPONSIVE */
 @media(max-width:768px){
   nav ul.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(15,25,55,.98);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -160,7 +176,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
       <li><a href="#why-us">Why Us</a></li>
       <li><a href="#how">Process</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact" class="cta-nav">Book a Call</a></li>
+      <li><a href="#" class="cta-nav" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Call</a></li>
     </ul>
   </div>
 </nav>
@@ -171,7 +187,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <h1>AI Solutions for the Businesses That Need It Most</h1>
     <p>We help local and mid-market businesses harness AI to automate operations, cut costs, and compete with the big guys — without the enterprise price tag.</p>
     <div class="btns">
-      <a href="#contact" class="btn">Book a Free Consultation →</a>
+      <a href="#" class="btn" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Free Consultation →</a>
       <a href="#services" class="btn btn-outline">See How It Works</a>
     </div>
   </div>
@@ -385,7 +401,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   <div class="container">
     <h2>Ready to See What AI Can Do for Your Business?</h2>
     <p>Book a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about whether AI makes sense for you right now.</p>
-    <a href="mailto:hello@uptimizeconsulting.ai" class="btn">Book a Free Consultation →</a>
+    <a href="#" class="btn" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Free Consultation →</a>
     <div class="info">
       <span>📧 hello@uptimizeconsulting.ai</span>
       <span>📍 Naperville, IL</span>
@@ -401,7 +417,45 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   </div>
 </footer>
 
+<!-- CONSULTATION MODAL -->
+<div class="modal-overlay" id="consultation-modal" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('consultation-modal').style.display='none'">&times;</button>
+    <div id="form-content">
+      <h3>Book a Free Consultation</h3>
+      <p>Tell us a bit about your business — we'll get back to you within 24 hours.</p>
+      <form id="consultation-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="How can we help your business?"></textarea>
+        <button type="submit" class="btn">Send Message →</button>
+      </form>
+    </div>
+    <div class="success-msg" id="form-success">
+      <h4>✅ Message Sent!</h4>
+      <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
 <script>
+// Form submission → mailto
+document.getElementById('consultation-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=this.name.value;const email=this.email.value;const msg=this.message.value;
+  const subject=encodeURIComponent('Consultation Request from '+name);
+  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+msg);
+  window.location='mailto:hello@uptimizeconsulting.ai?subject='+subject+'&body='+body;
+  document.getElementById('form-content').style.display='none';
+  document.getElementById('form-success').style.display='block';
+  setTimeout(()=>{
+    document.getElementById('consultation-modal').style.display='none';
+    document.getElementById('form-content').style.display='block';
+    document.getElementById('form-success').style.display='none';
+    this.reset();
+  },3000);
+});
+
 // Close mobile nav on link click
 document.querySelectorAll('.nav-links a').forEach(a=>{
   a.addEventListener('click',()=>{
