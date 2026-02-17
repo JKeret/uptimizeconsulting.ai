@@ -1,0 +1,3 @@
+# Redirect .com to .ai
+https://uptimizeconsulting.com/* https://uptimizeconsulting.ai/:splat 301!
+http://uptimizeconsulting.com/* https://uptimizeconsulting.ai/:splat 301!
