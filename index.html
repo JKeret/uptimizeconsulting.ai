@@ -425,7 +425,9 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div id="form-content">
       <h3>Book a Free Consultation</h3>
       <p>Tell us a bit about your business — we'll get back to you within 24 hours.</p>
-      <form id="consultation-form">
+      <form id="consultation-form" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="consultation">
+        <p class="hidden" style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
 
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Email Address" required>
@@ -440,21 +442,15 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init('0wWYx_0TTQciXgTPV');
-// Form submission → EmailJS
+// Form submission → Netlify Forms (fetch POST)
 document.getElementById('consultation-form').addEventListener('submit',async function(e){
   e.preventDefault();
   const form=this;
-  const params={
-    name:form.querySelector('[name="name"]').value,
-    email:form.querySelector('[name="email"]').value,
-    message:form.querySelector('[name="message"]').value,
-    reply_to:form.querySelector('[name="email"]').value
-  };
+  const formData=new FormData(form);
   try{
-    await emailjs.send('service_3lmw01i','template_m3a7a8s',params);
+    const resp=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()});
+    if(!resp.ok) throw new Error('Form submission failed');
     document.getElementById('form-content').style.display='none';
     document.getElementById('form-success').style.display='block';
     setTimeout(()=>{
@@ -464,8 +460,8 @@ document.getElementById('consultation-form').addEventListener('submit',async fun
       form.reset();
     },3000);
   }catch(err){
-    console.error('EmailJS error:',err);
-    window.location='mailto:hello@uptimizeconsulting.ai';
+    console.error('Form error:',err);
+    alert('Something went wrong. Please email us at hello@uptimizeconsulting.ai');
   }
 });
 
