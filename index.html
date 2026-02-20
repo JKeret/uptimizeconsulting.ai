@@ -148,6 +148,15 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 .modal .success-msg{display:none;text-align:center;padding:40px 0}
 .modal .success-msg h4{font-size:1.3rem;color:var(--navy);margin-bottom:8px}
 .modal .success-msg p{color:var(--gray)}
+.modal select{font-family:'Montserrat',system-ui,sans-serif;font-size:.95rem;padding:14px 18px;border:1.5px solid #E2E8F0;border-radius:10px;outline:none;transition:border-color .2s;color:var(--dark-text);background:#F8FAFC;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.modal select:focus{border-color:var(--blue)}
+.modal select option[disabled]{color:#94A3B8}
+.form-steps{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:24px}
+.form-step-dot{width:32px;height:32px;border-radius:50%;background:#E2E8F0;color:#94A3B8;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;transition:all .3s}
+.form-step-dot.active{background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff}
+.form-step-line{width:40px;height:2px;background:#E2E8F0;margin:0 8px}
+.btn-back{background:transparent;border:2px solid #E2E8F0;color:var(--gray);padding:16px 24px}
+.btn-back:hover{border-color:var(--blue);color:var(--navy);transform:translateY(-2px);box-shadow:none}
 
 /* RESPONSIVE */
 @media(max-width:768px){
@@ -425,24 +434,95 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div id="form-content">
       <h3>Book a Free Consultation</h3>
       <p>Tell us a bit about your business — we'll get back to you within 24 hours.</p>
+      <div class="form-steps">
+        <span class="form-step-dot active" id="dot1">1</span>
+        <span class="form-step-line"></span>
+        <span class="form-step-dot" id="dot2">2</span>
+      </div>
       <form id="consultation-form" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="consultation">
         <p class="hidden" style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
 
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <textarea name="message" placeholder="How can we help your business?"></textarea>
-        <button type="submit" class="btn">Send Message →</button>
+        <!-- Step 1: Contact Info -->
+        <div class="form-page" id="step1">
+          <input type="text" name="name" placeholder="Full Name *" required>
+          <input type="email" name="email" placeholder="Email Address *" required>
+          <input type="tel" name="phone" placeholder="Phone (optional)">
+          <input type="text" name="company" placeholder="Company / Business Name">
+          <button type="button" class="btn" onclick="goStep2()">Next →</button>
+        </div>
+
+        <!-- Step 2: Business Details -->
+        <div class="form-page" id="step2" style="display:none">
+          <select name="industry">
+            <option value="" disabled selected>Business Type</option>
+            <option value="Restaurant / Food Service">Restaurant / Food Service</option>
+            <option value="Retail / Store">Retail / Store</option>
+            <option value="Professional Services">Professional Services</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Other">Other</option>
+          </select>
+          <select name="interest">
+            <option value="" disabled selected>What are you interested in?</option>
+            <option value="AI Automation & Workflows">AI Automation & Workflows</option>
+            <option value="Digital Transformation">Digital Transformation</option>
+            <option value="Custom AI Solutions">Custom AI Solutions</option>
+            <option value="Not sure — just exploring">Not sure — just exploring</option>
+          </select>
+          <select name="team_size">
+            <option value="" disabled selected>Team Size</option>
+            <option value="Just me">Just me</option>
+            <option value="2-10">2–10</option>
+            <option value="11-50">11–50</option>
+            <option value="50+">50+</option>
+          </select>
+          <select name="referral">
+            <option value="" disabled selected>How did you hear about us?</option>
+            <option value="Google Search">Google Search</option>
+            <option value="Referral">Referral</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea name="message" placeholder="Tell us about your biggest challenge (optional)"></textarea>
+          <div style="display:flex;gap:12px">
+            <button type="button" class="btn btn-back" onclick="goStep1()">← Back</button>
+            <button type="submit" class="btn" style="flex:1">Submit →</button>
+          </div>
+        </div>
       </form>
     </div>
     <div class="success-msg" id="form-success">
-      <h4>✅ Message Sent!</h4>
-      <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+      <h4>✅ You're All Set!</h4>
+      <p>Thanks for reaching out. We'll review your info and get back to you within 24 hours.</p>
     </div>
   </div>
 </div>
 
 <script>
+// Step navigation
+function goStep2(){
+  const form=document.getElementById('consultation-form');
+  const name=form.querySelector('[name="name"]');
+  const email=form.querySelector('[name="email"]');
+  if(!name.value.trim()){name.focus();return}
+  if(!email.value.trim()||!email.validity.valid){email.focus();return}
+  document.getElementById('step1').style.display='none';
+  document.getElementById('step2').style.display='flex';
+  document.getElementById('step2').style.flexDirection='column';
+  document.getElementById('step2').style.gap='16px';
+  document.getElementById('dot1').classList.remove('active');
+  document.getElementById('dot2').classList.add('active');
+}
+function goStep1(){
+  document.getElementById('step2').style.display='none';
+  document.getElementById('step1').style.display='flex';
+  document.getElementById('step1').style.flexDirection='column';
+  document.getElementById('step1').style.gap='16px';
+  document.getElementById('dot2').classList.remove('active');
+  document.getElementById('dot1').classList.add('active');
+}
 // Form submission → Netlify Forms (fetch POST)
 document.getElementById('consultation-form').addEventListener('submit',async function(e){
   e.preventDefault();
