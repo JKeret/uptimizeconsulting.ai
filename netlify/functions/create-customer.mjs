@@ -1,7 +1,7 @@
 // netlify/functions/create-customer.mjs
 import { createClient } from '@supabase/supabase-js'
-import { handleCreateCustomer } from './create-customer.logic.mjs'
-import { sharedDeps, json } from './_lib.mjs'
+import { handleCreateCustomer } from '../shared/create-customer.logic.mjs'
+import { sharedDeps, json } from '../shared/_lib.mjs'
 
 const SUPABASE_URL = process.env.SUPABASE_URL
 const ANON = process.env.SUPABASE_ANON_KEY

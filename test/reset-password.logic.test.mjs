@@ -1,6 +1,6 @@
 // test/reset-password.logic.test.mjs
 import { describe, it, expect, vi } from 'vitest'
-import { handleResetPassword } from '../netlify/functions/reset-password.logic.mjs'
+import { handleResetPassword } from '../netlify/shared/reset-password.logic.mjs'
 
 function deps({ admin = true, updateError = null } = {}) {
   return {

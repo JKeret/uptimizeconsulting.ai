@@ -1,6 +1,6 @@
 // test/create-customer.logic.test.mjs
 import { describe, it, expect, vi } from 'vitest'
-import { handleCreateCustomer } from '../netlify/functions/create-customer.logic.mjs'
+import { handleCreateCustomer } from '../netlify/shared/create-customer.logic.mjs'
 
 function deps({ admin = true, createUserError = null, insertError = null } = {}) {
   const createdUser = { id: 'new-uid-1' }

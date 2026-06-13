@@ -1,7 +1,7 @@
 // netlify/functions/reset-password.mjs
 import { createClient } from '@supabase/supabase-js'
-import { handleResetPassword } from './reset-password.logic.mjs'
-import { sharedDeps, json } from './_lib.mjs'
+import { handleResetPassword } from '../shared/reset-password.logic.mjs'
+import { sharedDeps, json } from '../shared/_lib.mjs'
 
 const SUPABASE_URL = process.env.SUPABASE_URL
 const ANON = process.env.SUPABASE_ANON_KEY
