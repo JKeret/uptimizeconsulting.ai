@@ -46,7 +46,7 @@ function fileRow(userId, f, opts, refresh) {
     del.addEventListener('click', async () => {
       if (!confirm(`Delete "${f.name}"?`)) return
       const { error } = await supabase.storage.from(BUCKET).remove([`${userId}/${f.name}`])
-      if (error) alert('Delete failed: ' + error.message)
+      if (error) { alert('Delete failed: ' + error.message); return }
       refresh()
     })
     actions.appendChild(del)
@@ -58,7 +58,12 @@ function fileRow(userId, f, opts, refresh) {
 async function downloadFile(path) {
   const { data, error } = await supabase.storage.from(BUCKET).createSignedUrl(path, 60, { download: true })
   if (error) { alert('Download failed: ' + error.message); return }
-  window.open(data.signedUrl, '_blank')
+  const a = document.createElement('a')
+  a.href = data.signedUrl
+  a.download = ''
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
 }
 
 function buildDropzone(userId, refresh) {
