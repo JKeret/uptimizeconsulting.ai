@@ -1,0 +1,9 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Serve the SPA shell for any /portal/* path (client-side handles views)
+[[redirects]]
+  from = "/portal/*"
+  to = "/portal/index.html"
+  status = 200
