@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Client Portal — Uptimize Consulting AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="portal-bar">
+    <a class="brand" href="/">Uptimize Consulting <span>AI</span></a>
+    <div class="bar-right">
+      <span id="who" class="who"></span>
+      <button id="logout-btn" type="button" class="btn ghost" hidden>Log out</button>
+    </div>
+  </header>
+
+  <main class="portal-main">
+    <!-- LOGIN -->
+    <section id="login-view" class="card" hidden>
+      <h1>Client Portal</h1>
+      <p class="muted">Sign in to access your files.</p>
+      <form id="login-form">
+        <label>Email <input type="email" id="login-email" autocomplete="username" required /></label>
+        <label>Password <input type="password" id="login-password" autocomplete="current-password" required /></label>
+        <button class="btn" type="submit">Sign in</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+    </section>
+
+    <!-- CUSTOMER -->
+    <section id="customer-view" hidden>
+      <div class="row-between">
+        <h1>Your Files</h1>
+        <button id="cust-change-pw" type="button" class="btn ghost">Change password</button>
+      </div>
+      <div id="customer-files"></div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin-view" hidden>
+      <div class="row-between">
+        <h1>Admin — Customer Files</h1>
+        <div class="file-actions">
+          <button id="admin-reset-pw" type="button" class="btn ghost">Reset password</button>
+          <button id="admin-add-customer" type="button" class="btn">+ Add customer</button>
+        </div>
+      </div>
+      <label class="picker">Customer
+        <select id="admin-customer-select"></select>
+      </label>
+      <div id="admin-files"></div>
+    </section>
+  </main>
+
+  <div id="loading" class="loading">Loading…</div>
+  <!-- self-contained supabase-js (no CDN); must load before the app module -->
+  <script src="./vendor/supabase.umd.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

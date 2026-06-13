@@ -1,0 +1,48 @@
+// test/lib.test.mjs
+import { describe, it, expect } from 'vitest'
+import { formatBytes, sanitizeFilename, storagePathFor, isProbablyEmail, generatePassword } from '../portal/lib.js'
+
+describe('formatBytes', () => {
+  it('formats zero and units', () => {
+    expect(formatBytes(0)).toBe('0 B')
+    expect(formatBytes(512)).toBe('512 B')
+    expect(formatBytes(1024)).toBe('1.0 KB')
+    expect(formatBytes(1536)).toBe('1.5 KB')
+    expect(formatBytes(1048576)).toBe('1.0 MB')
+  })
+})
+
+describe('sanitizeFilename', () => {
+  it('strips path separators and control chars, keeps extension', () => {
+    expect(sanitizeFilename('../../etc/passwd')).toBe('passwd')
+    expect(sanitizeFilename('my report (final).pdf')).toBe('my report (final).pdf')
+    // NUL byte in filename is stripped
+    expect(sanitizeFilename('weird\x00name.exe')).toBe('weirdname.exe')
+  })
+  it('falls back when name becomes empty', () => {
+    expect(sanitizeFilename('/////')).toBe('file')
+  })
+})
+
+describe('storagePathFor', () => {
+  it('joins uid folder and sanitized filename', () => {
+    expect(storagePathFor('abc-123', 'a/b/report.pdf')).toBe('abc-123/report.pdf')
+  })
+})
+
+describe('isProbablyEmail', () => {
+  it('accepts valid and rejects invalid', () => {
+    expect(isProbablyEmail('a@b.co')).toBe(true)
+    expect(isProbablyEmail('nope')).toBe(false)
+    expect(isProbablyEmail('')).toBe(false)
+  })
+})
+
+describe('generatePassword', () => {
+  it('produces a strong-length password from the byte source', () => {
+    const bytes = new Uint8Array(24).fill(7)
+    const pw = generatePassword(() => bytes)
+    expect(pw).toHaveLength(24)
+    expect(/^[A-Za-z0-9]+$/.test(pw)).toBe(true)
+  })
+})
