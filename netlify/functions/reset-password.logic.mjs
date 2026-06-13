@@ -1,5 +1,5 @@
 // netlify/functions/reset-password.logic.mjs
-import { generatePassword } from './create-customer.logic.mjs'
+import { generatePassword } from '../../portal/lib.js'
 
 // args: { token, body: { userId } }
 // deps: { getCallerId, isCallerAdmin, updateUserPassword, randomBytes }

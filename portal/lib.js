@@ -22,3 +22,13 @@ export function storagePathFor(userId, filename) {
 export function isProbablyEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ''))
 }
+
+// 56 chars, no ambiguous glyphs; mild modular bias (~25%) is fine at this entropy (~139 bits over 24 chars)
+const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'
+
+export function generatePassword(randomBytes, length = 24) {
+  const bytes = randomBytes(length)
+  let out = ''
+  for (let i = 0; i < length; i++) out += ALPHABET[bytes[i] % ALPHABET.length]
+  return out
+}

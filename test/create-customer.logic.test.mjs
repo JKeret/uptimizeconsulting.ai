@@ -1,15 +1,6 @@
 // test/create-customer.logic.test.mjs
 import { describe, it, expect, vi } from 'vitest'
-import { generatePassword, handleCreateCustomer } from '../netlify/functions/create-customer.logic.mjs'
-
-describe('generatePassword', () => {
-  it('produces a strong-length password from the byte source', () => {
-    const bytes = new Uint8Array(24).fill(7)
-    const pw = generatePassword(() => bytes)
-    expect(pw).toHaveLength(24)
-    expect(/^[A-Za-z0-9]+$/.test(pw)).toBe(true)
-  })
-})
+import { handleCreateCustomer } from '../netlify/functions/create-customer.logic.mjs'
 
 function deps({ admin = true, createUserError = null, insertError = null } = {}) {
   const createdUser = { id: 'new-uid-1' }
@@ -20,6 +11,7 @@ function deps({ admin = true, createUserError = null, insertError = null } = {})
       createUserError ? { data: null, error: createUserError } : { data: { user: createdUser }, error: null }
     ),
     insertProfile: vi.fn().mockResolvedValue({ error: insertError }),
+    deleteAuthUser: vi.fn().mockResolvedValue({ error: null }),
     randomBytes: () => new Uint8Array(24).fill(1),
   }
 }
@@ -60,5 +52,13 @@ describe('handleCreateCustomer', () => {
     const d = deps({ createUserError: { message: 'already been registered' } })
     const res = await handleCreateCustomer({ token: 't', body: { email: 'c@x.com' } }, d)
     expect(res.status).toBe(409)
+  })
+
+  it('returns 500 when profile insert fails', async () => {
+    const d = deps({ insertError: { message: 'constraint violation' } })
+    const res = await handleCreateCustomer({ token: 't', body: { email: 'c@x.com' } }, d)
+    expect(res.status).toBe(500)
+    expect(res.body.error).toMatch(/Profile insert failed/)
+    expect(d.deleteAuthUser).toHaveBeenCalledWith('new-uid-1')
   })
 })

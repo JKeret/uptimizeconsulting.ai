@@ -1,17 +1,8 @@
 // netlify/functions/create-customer.logic.mjs
-import { isProbablyEmail } from '../../portal/lib.js'
-
-const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'
-
-export function generatePassword(randomBytes, length = 24) {
-  const bytes = randomBytes(length)
-  let out = ''
-  for (let i = 0; i < length; i++) out += ALPHABET[bytes[i] % ALPHABET.length]
-  return out
-}
+import { isProbablyEmail, generatePassword } from '../../portal/lib.js'
 
 // args:  { token, body: { email, company, displayName } }
-// deps:  { getCallerId, isCallerAdmin, adminCreateUser, insertProfile, randomBytes }
+// deps:  { getCallerId, isCallerAdmin, adminCreateUser, insertProfile, deleteAuthUser, randomBytes }
 export async function handleCreateCustomer({ token, body }, deps) {
   if (!token) return { status: 401, body: { error: 'Not authenticated' } }
 
@@ -27,14 +18,17 @@ export async function handleCreateCustomer({ token, body }, deps) {
   const password = generatePassword(deps.randomBytes)
   const { data, error } = await deps.adminCreateUser({ email, password, email_confirm: true })
   if (error) {
-    const exists = /registered|already/i.test(error.message || '')
+    const exists = /registered|already/i.test(error.message || '') || error.code === 'user_already_exists'
     return { status: exists ? 409 : 500, body: { error: error.message || 'Create failed' } }
   }
 
   const { error: pErr } = await deps.insertProfile({
     id: data.user.id, email, company, display_name: displayName, is_admin: false,
   })
-  if (pErr) return { status: 500, body: { error: 'Profile insert failed: ' + pErr.message } }
+  if (pErr) {
+    await deps.deleteAuthUser(data.user.id).catch(() => {})
+    return { status: 500, body: { error: 'Profile insert failed: ' + pErr.message } }
+  }
 
   return { status: 200, body: { email, password } }
 }
