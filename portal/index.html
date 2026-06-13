@@ -57,6 +57,8 @@
   </main>
 
   <div id="loading" class="loading">Loading…</div>
+  <!-- self-contained supabase-js (no CDN); must load before the app module -->
+  <script src="./vendor/supabase.umd.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

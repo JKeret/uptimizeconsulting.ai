@@ -1,5 +1,7 @@
 :root{--navy:#0f1b2d;--navy2:#15253c;--teal:#2dd4bf;--ink:#e8eef6;--muted:#9fb1c7;--line:#26384f;--err:#ff6b6b;}
 *{box-sizing:border-box}
+/* the hidden attribute must win over component display rules (e.g. .loading{display:flex}) */
+[hidden]{display:none!important}
 body{margin:0;font-family:Montserrat,system-ui,sans-serif;background:var(--navy);color:var(--ink)}
 .portal-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--navy2)}
 .brand{color:var(--ink);text-decoration:none;font-weight:800}
