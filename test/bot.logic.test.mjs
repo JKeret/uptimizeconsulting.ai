@@ -64,4 +64,10 @@ describe('buildObjectPath', () => {
     expect(path.startsWith('cust-1/')).toBe(true)
     expect(path).not.toContain('..')
   })
+
+  it('returns null for a missing or empty filename', () => {
+    expect(buildObjectPath('cust-1', undefined)).toBe(null)
+    expect(buildObjectPath('cust-1', null)).toBe(null)
+    expect(buildObjectPath('cust-1', '   ')).toBe(null)
+  })
 })

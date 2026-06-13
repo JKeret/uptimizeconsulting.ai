@@ -34,12 +34,11 @@ export async function createCustomerCore({ email, company, displayName }, deps) 
 export async function handleCreateCustomer({ token, body }, deps) {
   if (!token) return { status: 401, body: { error: 'Not authenticated' } }
 
-  const email = String(body?.email || '').trim().toLowerCase()
-  if (!isProbablyEmail(email)) return { status: 400, body: { error: 'Valid email required' } }
-
+  // Authorize BEFORE validating input, so a non-admin can't probe email validity.
   const callerId = await deps.getCallerId(token)
   if (!callerId) return { status: 401, body: { error: 'Invalid session' } }
   if (!(await deps.isCallerAdmin(callerId))) return { status: 403, body: { error: 'Admins only' } }
 
+  // createCustomerCore validates + normalizes the email.
   return createCustomerCore(body, deps)
 }

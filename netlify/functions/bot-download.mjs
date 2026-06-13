@@ -25,7 +25,13 @@ export default async (req) => {
   const { data, error } = await admin.storage
     .from('customer-files')
     .createSignedUrl(path, 300, { download: true })
-  if (error || !data?.signedUrl) return json(404, { error: 'File not found' })
+  // Distinguish a genuine miss (404) from an actual storage failure (500) so the
+  // bot can retry transient errors instead of giving up as if the file is absent.
+  if (error) {
+    const missing = error.statusCode === 404 || error.statusCode === '404' || /not.?found/i.test(error.message || '')
+    return json(missing ? 404 : 500, { error: error.message || 'Storage error' })
+  }
+  if (!data?.signedUrl) return json(404, { error: 'File not found' })
 
   return json(200, { signedUrl: data.signedUrl })
 }

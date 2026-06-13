@@ -29,5 +29,6 @@ export function validateCustomerId(id) {
 export function buildObjectPath(customerId, filename) {
   const cid = validateCustomerId(customerId)
   if (!cid) return null
+  if (filename === undefined || filename === null || String(filename).trim() === '') return null
   return `${cid}/${sanitizeFilename(filename)}`
 }

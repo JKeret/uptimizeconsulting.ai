@@ -22,10 +22,13 @@ export default async (req) => {
 
   const admin = createClient(SUPABASE_URL, SERVICE, { auth: { autoRefreshToken: false, persistSession: false } })
 
+  // upsert: a re-upload of the same path replaces the existing file (intentional)
   const { data, error } = await admin.storage
     .from('customer-files')
     .createSignedUploadUrl(path, { upsert: true })
   if (error) return json(500, { error: error.message })
 
-  return json(200, { path, token: data.token, signedUrl: data.signedUrl })
+  // signedUrl already carries its own auth; the bot PUTs bytes directly to it.
+  // Supabase's `token` is unused by the client, so we don't return it.
+  return json(200, { path, signedUrl: data.signedUrl })
 }
