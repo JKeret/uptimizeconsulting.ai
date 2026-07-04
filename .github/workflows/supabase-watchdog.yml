@@ -1,0 +1,56 @@
+# Auto-restore watchdog for the free-tier Supabase project.
+# Supabase pauses free projects after ~7 idle days; a queued pause can land
+# even after activity resumes (happened 2026-07-04). This checks hourly and
+# restores automatically, so a pause is at most a ~1h blip and the 90-day
+# deletion deadline can never be reached.
+name: supabase-watchdog
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-and-restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check project status, restore if paused
+        env:
+          TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          REF=nqcwxluxaadfuucgginq
+          API=https://api.supabase.com/v1/projects/$REF
+
+          status=$(curl -sf -H "Authorization: Bearer $TOKEN" "$API" | jq -r .status)
+          echo "project status: $status"
+
+          if [ -z "$status" ] || [ "$status" = "null" ]; then
+            echo "::error::Could not read project status from Management API"
+            exit 1
+          fi
+
+          if [ "$status" = "ACTIVE_HEALTHY" ]; then
+            exit 0
+          fi
+
+          if [ "$status" = "INACTIVE" ]; then
+            echo "Project is paused — restoring"
+            curl -sf -X POST -H "Authorization: Bearer $TOKEN" \
+              -H "Content-Type: application/json" -d '{}' "$API/restore"
+            for i in $(seq 1 40); do
+              sleep 15
+              s=$(curl -sf -H "Authorization: Bearer $TOKEN" "$API" | jq -r .status)
+              echo "poll $i: $s"
+              if [ "$s" = "ACTIVE_HEALTHY" ]; then
+                echo "Restore complete"
+                exit 0
+              fi
+            done
+            echo "::error::Restore did not reach ACTIVE_HEALTHY within 10 minutes"
+            exit 1
+          fi
+
+          # Transitional states (COMING_UP, RESTORING, PAUSING, ...) — let the
+          # next hourly run re-check rather than interfering mid-transition.
+          echo "::warning::Project in transitional state: $status"
