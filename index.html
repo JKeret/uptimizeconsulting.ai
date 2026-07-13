@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- EmailJS handles form submissions -->
-<title>Uptimize Consulting AI — AI Solutions for Local & Mid-Market Businesses</title>
-<meta name="description" content="We help local and mid-market businesses harness AI to automate operations, cut costs, and compete — without the enterprise price tag.">
+<title>Uptimize Consulting AI — Workflow Automation, Systems Optimization & Integrations</title>
+<meta name="description" content="We help mid-market and growing businesses automate workflows, optimize systems, and integrate the tools they already run on — AI that improves real work, without the enterprise price tag.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -67,27 +67,34 @@ nav .cta-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,195,1
 .card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .card ul li{background:var(--light);color:var(--dark-text);font-size:.8rem;font-weight:500;padding:6px 14px;border-radius:100px}
 
-/* USE CASES */
-.use-cases{padding:100px 0;background:var(--white)}
-.use-cases .header{text-align:center;margin-bottom:64px}
-.use-cases .header .section-sub{margin:0 auto}
-.use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
-.use-item{background:linear-gradient(135deg,rgba(15,25,55,.03),rgba(30,140,220,.04));border:1px solid rgba(30,140,220,.1);border-radius:14px;padding:32px 28px;transition:all .3s}
-.use-item:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(15,25,55,.06);border-color:var(--teal)}
-.use-item .use-industry{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.use-item h4{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
-.use-item p{color:var(--gray);font-size:.88rem;line-height:1.7}
+/* PLATFORMS */
+.platforms{margin-top:56px;text-align:center}
+.platforms .plat-label{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+.platforms .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.platforms .chips span{background:#FFFFFF;border:1px solid #E2E8F0;padding:8px 18px;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--navy)}
 
-/* CASE STUDY */
-.case-study{padding:100px 0;background:var(--white)}
-.case-study .inner{background:linear-gradient(135deg,var(--navy),#1a2d5a);border-radius:20px;padding:64px;display:flex;align-items:center;gap:48px;position:relative;overflow:hidden}
-.case-study .inner::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,195,165,.15),transparent 70%);pointer-events:none}
-.case-study .badge{display:inline-block;background:rgba(0,195,165,.15);color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:20px}
-.case-study h3{font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--white);font-weight:700;line-height:1.4;margin-bottom:16px}
-.case-study p{color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:28px}
-.case-study .stat{display:inline-flex;align-items:baseline;gap:8px;background:rgba(255,255,255,.07);padding:12px 20px;border-radius:10px;margin-right:12px;margin-bottom:12px}
-.case-study .stat strong{font-size:1.6rem;color:var(--teal);font-weight:800}
-.case-study .stat span{font-size:.85rem;color:rgba(255,255,255,.5)}
+/* INDUSTRIES */
+.industries{padding:100px 0;background:var(--white)}
+.industries .header{text-align:center;margin-bottom:56px}
+.industries .header .section-sub{margin:0 auto}
+.accordion{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.ind{background:linear-gradient(135deg,rgba(15,25,55,.03),rgba(30,140,220,.04));border:1px solid rgba(30,140,220,.12);border-radius:14px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.ind:hover{border-color:var(--teal)}
+.ind.open{border-color:var(--teal);box-shadow:0 12px 40px rgba(15,25,55,.07)}
+.ind-head{width:100%;display:flex;align-items:center;gap:18px;padding:22px 26px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit}
+.ind-icon{font-size:1.6rem;flex-shrink:0}
+.ind-title{flex:1;display:flex;flex-direction:column;gap:2px}
+.ind-name{font-size:1.05rem;font-weight:700;color:var(--navy)}
+.ind-tagline{font-size:.85rem;color:var(--gray)}
+.ind-chev{color:var(--blue);font-size:1rem;transition:transform .3s;flex-shrink:0}
+.ind.open .ind-chev{transform:rotate(180deg)}
+.ind-panel{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.ind.open .ind-panel{max-height:700px}
+.ind-panel-inner{padding:0 26px 26px 70px}
+.ind-panel-inner p{color:var(--gray);font-size:.92rem;line-height:1.7;margin-bottom:14px}
+.ind-panel-inner ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.ind-panel-inner ul li{position:relative;padding-left:22px;color:var(--dark-text);font-size:.88rem;line-height:1.6}
+.ind-panel-inner ul li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:800}
 
 /* WHY US */
 .why-us{padding:100px 0;background:var(--light)}
@@ -166,7 +173,8 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   .hero{padding:130px 0 80px}
   .btn-outline{margin-left:0;margin-top:12px}
   .hero .btns{display:flex;flex-direction:column;align-items:flex-start;gap:0}
-  .case-study .inner{flex-direction:column;padding:40px 28px}
+  .ind-head{padding:18px 20px;gap:14px}
+  .ind-panel-inner{padding:0 20px 22px 20px}
   .contact .info{flex-direction:column;gap:16px}
   footer .container{flex-direction:column;text-align:center}
   .cards{grid-template-columns:1fr}
@@ -182,7 +190,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#case-study">Results</a></li>
+      <li><a href="#industries">Industries</a></li>
       <li><a href="#why-us">Why Us</a></li>
       <li><a href="#how">Process</a></li>
       <li><a href="#about">About</a></li>
@@ -195,8 +203,8 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1>AI Solutions for the Businesses That Need It Most</h1>
-    <p>We help local and mid-market businesses harness AI to automate operations, cut costs, and compete with the big guys — without the enterprise price tag.</p>
+    <h1>Turn AI Into an Operational Advantage</h1>
+    <p>We automate workflows, optimize systems, and integrate the tools you already run on. Enterprise-grade AI for mid-market and growing businesses nationwide — without the enterprise price tag.</p>
     <div class="btns">
       <a href="#" class="btn" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Free Consultation →</a>
       <a href="#services" class="btn btn-outline">See How It Works</a>
@@ -207,9 +215,9 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 <!-- PROBLEM / WHAT WE DO -->
 <section class="problem">
   <div class="container">
-    <p>Big companies are spending millions on AI. Your business doesn't have millions — but you still need to keep up. <strong>The problem isn't that AI is too complex. It's that no one's building it for businesses like yours.</strong></p>
+    <p>AI earns trust by improving real work — not by adding another dashboard nobody opens. Big companies are spending millions to figure that out. <strong>You don't need millions. You need the right workflows automated, the right systems connected.</strong></p>
     <br>
-    <p>We bring enterprise-grade AI to local businesses. Not theory. Not hype. <strong>Real automation that saves you time and money — starting week one.</strong></p>
+    <p>We find the processes eating your team's time, automate them, and integrate the systems you already run on. Not theory. Not hype. <strong>Measurable results — starting week one.</strong></p>
   </div>
 </section>
 
@@ -224,99 +232,182 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div class="cards">
       <div class="card">
         <span class="card-icon">⚡</span>
-        <h3>AI Automation &amp; Workflows</h3>
-        <p>Repetitive tasks eating your team's time? We build AI agents that handle the boring stuff — scheduling, data entry, customer communications — so your people can focus on what matters.</p>
+        <h3>Workflow Automation</h3>
+        <p>Repetitive processes eating your team's time? We map how work actually flows through your business, then build AI that handles the intake, the routing, the follow-ups — so your people focus on judgment, not busywork.</p>
         <ul>
-          <li>Process automation</li>
-          <li>AI customer service</li>
-          <li>Document processing</li>
-          <li>Workflow optimization</li>
+          <li>Process &amp; intake automation</li>
+          <li>Document processing &amp; extraction</li>
+          <li>AI customer communications</li>
+          <li>Approval &amp; routing workflows</li>
         </ul>
       </div>
       <div class="card">
-        <span class="card-icon">🔄</span>
-        <h3>Digital Transformation</h3>
-        <p>Still running on spreadsheets and paper? We modernize your operations with custom digital tools — from digital signage to automated marketing to smart inventory systems.</p>
+        <span class="card-icon">🔧</span>
+        <h3>Systems Optimization</h3>
+        <p>Still running on spreadsheets, paper, and workarounds? We assess your operations, redesign the bottlenecked processes, and modernize the tools underneath them — measured in hours saved and errors eliminated.</p>
         <ul>
-          <li>Digital signage</li>
-          <li>Automated content</li>
-          <li>Catalog management</li>
-          <li>POS integration</li>
+          <li>Operations assessment</li>
+          <li>Process redesign</li>
+          <li>Legacy modernization</li>
+          <li>Real-time reporting &amp; dashboards</li>
         </ul>
       </div>
       <div class="card">
-        <span class="card-icon">🧭</span>
-        <h3>AI Strategy &amp; Advisory</h3>
-        <p>Not sure where to start? We assess your business, identify the highest-ROI opportunities for AI, and build a roadmap you can actually execute.</p>
+        <span class="card-icon">🔗</span>
+        <h3>Integrations</h3>
+        <p>Your CRM doesn't talk to your billing system, and nothing talks to the industry software you actually live in. We connect them — data flows automatically, entered once, correct everywhere.</p>
         <ul>
-          <li>AI readiness assessment</li>
-          <li>Technology roadmap</li>
-          <li>Vendor evaluation</li>
-          <li>Advisory retainer</li>
+          <li>CRM &amp; ERP integrations</li>
+          <li>Industry systems (TMS, AMS, EHR, LOS, POS)</li>
+          <li>APIs &amp; data pipelines</li>
+          <li>AI inside the tools you already use</li>
         </ul>
+      </div>
+    </div>
+    <div class="platforms">
+      <div class="plat-label">Platforms &amp; Systems We Work With</div>
+      <div class="chips">
+        <span>Anthropic Claude</span>
+        <span>OpenAI</span>
+        <span>Microsoft 365</span>
+        <span>Google Workspace</span>
+        <span>Salesforce &amp; CRMs</span>
+        <span>QuickBooks</span>
+        <span>Your industry systems — TMS · AMS · EHR · LOS · POS</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- USE CASES -->
-<section class="use-cases" id="use-cases">
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
   <div class="container">
     <div class="header">
-      <span class="section-label">Use Cases</span>
-      <h2 class="section-title">AI at Work — Across Industries</h2>
-      <p class="section-sub">Real examples of how local businesses use AI to save time, reduce costs, and grow.</p>
+      <span class="section-label">Industries We Serve</span>
+      <h2 class="section-title">Your Industry, Your Systems, Your Workflows</h2>
+      <p class="section-sub">Every industry runs on different systems and drowns in different paperwork. Click yours to see what we automate, optimize, and integrate.</p>
     </div>
-    <div class="use-grid">
-      <div class="use-item">
-        <div class="use-industry">🛒 Grocery & Specialty Retail</div>
-        <h4>Automated Weekly Ad & Promotional Content</h4>
-        <p>AI generates weekly promotional ads, digital signage, and product catalogs from your inventory — cutting hours of manual design work to minutes.</p>
-      </div>
-      <div class="use-item">
-        <div class="use-industry">🍽️ Restaurants & Food Service</div>
-        <h4>Smart Inventory & Waste Reduction</h4>
-        <p>AI tracks ingredient usage patterns, predicts demand based on historical sales and events, and auto-generates reorder lists — reducing food waste by up to 30%.</p>
-      </div>
-      <div class="use-item">
-        <div class="use-industry">⚖️ Professional Services</div>
-        <h4>Automated Client Intake & Document Processing</h4>
-        <p>AI handles initial client inquiries, extracts key data from documents, routes requests to the right team member, and drafts follow-up communications.</p>
-      </div>
-      <div class="use-item">
-        <div class="use-industry">🏥 Medical & Dental Offices</div>
-        <h4>Patient Communication & Scheduling</h4>
-        <p>AI agents manage appointment reminders, handle rescheduling, answer common patient questions, and process intake forms — freeing front desk staff for patient care.</p>
-      </div>
-      <div class="use-item">
-        <div class="use-industry">🏗️ Contractors & Trades</div>
-        <h4>Estimate Generation & Job Scheduling</h4>
-        <p>AI analyzes project specs and photos to generate preliminary estimates, optimizes crew scheduling across jobs, and sends automated status updates to clients.</p>
-      </div>
-      <div class="use-item">
-        <div class="use-industry">🏬 Multi-Location Retail</div>
-        <h4>Unified Operations & Reporting</h4>
-        <p>AI consolidates data across locations into real-time dashboards, identifies performance trends, flags inventory discrepancies, and automates inter-store transfers.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="accordion">
 
-<!-- CASE STUDY -->
-<section class="case-study" id="case-study">
-  <div class="container">
-    <div class="inner">
-      <div>
-        <span class="badge">Case Study — Curacao</span>
-        <h3>AI-Powered Customer Service Across 15 Retail Locations</h3>
-        <p>Curacao, a major Southern California retail chain with 15 locations averaging 100,000 sq ft each, needed to scale customer support without scaling headcount. We designed and deployed an AI assistant that handles customer inquiries, account payments, and product questions — with 100% accuracy backed by real-time access to their product catalog, support docs, and customer database.</p>
-        <div>
-          <span class="stat"><strong>15</strong><span>locations served</span></span>
-          <span class="stat"><strong>100%</strong><span>answer accuracy</span></span>
-          <span class="stat"><strong>50%</strong><span>satisfaction increase</span></span>
-          <span class="stat"><strong>24/7</strong><span>availability</span></span>
-        </div>
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🚚</span>
+          <span class="ind-title"><span class="ind-name">Trucking &amp; Logistics</span><span class="ind-tagline">Keep freight moving — not paperwork.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>Dispatch boards, rate confirmations, BOLs, PODs, driver check-ins — logistics runs on documents and status updates. We automate the paper trail and connect it to the systems your operation already depends on.</p>
+          <ul>
+            <li>BOL, POD &amp; rate confirmation document processing</li>
+            <li>Automated dispatch &amp; load status workflows</li>
+            <li>TMS &amp; ELD integrations</li>
+            <li>Automated driver &amp; customer communications</li>
+          </ul>
+        </div></div>
       </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🏪</span>
+          <span class="ind-title"><span class="ind-name">Markets &amp; Retail</span><span class="ind-tagline">Run every location like your best location.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>From single-store grocers to multi-location chains: we automate the weekly grind of promotions and catalogs, keep inventory in sync, and roll every location's numbers into one real-time picture.</p>
+          <ul>
+            <li>Weekly ad &amp; promotional content automation</li>
+            <li>Catalog &amp; inventory management</li>
+            <li>POS integrations</li>
+            <li>Cross-location reporting &amp; dashboards</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🛡️</span>
+          <span class="ind-title"><span class="ind-name">Insurance</span><span class="ind-tagline">Faster claims, cleaner workflows, happier policyholders.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>Agencies, TPAs, and carriers run on workflow — intake, triage, documentation, follow-up. We optimize those workflows end to end: AI reads the documents, routes the work, and keeps your AMS and CRM in sync, so your team handles decisions instead of data entry.</p>
+          <ul>
+            <li>Claims intake, triage &amp; routing automation</li>
+            <li>Policy &amp; underwriting document extraction</li>
+            <li>Quote, renewal &amp; certificate workflows</li>
+            <li>AMS &amp; CRM integrations</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🏥</span>
+          <span class="ind-title"><span class="ind-name">Medical Services</span><span class="ind-tagline">Less admin, more patient care.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>Front desk and billing teams spend their days on scheduling, intake forms, claims, and EOBs. We automate the administrative load and connect it to your practice systems — so staff time goes to patients, not paperwork.</p>
+          <ul>
+            <li>Scheduling, reminders &amp; patient intake automation</li>
+            <li>Billing, EOB &amp; claims processing workflows</li>
+            <li>Automated patient communications</li>
+            <li>Practice management &amp; EHR integrations</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🏦</span>
+          <span class="ind-title"><span class="ind-name">Mortgage &amp; Lending</span><span class="ind-tagline">Move every file to clear-to-close faster.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>Every loan file is a document-collection race: statements, W-2s, disclosures, conditions. We automate the chase — collecting, extracting, and tracking borrower documents — and keep your LOS, CRM, and borrowers on the same page.</p>
+          <ul>
+            <li>Borrower document collection &amp; extraction</li>
+            <li>Loan status workflows &amp; milestone alerts</li>
+            <li>LOS &amp; CRM integrations</li>
+            <li>Automated borrower communications</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">⚖️</span>
+          <span class="ind-title"><span class="ind-name">Professional Services</span><span class="ind-tagline">Bill for judgment, not busywork.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>Law firms, accounting practices, and agencies lose billable hours to intake, document handling, and follow-up. We automate the routine so your professionals spend their time on the work clients actually pay for.</p>
+          <ul>
+            <li>Client intake &amp; request routing</li>
+            <li>Document processing &amp; first-draft generation</li>
+            <li>Automated follow-up communications</li>
+            <li>Practice tool &amp; CRM integrations</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="ind">
+        <button class="ind-head" aria-expanded="false" onclick="toggleInd(this)">
+          <span class="ind-icon">🍽️</span>
+          <span class="ind-title"><span class="ind-name">Restaurants &amp; Food Service</span><span class="ind-tagline">Predict demand, cut waste, reorder automatically.</span></span>
+          <span class="ind-chev">▾</span>
+        </button>
+        <div class="ind-panel"><div class="ind-panel-inner">
+          <p>AI tracks ingredient usage, predicts demand from historical sales and events, and generates reorder lists automatically — reducing food waste by up to 30% while keeping the line stocked.</p>
+          <ul>
+            <li>Smart inventory &amp; demand prediction</li>
+            <li>Automated reorder lists &amp; vendor workflows</li>
+            <li>POS &amp; supplier integrations</li>
+            <li>Automated customer communications</li>
+          </ul>
+        </div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -327,7 +418,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div class="header">
       <span class="section-label">Why Uptimize AI</span>
       <h2 class="section-title">Built Different, On Purpose</h2>
-      <p class="section-sub">We're not a faceless agency. We're your neighbors who happen to build enterprise-grade AI.</p>
+      <p class="section-sub">Senior-led, hands-on, and accountable for results — not another agency that disappears after the kickoff call.</p>
     </div>
     <div class="reasons">
       <div class="reason">
@@ -336,9 +427,9 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
         <p>Enterprise infrastructure and cybersecurity background — Fortune 500 expertise, delivered to your business.</p>
       </div>
       <div class="reason">
-        <div class="icon-wrap">📍</div>
-        <h4>We're Local</h4>
-        <p>Based in Naperville, IL. We're your neighbors, not a faceless agency on the other side of the country.</p>
+        <div class="icon-wrap">🌎</div>
+        <h4>Hands-On, Coast to Coast</h4>
+        <p>Headquartered in Naperville, IL, working with clients from Chicagoland to Southern California. Senior-led delivery, wherever you are.</p>
       </div>
       <div class="reason">
         <div class="icon-wrap">🛠️</div>
@@ -365,23 +456,23 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h4>Discovery Call</h4>
-        <p>Free, 30 minutes. Tell us what's eating your time. We'll tell you if AI can help.</p>
+        <h4>Assess</h4>
+        <p>Free 30-minute call, then we map your operations and find the highest-ROI opportunities. We'll tell you honestly if AI can help.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h4>Assessment</h4>
-        <p>We map your operations and identify the biggest opportunities for automation.</p>
+        <h4>Pilot</h4>
+        <p>We pick one high-impact workflow and automate it first. AI earns trust by improving real work — scale follows proof.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <h4>Build &amp; Deploy</h4>
-        <p>We build the solution, train your team, and go live. No endless planning cycles.</p>
+        <h4>Build</h4>
+        <p>We build the full solution, integrate it with your systems, train your team, and go live. No endless planning cycles.</p>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <h4>Optimize</h4>
-        <p>Monthly check-ins to measure impact, gather feedback, and improve.</p>
+        <h4>Scale</h4>
+        <p>We expand what works across teams, locations, and systems — with monthly check-ins to measure impact and improve.</p>
       </div>
     </div>
   </div>
@@ -395,8 +486,9 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
       <h2 class="section-title">The Story Behind Uptimize</h2>
     </div>
     <p>Uptimize AI was founded by an IT infrastructure and cybersecurity veteran with 15+ years of experience helping enterprise companies deploy complex technology.</p>
-    <p>After years of watching billion-dollar companies invest millions in AI while local businesses got left behind, the mission became clear: <strong>bring the same caliber of AI solutions to the businesses that drive our communities.</strong></p>
-    <p>We're based in Naperville, Illinois — and we believe the local restaurant, the neighborhood grocery store, and the family-owned retail shop deserve the same technology advantages as the Fortune 500.</p>
+    <p>After years of watching billion-dollar companies invest millions in AI while everyone else got left behind, the mission became clear: <strong>bring the same caliber of AI solutions to the mid-market businesses that actually run the economy.</strong></p>
+    <p>Every engagement starts with strategy: we assess your operations, identify the highest-ROI opportunities, and build a roadmap you can actually execute — then we build it with you.</p>
+    <p>We're headquartered in Naperville, Illinois and work with clients across the country — from Chicagoland to Southern California. Whether it's a trucking fleet, an insurance agency, a medical practice, or a retail chain, we believe growing businesses deserve the same technology advantages as the Fortune 500.</p>
     <div class="tags">
       <span>Enterprise Infrastructure</span>
       <span>Cybersecurity &amp; SASE</span>
@@ -456,19 +548,21 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
         <!-- Step 2: Business Details -->
         <div class="form-page" id="step2" style="display:none">
           <select name="industry">
-            <option value="" disabled selected>Business Type</option>
-            <option value="Restaurant / Food Service">Restaurant / Food Service</option>
-            <option value="Retail / Store">Retail / Store</option>
+            <option value="" disabled selected>Industry</option>
+            <option value="Trucking & Logistics">Trucking & Logistics</option>
+            <option value="Markets & Retail">Markets & Retail</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Medical Services">Medical Services</option>
+            <option value="Mortgage & Lending">Mortgage & Lending</option>
             <option value="Professional Services">Professional Services</option>
-            <option value="Healthcare">Healthcare</option>
-            <option value="Real Estate">Real Estate</option>
+            <option value="Restaurant / Food Service">Restaurant / Food Service</option>
             <option value="Other">Other</option>
           </select>
           <select name="interest">
             <option value="" disabled selected>What are you interested in?</option>
-            <option value="AI Automation & Workflows">AI Automation & Workflows</option>
-            <option value="Digital Transformation">Digital Transformation</option>
-            <option value="Custom AI Solutions">Custom AI Solutions</option>
+            <option value="Workflow Automation">Workflow Automation</option>
+            <option value="Systems Optimization">Systems Optimization</option>
+            <option value="Integrations">Integrations</option>
             <option value="Not sure — just exploring">Not sure — just exploring</option>
           </select>
           <select name="team_size">
@@ -502,6 +596,20 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 </div>
 
 <script>
+// Industries accordion — one open at a time
+function toggleInd(btn){
+  const item=btn.closest('.ind');
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.ind.open').forEach(i=>{
+    i.classList.remove('open');
+    i.querySelector('.ind-head').setAttribute('aria-expanded','false');
+  });
+  if(!wasOpen){
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+}
+
 // Step navigation
 function goStep2(){
   const form=document.getElementById('consultation-form');
