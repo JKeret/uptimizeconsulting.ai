@@ -125,6 +125,15 @@ nav .cta-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,195,1
 .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;justify-content:center}
 .tags span{background:#FFFFFF;border:1px solid #E2E8F0;padding:8px 18px;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--navy)}
 
+/* RECENT WORK */
+.work{padding:100px 0;background:var(--white)}
+.work .header{text-align:center;margin-bottom:56px}
+.work .header .section-sub{margin:0 auto}
+.work-outcome{display:inline-block;margin-top:16px;font-weight:800;color:#00997F;font-size:.88rem;background:rgba(0,195,165,.1);padding:6px 14px;border-radius:100px}
+.work-more{text-align:center;margin-top:48px}
+.work-more a{color:var(--blue);font-weight:700;font-size:.95rem}
+.work-more a:hover{color:var(--teal)}
+
 /* CONTACT CTA */
 .contact{padding:120px 0;background:linear-gradient(165deg,var(--navy),#132347);text-align:center;position:relative;overflow:hidden}
 .contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:1000px;background:radial-gradient(circle,rgba(0,195,165,.06),transparent 60%);pointer-events:none}
@@ -193,6 +202,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
       <li><a href="#industries">Industries</a></li>
       <li><a href="#why-us">Why Us</a></li>
       <li><a href="#how">Process</a></li>
+      <li><a href="#work">Recent Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="/portal/">Client Login</a></li>
       <li><a href="#" class="cta-nav" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Call</a></li>
@@ -207,7 +217,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
     <p>We automate workflows, optimize systems, and integrate the tools you already run on. Enterprise-grade AI for mid-market and growing businesses nationwide — without the enterprise price tag.</p>
     <div class="btns">
       <a href="#" class="btn" onclick="document.getElementById('consultation-modal').style.display='flex';return false;">Book a Free Consultation →</a>
-      <a href="#services" class="btn btn-outline">See How It Works</a>
+      <a href="/starter/" class="btn btn-outline">$1,000 Starter Project →</a>
     </div>
   </div>
 </section>
@@ -496,6 +506,38 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
       <span>Solution Engineering</span>
       <span>15+ Years Experience</span>
     </div>
+  </div>
+</section>
+
+<!-- RECENT WORK -->
+<section class="work" id="work">
+  <div class="container">
+    <div class="header">
+      <span class="section-label">Recent Work</span>
+      <h2 class="section-title">Small Starts, Real Outcomes</h2>
+      <p class="section-sub">Every one of these began as a small, fixed-price project. Working software earned the rest.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">🏥</span>
+        <h3>Home Care</h3>
+        <p>A home-care agency buried in insurance paperwork started with a $1,000 project: an app that reads claim statements and flags billing errors automatically. It worked. That first project grew into a platform that now runs billing compliance end to end.</p>
+        <span class="work-outcome">$1,000 project → $50,000 platform</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎙️</span>
+        <h3>Recruiting</h3>
+        <p>A recruiting agency needed candidate screening in four languages, around the clock. A custom voice assistant now answers calls in English, Russian, Ukrainian, and Polish, interviews candidates, and files structured summaries. Recruiters start the day with a ranked list.</p>
+        <span class="work-outcome">24/7 screening in 4 languages</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛒</span>
+        <h3>Grocery Retail</h3>
+        <p>A fresh market was building weekly ad flyers by hand. A tablet app now turns product lists into print-ready promotional graphics, week after week.</p>
+        <span class="work-outcome">Days of design work → one afternoon</span>
+      </div>
+    </div>
+    <div class="work-more"><a href="/starter/">See how projects start: the $1,000 Starter Project →</a></div>
   </div>
 </section>
 
