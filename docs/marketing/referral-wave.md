@@ -10,11 +10,30 @@ Live links used in every note:
 
 ## Send first: Grisha follow-up (LaneFit)
 
-> Hi Grisha, checking in. The platform is ready for Crystal Way: the Kristina
-> line, screening in all four languages, and the add-ons we walked through. To
-> switch it on for your team I need the license set up on your side. Do you
-> have 15 minutes this week? If timing has changed on your end, tell me where
-> things stand and we will plan around it.
+Send as email, subject **"The conversation we skipped"**. One ask (the call),
+no price or license terms in writing, safe exit stays in.
+
+> Hi Grisha,
+>
+> I want to rewind a little.
+>
+> This started as a conversation between friends, and somewhere along the way
+> it turned into me sending you a finished platform with a license attached.
+> Reading it back, that was too much fact and too little conversation. You two
+> told me you wanted to see something real before talking further, and I took
+> that seriously: Kristina exists, she answers the phone in four languages, and
+> the screening works today. But then I skipped the part where we actually talk
+> about what this should be for Crystal Way.
+>
+> That is still the conversation I want to have. What you liked at the
+> beginning was that this would be built for you, and there are real ways to
+> keep that true. Nothing about the structure is set in stone.
+>
+> Do you and Sandra have 30 minutes next week? Coffee works too. And if the
+> honest answer is that the timing or the fit is not right, tell me that
+> straight. From a friend, a clear no beats a long silence.
+>
+> Jonathan
 
 ## Contact table
 

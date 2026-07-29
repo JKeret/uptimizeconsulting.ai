@@ -58,10 +58,32 @@ or paperwork? One intro would mean a lot.
 One-pager: https://uptimizeconsulting.ai/starter/uptimize-starter-onepager.pdf
 Details: https://uptimizeconsulting.ai/starter/
 
-## Grisha follow-up
+## Grisha follow-up (rewritten 2026-07-29 after strategy talk)
 
-Hi Grisha, checking in. The platform is ready for Crystal Way: the Kristina
-line, screening in all four languages, and the add-ons we walked through. To
-switch it on for your team I need the license set up on your side. Do you have
-15 minutes this week? If timing has changed on your end, tell me where things
-stand and we will plan around it.
+Subject: The conversation we skipped
+
+Hi Grisha,
+
+I want to rewind a little.
+
+This started as a conversation between friends, and somewhere along the way it
+turned into me sending you a finished platform with a license attached. Reading
+it back, that was too much fact and too little conversation. You two told me
+you wanted to see something real before talking further, and I took that
+seriously: Kristina exists, she answers the phone in four languages, and the
+screening works today. But then I skipped the part where we actually talk about
+what this should be for Crystal Way.
+
+That is still the conversation I want to have. What you liked at the beginning
+was that this would be built for you, and there are real ways to keep that
+true. Nothing about the structure is set in stone.
+
+Do you and Sandra have 30 minutes next week? Coffee works too. And if the
+honest answer is that the timing or the fit is not right, tell me that
+straight. From a friend, a clear no beats a long silence.
+
+Jonathan
+
+Rules for this send: one ask only (the call), no price or license terms in
+writing, the safe exit stays in. If the call happens, exclusivity options
+(their market for a period, founding-customer terms) are on the table.
