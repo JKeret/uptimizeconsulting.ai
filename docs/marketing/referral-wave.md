@@ -20,7 +20,7 @@ Live links used in every note:
 
 | Name | Relationship | Proof line to use | Sent | Reply | Next step |
 |---|---|---|---|---|---|
-| Ronnie | Referred the home-care project | Home care ($1K to $50K arc) | | | |
+| Ronnie | Referred the home-care project | Home care (start-small arc) | | | |
 | Ari | Attorney friend (Kitchen Table convo) | Recruiting + mediator angle | | | |
 | Guy | Israel network | Home care or recruiting | | | |
 | Allan | ANLC (saw CRM demo) | Home care (platform story) | | | |
@@ -42,7 +42,8 @@ Live links used in every note:
 
 > Hi Ronnie, quick favor. I have been building custom apps for small
 > businesses. You saw it up close: the claim-statement project you connected me
-> to started at $1,000 and grew into a $50,000 platform. I am opening a few
+> to started at $1,000 and grew into the platform that now runs their billing
+> compliance. I am opening a few
 > slots for a $1,000 Starter Project: I take one annoying manual process and
 > automate it in about two weeks, fixed price. Who do you know that is drowning
 > in spreadsheets or paperwork? One intro would mean a lot.

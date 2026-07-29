@@ -29,11 +29,14 @@ we talk about what to automate next. Most clients do.
 
 ## Case blurbs
 
-**Home care (the $1K-to-$50K arc):** A home-care agency was buried in insurance
+**Home care (the start-small arc):** A home-care agency was buried in insurance
 paperwork. We started with a $1,000 project: an app that reads claim statements
 and flags billing errors automatically. It worked, so we kept going. That first
-project grew into a $50,000 platform that now runs their billing compliance end
-to end. The fastest way to trust is working software.
+project grew into a platform that now runs their billing compliance end to end.
+The fastest way to trust is working software.
+
+(Note: deal sizes stay out of public copy per Jonathan, 2026-07-29. The $1K
+starter price is the only number we publish.)
 
 **Recruiting:** A recruiting agency needed to screen candidates in four
 languages, around the clock. I built a voice assistant that answers calls in
