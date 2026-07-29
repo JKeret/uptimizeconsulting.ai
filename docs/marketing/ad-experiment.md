@@ -18,8 +18,11 @@ All ads point at the starter landing page with UTM tags:
 - Facebook: `https://uptimizeconsulting.ai/starter/?utm_source=facebook&utm_medium=cpc&utm_campaign=starter-2026q3`
 - Google: `https://uptimizeconsulting.ai/starter/?utm_source=google&utm_medium=cpc&utm_campaign=starter-2026q3`
 
-Conversion signal = Netlify form submissions (check Netlify → Forms →
-`starter-project`). No pixel, no extra tracking. Keep it simple.
+Conversion signal = self-hosted Umami analytics
+(https://analytics.uptimizeconsulting.ai, runs on Zima): the
+`starter-form-submit` event, segmented by `utm_source`. Netlify → Forms →
+`starter-project` holds the actual lead details. No Google/Facebook pixel;
+ads are judged by Umami event counts per source.
 
 ## Targeting
 

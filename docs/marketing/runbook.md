@@ -24,6 +24,7 @@ one anonymized example, FAQ JSON-LD, CTA to /starter/.
 - [ ] Starter projects sold / in delivery (cap: 2 concurrent)
 - [ ] Starter-to-platform conversions in discussion
 - [ ] Netlify Forms check: new `starter-project` submissions answered within 24h
+- [ ] Umami check (https://analytics.uptimizeconsulting.ai): visitors, top referrers/UTMs, `starter-form-submit` + `consultation-submit` event counts
 
 **From week 4 (~2026-08-19): ads check**
 - [ ] Fill the weekly row in `ad-experiment.md` (spend, clicks, submissions)
