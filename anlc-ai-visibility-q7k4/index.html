@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Adoption Network Law Center — AI Visibility Findings · Uptimize Consulting</title>
+<style>
+  :root {
+    --bg:#f7f8fa; --card:#ffffff; --ink:#111726; --ink2:#414b61; --muted:#6b7690;
+    --accent:#2a78d6; --accent-soft:#e8f0fb; --warn:#a05a00; --line:#e3e7ee; --bar:#c6cede;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --bg:#0f1420; --card:#161d2e; --ink:#f4f6fa; --ink2:#aeb7c9; --muted:#7683a0;
+    --accent:#4d9fff; --accent-soft:#1b2740; --warn:#f0b429; --line:#28324a; --bar:#3a4763; } }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body { background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.55; }
+  .wrap { max-width:760px; margin:0 auto; padding:56px 22px 80px; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:12px; color:var(--accent); font-weight:650; }
+  h1 { font-size:36px; line-height:1.12; margin:10px 0 8px; text-wrap:balance; }
+  .lede { font-size:17px; color:var(--ink2); }
+  .from-me { background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; padding:18px 20px; margin:28px 0 8px; font-size:15.5px; color:var(--ink2); }
+  h2 { font-size:23px; margin:52px 0 10px; text-wrap:balance; }
+  h2 .sec { color:var(--muted); font-weight:500; font-size:14px; display:block; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+  p { margin:0 0 14px; color:var(--ink2); font-size:16px; }
+  strong { color:var(--ink); }
+  .stat-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:18px 0; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .stat-v { font-size:30px; font-weight:700; color:var(--ink); }
+  .stat-l { font-size:12.5px; color:var(--muted); margin-top:2px; line-height:1.35; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:10px; margin:14px 0 22px; overflow:hidden; }
+  summary { cursor:pointer; padding:13px 18px; font-weight:600; color:var(--accent); font-size:14.5px; list-style:none; display:flex; align-items:center; gap:8px; }
+  summary::before { content:"+"; font-weight:700; font-size:17px; width:18px; }
+  details[open] summary::before { content:"–"; }
+  summary:hover { background:var(--accent-soft); }
+  .d-body { padding:4px 20px 18px; border-top:1px solid var(--line); }
+  .d-body p, .d-body li { font-size:14.5px; }
+  .ev { margin:16px 0; }
+  .ev-q { font-weight:600; font-size:14.5px; color:var(--ink); margin-bottom:6px; }
+  .ev-meta { color:var(--muted); font-weight:400; font-size:12.5px; }
+  blockquote { margin:8px 0; padding:12px 16px; background:var(--bg); border-left:3px solid var(--bar); border-radius:6px; font-size:13.5px; color:var(--ink2); }
+  .ev-note { font-size:13px; color:var(--warn); font-style:italic; }
+  .sv-row { display:grid; grid-template-columns:200px 1fr 32px; gap:10px; align-items:center; padding:3px 0; }
+  .sv-name { font-size:13px; color:var(--ink2); text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .sv-name.b { color:var(--ink); font-weight:700; }
+  .sv-track { height:15px; }
+  .sv-fill { height:100%; background:var(--bar); border-radius:0 3px 3px 0; min-width:2px; }
+  .sv-fill.b { background:var(--accent); }
+  .sv-num { font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .chart-card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:16px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th { text-align:left; color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; padding:7px 8px; border-bottom:1px solid var(--line); }
+  td { padding:7px 8px; border-bottom:1px solid var(--line); color:var(--ink2); font-variant-numeric:tabular-nums; }
+  td.num, th.num { text-align:right; }
+  .tag { font-size:11px; border:1px solid var(--line); border-radius:99px; padding:1px 8px; color:var(--ink2); white-space:nowrap; }
+  .tag.b { background:var(--accent); color:#fff; border-color:transparent; font-weight:600; }
+  .tag.w { color:var(--warn); }
+  ol.plan { padding-left:20px; color:var(--ink2); font-size:15px; }
+  ol.plan li { margin-bottom:12px; }
+  .wk { color:var(--accent); font-size:12px; font-weight:650; }
+  .cta { background:var(--card); border:1px solid var(--accent); border-radius:12px; padding:24px 26px; margin-top:48px; }
+  .cta h2 { margin-top:0; }
+  .sig { margin-top:36px; color:var(--muted); font-size:14px; }
+  .overflow { overflow-x:auto; }
+  @media print { details { display:block; } summary { display:none; } .d-body { border-top:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Prepared for Allan · Adoption Network Law Center · Uptimize Consulting</div>
+  <h1>When families ask AI instead of Google</h1>
+  <p class="lede">What ChatGPT and Gemini tell your two audiences today, measured — and the 90-day plan to change it.</p>
+
+  <div class="from-me">Allan — good seeing you. As promised, here is everything I found, written so you can review it on your own time. Every claim below has a <strong>“show me how you know this”</strong> panel under it — click any of them to see the method and the actual AI answers, word for word. — Jonathan</div>
+
+  <h2><span class="sec">The shift</span>The questions you used to buy on Google are now answered by AI</h2>
+  <p>When a couple asks ChatGPT <em>“how do we adopt a newborn?”</em>, it doesn't return ten blue links. It answers — names three or four organizations, cites its sources, and moves on. There is <strong>no keyword bid into that answer</strong>. The organic discipline that replaces PPC-for-discovery is called AEO — and unlike most marketing, it's directly measurable.</p>
+  <details><summary>What's actually buyable in AI ads today</summary><div class="d-body">
+    <p>Verified as of July 2026: OpenAI began testing ads in ChatGPT (US) in February 2026 — shown only to free-tier users, clearly labeled, and per OpenAI they <strong>do not influence the organic answer</strong>. There is no open self-serve ad platform yet. Google's AI Mode carries ads through regular Google Ads. Perplexity reportedly discontinued its ad program over user-trust concerns. Bottom line: paid placement covers a sliver of AI answers; the main game is being the name in the organic answer.</p>
+  </div></details>
+
+  <h2><span class="sec">Method</span>I asked the AIs your customers' real questions</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-v">30</div><div class="stat-l">real consumer questions</div></div>
+    <div class="stat"><div class="stat-v">2</div><div class="stat-l">audiences: adoptive parents &amp; birth mothers</div></div>
+    <div class="stat"><div class="stat-v">2</div><div class="stat-l">AI models, web search on</div></div>
+    <div class="stat"><div class="stat-v">120</div><div class="stat-l">answers collected &amp; scored</div></div>
+  </div>
+  <details><summary>Full methodology — and its honest limits</summary><div class="d-body">
+    <p>I wrote 30 questions phrased the way real people ask assistants — adoptive-parent questions (how to adopt, agency vs attorney, costs, local searches near Orange County, LA, Dallas, Phoenix), birth-mother questions (options, financial support, placement), and brand checks (“is Adoption Network Law Center legitimate?”). Each question went to ChatGPT and Gemini with web search enabled, <strong>twice</strong>, to account for answer variability — 120 answers total, collected 2026-08-05.</p>
+    <p>Each answer was scored: was Adoption Network Law Center named? recommended? which competitors appeared? which websites did the AI cite as sources? The brand-name check is a literal text match, not an AI's opinion — I verified the headline numbers by hand.</p>
+    <p><strong>Limits, stated plainly:</strong> answers came through the models' developer interfaces with web search on — the closest measurable proxy to the consumer apps, but not byte-identical (no personal chat history). Answers also shift between runs and over time; that's why the plan includes re-measuring monthly rather than trusting any single snapshot — including this one.</p>
+  </div></details>
+
+  <h2><span class="sec">Finding 1</span>The AIs name your competitors. They don't name you.</h2>
+  <p>Across the 104 answers to adoptive-parent and birth-mother questions, <strong>Adoption Network Law Center was named 5 times</strong>. American Adoptions was named 55 times.</p>
+  <div class="chart-card">
+  <div class="sv-row"><div class="sv-name">American Adoptions</div>
+  <div class="sv-track"><div class="sv-fill" style="width:100%"></div></div>
+  <div class="sv-num">55</div></div>
+  <div class="sv-row"><div class="sv-name">Nightlight Christian Adoptions</div>
+  <div class="sv-track"><div class="sv-fill" style="width:36%"></div></div>
+  <div class="sv-num">20</div></div>
+  <div class="sv-row"><div class="sv-name">Gladney Center for Adoption</div>
+  <div class="sv-track"><div class="sv-fill" style="width:27%"></div></div>
+  <div class="sv-num">15</div></div>
+  <div class="sv-row"><div class="sv-name">AdoptHelp</div>
+  <div class="sv-track"><div class="sv-fill" style="width:18%"></div></div>
+  <div class="sv-num">10</div></div>
+  <div class="sv-row"><div class="sv-name">Angel Adoption</div>
+  <div class="sv-track"><div class="sv-fill" style="width:16%"></div></div>
+  <div class="sv-num">9</div></div>
+  <div class="sv-row"><div class="sv-name">Lifetime Adoption</div>
+  <div class="sv-track"><div class="sv-fill" style="width:16%"></div></div>
+  <div class="sv-num">9</div></div>
+  <div class="sv-row"><div class="sv-name">Bethany Christian Services</div>
+  <div class="sv-track"><div class="sv-fill" style="width:15%"></div></div>
+  <div class="sv-num">8</div></div>
+  <div class="sv-row"><div class="sv-name b">Adoption Network Law Center</div>
+  <div class="sv-track"><div class="sv-fill b" style="width:9%"></div></div>
+  <div class="sv-num">5</div></div></div>
+  <details><summary>Show me the answers</summary><div class="d-body">
+    
+  <div class="ev">
+    <div class="ev-q">“Which adoption organizations have the shortest wait times for adoptive parents?” <span class="ev-meta">— asked to ChatGPT, 2026-08-05</span></div>
+    <blockquote>There isn’t a reliable national ranking of adoption organizations by wait time, and many “shortest wait” claims are self-reported. The shortest path also depends heavily on what kind of adoption you mean.
+
+For **adopting a waiting child from foster care**, the fastest route is usually your **state/county child welfare agency**, often using **AdoptUSKids** to search for children after you are licensed. AdoptUSKids says licensing typically takes **4-12 months**, and Adopt.org says the child-search step can be **days, weeks, or months**, depending on your openness to age, sibling groups, and need…</blockquote>
+    <div class="ev-note">Five organizations recommended by name. Adoption Network Law Center absent.</div>
+  </div>
+    
+  <div class="ev">
+    <div class="ev-q">“What are the best adoption agencies for newborn domestic adoption?” <span class="ev-meta">— asked to ChatGPT, 2026-08-05</span></div>
+    <blockquote>There isn’t one universally “best” newborn domestic adoption agency, because licensing, home studies, birth-parent services, fees, and wait times vary by state. The strongest shortlist is usually made of licensed agencies with transparent fees, ethical expectant-parent counseling, open-adoption support, strong post-adoption services, and realistic wait-time expectations.
+
+A good national/regional shortlist to compare:
+
+- **Gladney Center for Adoption**: Best established nonprofit option with a domestic infant program, broad U.S. applicant reach, post-adoption support, and published program det…</blockquote>
+    <div class="ev-note">The good news: when the question got local, ChatGPT <em>did</em> name you — proof this is winnable, not hopeless.</div>
+  </div>
+  </div></details>
+
+  <h2><span class="sec">Finding 2</span>The AIs read your website. They almost never credit you.</h2>
+  <p>Here's the part I didn't expect. <strong>adoptionnetwork.com is the #2 most-cited source</strong> across all 120 answers — 42 citations. The AIs are reading your content to write these answers. 29 answers were built on your material; <strong>4 credited you by name</strong>.</p>
+  <p>That's the diagnosis in one sentence: <strong>a credit problem, not a content problem</strong>. Your content earns retrieval; your brand entity is too weak for attribution. And a credit problem is fixable.</p>
+  <details><summary>Show me an answer that uses your site without naming you</summary><div class="d-body">
+    
+  <div class="ev">
+    <div class="ev-q">“What is a full-service adoption law center and is it better than an agency?” <span class="ev-meta">— asked to ChatGPT, 2026-08-05</span></div>
+    <blockquote>A **full-service adoption law center** is usually a legal practice or attorney-supervised organization that helps with many parts of a private adoption, not just court paperwork. Depending on the state and the provider, “full-service” may include legal guidance, matching or outreach, coordination with birth parents, referrals for home studies, help with ICPC/interstate paperwork, court filings, and finalization.
+
+It is **not automatically the same as a licensed adoption agency**. A licensed agency is typically authorized and regulated by the state to provide placement services, home studies, c…</blockquote>
+    <div class="ev-note">This answer's source list includes adoptionnetwork.com — the text never mentions Adoption Network Law Center.</div>
+  </div>
+  </div></details>
+
+  <h2><span class="sec">Finding 3</span>The leader built the sources the AIs cite</h2>
+  <p>Why does American Adoptions win? Look at the top of the citation table — they don't just get mentioned, they <strong>own the #1 cited source</strong>. They built the library the AIs read from. That's a playbook, not luck — and the rows marked “neutral” are where you run it.</p>
+  <div class="chart-card overflow"><table>
+    <tr><th>Cited source</th><th class="num">Citations</th><th>Who is it</th></tr>
+    <tr><td>americanadoptions.com</td><td class="num">67</td><td><span class="tag w">competitor: American Adoptions</span></td></tr><tr><td>adoptionnetwork.com</td><td class="num">42</td><td><span class="tag b">you</span></td></tr><tr><td>adoptioncouncil.org</td><td class="num">28</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>cdss.ca.gov</td><td class="num">26</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>adoptuskids.org</td><td class="num">19</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>acf.gov</td><td class="num">18</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>bbb.org</td><td class="num">18</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>adoptionagencies.com</td><td class="num">18</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>vistadelmar.org</td><td class="num">16</td><td><span class="tag">neutral — presence can be earned</span></td></tr><tr><td>angeladoptioninc.com</td><td class="num">15</td><td><span class="tag w">competitor: Angel Adoption</span></td></tr>
+  </table></div>
+
+  <h2><span class="sec">Finding 4</span>Birth mothers get deflected; adoptive parents are winnable now</h2>
+  <p>On <strong>42% of birth-mother questions</strong>, the AIs deliberately avoided naming any provider and pointed to neutral resources instead — a built-in safety behavior nobody beats head-on. The near-term battleground is adoptive-parent visibility; the birth-mother path runs through presence on the neutral resources the AIs <em>do</em> cite.</p>
+  <p>One more thing you should see: when someone asks the AIs whether to <em>trust</em> Adoption Network Law Center, the answer today is mixed — praise alongside concern narratives. Reputation is part of this fight, and it's measured monthly like everything else in the plan.</p>
+  <details><summary>Show me both</summary><div class="d-body">
+    
+  <div class="ev">
+    <div class="ev-q">“Can I choose the family that adopts my baby?” <span class="ev-meta">— asked to ChatGPT, 2026-08-05</span></div>
+    <blockquote>Yes. In a private infant adoption, you can usually choose the prospective adoptive family for your baby. You may be able to review family profiles, talk with or meet families, choose how much contact you want before and after birth, and decide whether you want an open, semi-open, or closed adoption.
+
+A few important caveats:
+
+- The family still has to be legally eligible and approved to adopt, usually through a home study/background-check process.
+- Adoption laws vary by state, including when you can sign consent papers and whether there is any period to change your mind after signing.
+- You r…</blockquote>
+    <div class="ev-note">Supportive, thorough — and no provider named. This is the pattern.</div>
+  </div>
+    
+  <div class="ev">
+    <div class="ev-q">“Adoption Network Law Center reviews - should I trust them?” <span class="ev-meta">— asked to ChatGPT, 2026-08-05</span></div>
+    <blockquote>I would not treat Adoption Network Law Center reviews alone as enough reason to trust them. I’d approach them with caution and only proceed after independent verification.
+
+The mixed signal is this:
+
+Positive signs: ANLC has a long operating history, says it has handled 6,000+ adoptions, states it is a California law corporation rather than a licensed adoption agency, and has a BBB profile showing A+ accreditation.
+
+Red flags: ANLC is not a licensed adoption agency, by its own description. TIME reported serious allegations about pressure on expectant mothers, large nonrefundable fees, a prior …</blockquote>
+    
+  </div>
+  </div></details>
+
+  <h2><span class="sec">The plan</span>Six workstreams, 90 days</h2>
+  <ol class="plan">
+    <li><strong>Entity &amp; attribution fix</strong> <span class="wk">wk 1–3</span> — schema markup, brand-in-the-quotable-sentence writing, one canonical identity everywhere. Make your content impossible to use without naming you.</li>
+    <li><strong>Citation-map placement</strong> <span class="wk">wk 2–8</span> — get listed on the exact neutral sites in the table above. Target: 8 of the top 10.</li>
+    <li><strong>Conversational Q&amp;A hubs</strong> <span class="wk">wk 3–10</span> — out-answer the answers the AIs give today; I already hold the question list and the answers to beat.</li>
+    <li><strong>Reputation defense</strong> <span class="wk">ongoing</span> — review velocity plus an authoritative response to the concern narrative, measured monthly.</li>
+    <li><strong>Reddit &amp; community</strong> <span class="wk">ongoing</span> — disclosed, authentic participation; Reddit is a top cited source.</li>
+    <li><strong>Keep SEO/PPC funded</strong> <span class="wk">unchanged</span> — page-1 Google rank remains the strongest verified predictor of AI mentions. This rides on your existing spend; it doesn't replace it.</li>
+  </ol>
+
+  <h2><span class="sec">Accountability</span>Measured monthly — same audit, tracked over time</h2>
+  <div class="chart-card overflow"><table>
+    <tr><th>KPI</th><th>Today</th><th>Day-90 target</th></tr>
+    <tr><td>Mention rate, adoptive-parent questions</td><td>5%</td><td>≥ 15%</td></tr>
+    <tr><td>Named share of voice</td><td>5 vs 55 (American Adoptions)</td><td>top-5 organization</td></tr>
+    <tr><td>Presence on top-10 neutral cited sites</td><td>~1</td><td>≥ 8</td></tr>
+    <tr><td>Brand-check stance</td><td>mixed / cautionary</td><td>positive-leaning</td></tr>
+  </table></div>
+  <p>Straight talk: this discipline is young, and AI citation patterns shift. These targets are directional and re-baselined monthly — which is exactly why you measure every month instead of paying someone once and hoping.</p>
+
+  <h2><span class="sec">Part two</span>From source to signed: the funnel map</h2>
+  <p>Everything above is the <em>front half</em> of your funnel — whether families find you. You asked me years ago for the back half: source to lead, time in every stage, and a prediction of what comes out of the funnel. I couldn't build it then — the data sat in a database we couldn't touch, and there was no way to flag a field change. That request is half the reason I built my own CRM.</p>
+  <p>In my system, <strong>every stage change is recorded the moment it happens</strong> — who moved it, from which stage to which, when — and every inquiry is tagged with its source: Google, referral, ChatGPT, Gemini. Time-in-stage, conversion by stage, time-to-close per channel, and a forward view of the funnel become a dashboard on data the system collects from day one. It's also how we'll measure the AI work above paying off in signed families, not just mentions. Happy to show you this live — it's running now, with an Adoption Network demo workspace in it.</p>
+
+  <div class="cta">
+    <h2 style="font-size:20px">Ready when you are</h2>
+    <p>If you want me to run the 90-day plan, say the word and I'll send over a one-page proposal — fixed scope, first re-measurement 30 days in, and you'll see the scorecard move (or not) every month. And if you'd like the CRM walkthrough, that's a 20-minute screen share whenever suits you.</p>
+    <p class="sig">Jonathan Keret · Uptimize Consulting · jonathanke@gmail.com<br>Audit run 2026-08-05 · 120 answers · methodology and raw excerpts in the panels above</p>
+  </div>
+</div>
+</body>
+</html>
