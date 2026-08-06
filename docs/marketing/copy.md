@@ -35,8 +35,22 @@ and flags billing errors automatically. It worked, so we kept going. That first
 project grew into a platform that now runs their billing compliance end to end.
 The fastest way to trust is working software.
 
-(Note: deal sizes stay out of public copy per Jonathan, 2026-07-29. The $1K
-starter price is the only number we publish.)
+(Note: client deal sizes stay out of public copy per Jonathan, 2026-07-29.
+Published pricing is the generic tier ranges below, nothing tied to a named
+or recognizable client.)
+
+## Published pricing tiers (per Jonathan, 2026-08-06)
+
+Use these ranges anywhere pricing appears in public copy or articles:
+- Starter: $1,000 fixed, one process, about two weeks.
+- Platform (small business): $10,000 to $25,000, built in phases.
+- Complex platform: $30,000 to $75,000 and up, for compliance-heavy or
+  multi-system builds (HIPAA workflows, integrations into existing systems,
+  separate portals for staff and customers).
+- Care: about $1,500 per month.
+
+Always present $10-25K as the typical small-business range, never as a
+ceiling. The complex tier exists so larger prospects do not anchor on $25K.
 
 **Recruiting:** A recruiting agency needed to screen candidates in four
 languages, around the clock. I built a voice assistant that answers calls in
