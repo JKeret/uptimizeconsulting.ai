@@ -47,7 +47,9 @@ Use these ranges anywhere pricing appears in public copy or articles:
 - Complex platform: $30,000 to $75,000 and up, for compliance-heavy or
   multi-system builds (HIPAA workflows, integrations into existing systems,
   separate portals for staff and customers).
-- Care: about $1,500 per month.
+- Care: $300 to $1,500 per month, scaling with how much of the business runs
+  on the software. A single starter app sits at the bottom of the range, a
+  full platform at the top. Never quote flat $1,500 as the entry point.
 
 Always present $10-25K as the typical small-business range, never as a
 ceiling. The complex tier exists so larger prospects do not anchor on $25K.
