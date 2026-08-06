@@ -11,9 +11,10 @@ Assets live: https://uptimizeconsulting.ai/starter/ (+ one-pager PDF, /insights/
 - [ ] Log every send/reply in Uptimize CRM the same day
 
 **One article per week (Tier 3, AEO)**
-Published: 1. "How much does a custom app for a small business cost?" (2026-07-29)
+Published:
+1. "How much does a custom app for a small business cost?" (2026-07-29)
+2. "Custom software vs. off-the-shelf for a small business" (2026-08-06)
 Queued next:
-2. "Custom software vs. off-the-shelf for a small business"
 3. "What processes should a small business automate first?"
 4. "How long does it take to build a custom business app?"
 Pattern: answer the question directly in the first paragraph, real numbers,
