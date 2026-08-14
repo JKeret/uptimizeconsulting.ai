@@ -16,6 +16,7 @@ for (const slug of dirs) {
 
   if (!html.includes(`<link rel="canonical" href="https://uptimizeconsulting.ai/answers/${slug}/">`)) err("canonical missing or wrong");
   if (!html.includes('data-website-id="a163a740-7152-46d9-9206-1f292ce13579"')) err("Umami script missing");
+  if (!html.includes("widget.instantaiguru.com/chat-widget.min.js")) err("chat widget script missing");
   if (!/<div class="answer">/.test(html)) err("no .answer direct-answer box");
   if (!html.includes("Uptimize Consulting")) err("brand not named");
   if (!html.includes('data-umami-event="answer-cta-click"')) err("CTA event missing");
