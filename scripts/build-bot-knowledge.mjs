@@ -55,7 +55,7 @@ const voiceFaq = `## Five questions callers ask (answers, phone-speakable)
 
 **Do I need to be technical?** No. Most clients are operators, not engineers. Jonathan translates the technical decisions into business decisions.
 
-**How do we start?** A free thirty minute call with Jonathan. I can take your details right now and he will call you back within one business day.`;
+**How do we start?** A free thirty minute call with Jonathan. I can take your details right now — Jonathan will call you back within one business day.`;
 writeFileSync("docs/marketing/voice-canon.md", `# Voice canon — phone agent digest\n\n${section0}\n\n---\n\n${voiceFaq}\n`);
 console.log("Wrote docs/marketing/voice-canon.md");
 console.log(`Wrote docs/marketing/bot-knowledge.md + Uptimize_KB_v2.md (${sections.length - 2} answers pages compiled)`);

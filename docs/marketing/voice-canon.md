@@ -22,4 +22,4 @@ Never quote any other price ranges or timelines. If someone asks about a project
 
 **Do I need to be technical?** No. Most clients are operators, not engineers. Jonathan translates the technical decisions into business decisions.
 
-**How do we start?** A free thirty minute call with Jonathan. I can take your details right now and he will call you back within one business day.
+**How do we start?** A free thirty minute call with Jonathan. I can take your details right now — Jonathan will call you back within one business day.

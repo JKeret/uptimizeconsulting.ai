@@ -17,6 +17,13 @@
 // overwrites the field, so repeated runs against unchanged inputs produce
 // a byte-identical agent-config.json.
 //
+// Self-check guard against canon drift: fails the build if
+// "call you back within one business day" (any casing) ever appears in the
+// assembled prompt without being immediately preceded by the exact
+// "Jonathan will " prefix -- catches a future voice-canon.md edit
+// reintroducing a rephrased callback promise (e.g. "he will call you back
+// ...") that would coexist with the binding exact sentence.
+//
 // Usage: node voice/agent/build-prompt.mjs
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -50,6 +57,30 @@ function speakifyUrls(text) {
   return text.replace(/https?:\/\/[^\s)]+/g, (match) => urlToSpeech(match));
 }
 
+/** Guards against callback-promise wording drift (e.g. a canon FAQ entry
+ * rephrasing the promise as "he will call you back..." instead of the
+ * binding exact sentence). Finds every occurrence of "call you back within
+ * one business day" in the assembled prompt (any casing) and flags any
+ * occurrence NOT immediately preceded by "Jonathan will " (also any
+ * casing) -- returns an array of the offending snippets, empty if clean. */
+function findCallbackPhraseDrift(text) {
+  const phrase = /call you back within one business day/gi;
+  const requiredPrefix = "jonathan will ";
+  const violations = [];
+  let match;
+  while ((match = phrase.exec(text)) !== null) {
+    const start = match.index;
+    const precedingStart = Math.max(0, start - requiredPrefix.length);
+    const preceding = text.slice(precedingStart, start).toLowerCase();
+    if (preceding !== requiredPrefix) {
+      const snippetStart = Math.max(0, start - 40);
+      const snippetEnd = Math.min(text.length, start + match[0].length + 1);
+      violations.push(text.slice(snippetStart, snippetEnd));
+    }
+  }
+  return violations;
+}
+
 function buildPersonaBlock() {
   return [
     "You are Ava, the AI voice assistant answering inbound calls for Uptimize Consulting.",
@@ -72,7 +103,8 @@ function buildIntakeBlock() {
     "6. Before ending the call, confirm a brief summary of what you heard back to the caller so they know it was captured correctly.",
     "While listening at any point in the call, set urgent to true the moment the caller signals time pressure or an emergency, and set existing_client to true the moment they indicate they're already an Uptimize Consulting client.",
     "Keep the whole call to about five minutes. If the caller keeps talking well past that, gently steer toward wrapping up: summarize what you have so far and close with the callback promise.",
-    `You may only answer questions using the canon reference below. If asked about anything not covered there -- pricing outside the ranges given, technical specifics, scheduling, or anything else you're not sure about -- say: "${OFF_CANON_LINE}" Then continue the intake where you left off.`,
+    `You may only answer questions using the canon reference below. If asked about anything not covered there -- pricing outside the ranges given, technical specifics, scheduling, or anything else you're not sure about -- say: "${OFF_CANON_LINE}"`,
+    "HARD RULE -- always resume the intake: after answering ANY question during the call, whether you answered it from the canon reference (for example a cost or timeline question) or with the off-canon fallback line above, always return to the next uncollected intake field from the numbered order above and continue exactly where you left off. Never restart the intake from the beginning, never skip ahead, and never let an answered question end the call on its own.",
   ].join(" ");
 }
 
@@ -112,6 +144,12 @@ function main() {
   if (/https?:\/\//i.test(fullPrompt)) problems.push("contains an un-converted bare URL");
   if (!fullPrompt.includes("uptimizeconsulting dot ai slash starter"))
     problems.push("expected speakable form of the canon URL not found");
+  const callbackDrift = findCallbackPhraseDrift(fullPrompt);
+  if (callbackDrift.length > 0) {
+    problems.push(
+      `callback-promise wording drift -- "call you back within one business day" appears without the exact "Jonathan will " prefix in: ${JSON.stringify(callbackDrift)}`
+    );
+  }
   if (problems.length > 0) {
     console.error("build-prompt.mjs: assembled prompt failed self-check:\n  - " + problems.join("\n  - "));
     process.exit(1);
