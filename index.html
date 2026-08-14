@@ -23,7 +23,7 @@ a{text-decoration:none;color:inherit}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,25,55,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
 nav .container{display:flex;align-items:center;justify-content:space-between;height:72px}
 nav .logo img{height:40px}
-nav ul{list-style:none;display:flex;gap:32px}
+nav ul{list-style:none;display:flex;gap:22px}
 nav ul li a{color:rgba(255,255,255,.75);font-size:.85rem;font-weight:500;letter-spacing:.02em;transition:color .2s}
 nav ul li a:hover{color:var(--teal)}
 nav .cta-nav{background:var(--teal);color:var(--navy);padding:10px 22px;border-radius:8px;font-weight:700;font-size:.85rem;transition:transform .2s,box-shadow .2s}
@@ -176,10 +176,14 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 .btn-back:hover{border-color:var(--blue);color:var(--navy);transform:translateY(-2px);box-shadow:none}
 
 /* RESPONSIVE */
-@media(max-width:768px){
+/* Nav collapses earlier than the rest of the mobile layout: ten items
+   (Answers included) don't fit between 768 and ~1080px. */
+@media(max-width:1080px){
   nav ul.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(15,25,55,.98);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid rgba(255,255,255,.06)}
   nav ul.nav-links.open{display:flex}
   .menu-toggle{display:block}
+}
+@media(max-width:768px){
   .hero{padding:130px 0 80px}
   .btn-outline{margin-left:0;margin-top:12px}
   .hero .btns{display:flex;flex-direction:column;align-items:flex-start;gap:0}
