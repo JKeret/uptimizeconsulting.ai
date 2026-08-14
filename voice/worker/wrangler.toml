@@ -15,5 +15,19 @@ enabled = true
 # No route configured yet -- deploys to the default *.workers.dev subdomain.
 # A custom route is decided at deploy time (Task 4).
 
-# Secrets (set via `wrangler secret put <NAME>`, never committed):
-#   ELEVENLABS_WEBHOOK_SECRET  (HMAC secret for the ElevenLabs post-call webhook)
+[vars]
+# Non-secret config, safe to commit.
+NETLIFY_SITE_URL = "https://uptimizeconsulting.ai"
+# The CRM's pre-seeded "Inbound Call" lead_source row (workspace
+# 97e25975-ede3-4ce2-b463-a6986c713355) -- confirmed live via
+# GET /api/lead-sources during Task 4 provisioning. Optional on the CRM's
+# side; set so phone-intake leads carry a source instead of none.
+CRM_LEAD_SOURCE_ID = "649d8b9b-2f0f-4f73-8d7a-769dc2e3e6b9"
+
+# Secrets (set via `wrangler secret put <NAME>`, never committed; see
+# PROVISION.md for the exact commands run and what each one is for):
+#   ELEVENLABS_WEBHOOK_SECRET  (HMAC secret for the ElevenLabs post-call webhook;
+#                               placeholder until Task 5)
+#   TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID
+#   CRM_BASE_URL / CRM_EMAIL / CRM_PASSWORD
+#   CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET

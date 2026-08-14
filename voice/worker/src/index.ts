@@ -11,6 +11,10 @@ export interface Env {
   CRM_BASE_URL?: string;
   CRM_EMAIL?: string;
   CRM_PASSWORD?: string;
+  // Optional: UUID of an existing `lead_source` row (Task 4 provisioning used
+  // the CRM's pre-seeded "Inbound Call" source). Omit to create leads with no
+  // source attribution -- the field is optional on the CRM's side.
+  CRM_LEAD_SOURCE_ID?: string;
   CF_ACCESS_CLIENT_ID?: string;
   CF_ACCESS_CLIENT_SECRET?: string;
 }

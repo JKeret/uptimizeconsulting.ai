@@ -96,6 +96,17 @@ export async function telegramSink(lead: Lead, env: Env, fetchImpl: typeof fetch
 // calls (ported from lanefit/worker/src/crm.ts, where a hardcoded origin
 // caused real login 403s). Derived from CRM_BASE_URL so re-pointing the
 // worker can't silently desync the two.
+//
+// Route prefix (confirmed live, Task 4): the CRM's Nest app mounts its
+// controllers at the root (`/auth/login`, `/leads`), but the public edge is
+// an nginx reverse proxy that only forwards the `/api/` location -- it
+// strips that prefix before proxying to the app
+// (`crm-web`'s default.conf: `location /api/ { proxy_pass http://api:3000/; }`).
+// Everything outside `/api/` falls through to nginx's static SPA
+// `try_files`, which 405s on POST. So externally the routes are
+// `/api/auth/login` and `/api/leads`, not the bare root paths.
+const CRM_API_PREFIX = "/api";
+
 function crmHeaders(env: Env, extra?: Record<string, string>): Record<string, string> {
   return {
     Origin: new URL(env.CRM_BASE_URL as string).origin,
@@ -105,59 +116,64 @@ function crmHeaders(env: Env, extra?: Record<string, string>): Record<string, st
   };
 }
 
-interface CrmSession {
-  cookie?: string;
-  token?: string;
-}
-
-/** Logs into the CRM and carries forward BOTH the session cookie and a JSON
- * bearer token (whichever the login response actually provides) since it's
- * unconfirmed which one the real /leads route checks. */
-async function crmLogin(env: Env, fetchImpl: typeof fetch): Promise<CrmSession> {
-  const res = await fetchImpl(`${env.CRM_BASE_URL}/auth/login`, {
+/** Logs into the CRM and carries forward every `Set-Cookie` the response
+ * sent (session cookie, and -- since the request also crosses Cloudflare
+ * Access -- Access's own `CF_Authorization` cookie). `Headers#get("set-cookie")`
+ * collapses multiple Set-Cookie headers into one lossy string; `getSetCookie()`
+ * (confirmed live, Task 4: the CRM's login sets two) is the only correct way
+ * to read them all. The CRM's AuthGuard only ever reads its own session
+ * cookie, but there's no reason not to forward Access's too. There's no JSON
+ * bearer token -- the real login response is just `{ ok: true }`. */
+async function crmLogin(env: Env, fetchImpl: typeof fetch): Promise<string | undefined> {
+  const res = await fetchImpl(`${env.CRM_BASE_URL}${CRM_API_PREFIX}/auth/login`, {
     method: "POST",
     headers: crmHeaders(env, { "Content-Type": "application/json" }),
     body: JSON.stringify({ email: env.CRM_EMAIL, password: env.CRM_PASSWORD }),
   });
   if (!res.ok) throw new Error(`CRM login failed: HTTP ${res.status}`);
 
-  const setCookie = res.headers.get("set-cookie");
-  const cookie = setCookie ? setCookie.split(";")[0] : undefined;
-  let token: string | undefined;
-  try {
-    const parsed = (await res.json()) as { token?: unknown };
-    token = typeof parsed?.token === "string" ? parsed.token : undefined;
-  } catch {
-    token = undefined;
-  }
-  return { cookie, token };
+  const cookies = res.headers.getSetCookie();
+  if (cookies.length === 0) return undefined;
+  return cookies.map((c) => c.split(";")[0]).join("; ");
 }
 
 /** Logs in, then creates a CRM lead. Skips (returns `false`, no request
  * made) for lab leads or when CRM_BASE_URL/CRM_EMAIL/CRM_PASSWORD aren't
- * configured. Throws on any non-ok response. The real `/leads` route
- * contract is unconfirmed until Task 4's live verification -- built to the
- * documented shape in the meantime. */
+ * configured. Throws on any non-ok response.
+ *
+ * Payload shape confirmed live against the CRM's `createLeadSchema`
+ * (Task 4): it's a Zod `.strict()` object accepting only `name`, `email`,
+ * `phone`, `company`, `sourceId` (an existing lead_source UUID, optional),
+ * and `notes` -- extra keys (a `title`, a free-text `source` string) 400 with
+ * "Unrecognized key(s)". There's no title field, so the "Phone intake --"
+ * framing that used to be the lead's title is now the first line of notes
+ * instead. */
 export async function crmSink(lead: Lead, env: Env, fetchImpl: typeof fetch): Promise<boolean> {
   if (lead.brain === "openai-lab") return false;
   if (!env.CRM_BASE_URL || !env.CRM_EMAIL || !env.CRM_PASSWORD) return false;
 
-  const session = await crmLogin(env, fetchImpl);
+  const cookie = await crmLogin(env, fetchImpl);
   const authHeaders: Record<string, string> = {};
-  if (session.cookie) authHeaders.Cookie = session.cookie;
-  if (session.token) authHeaders.Authorization = `Bearer ${session.token}`;
+  if (cookie) authHeaders.Cookie = cookie;
 
-  const notes = [lead.summary, lead.process, lead.transcript_url].filter(Boolean).join("\n\n");
-  const res = await fetchImpl(`${env.CRM_BASE_URL}/leads`, {
+  const notes = [
+    `Phone intake — ${lead.name || lead.callback_number}`,
+    lead.summary,
+    lead.process,
+    lead.transcript_url,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+  const res = await fetchImpl(`${env.CRM_BASE_URL}${CRM_API_PREFIX}/leads`, {
     method: "POST",
     headers: crmHeaders(env, { "Content-Type": "application/json", ...authHeaders }),
     body: JSON.stringify({
-      title: `Phone intake — ${lead.name || lead.callback_number}`,
-      name: lead.name,
-      email: lead.email,
+      name: lead.name || lead.callback_number,
+      email: lead.email || undefined,
       phone: lead.callback_number,
+      company: lead.business || undefined,
       notes,
-      source: "phone-intake",
+      ...(env.CRM_LEAD_SOURCE_ID ? { sourceId: env.CRM_LEAD_SOURCE_ID } : {}),
     }),
   });
   if (!res.ok) throw new Error(`CRM lead create failed: HTTP ${res.status}`);

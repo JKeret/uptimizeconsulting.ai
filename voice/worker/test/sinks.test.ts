@@ -31,6 +31,7 @@ function makeEnv(overrides: Partial<Env> = {}): Env {
     CRM_BASE_URL: "https://crm.uptimizeconsulting.ai",
     CRM_EMAIL: "bot@uptimizeconsulting.ai",
     CRM_PASSWORD: "supersecret",
+    CRM_LEAD_SOURCE_ID: "lead-source-id",
     CF_ACCESS_CLIENT_ID: "cf-id",
     CF_ACCESS_CLIENT_SECRET: "cf-secret",
     ...overrides,
@@ -42,7 +43,10 @@ function makeEnv(overrides: Partial<Env> = {}): Env {
 interface MockResponseSpec {
   ok: boolean;
   status?: number;
-  headers?: Record<string, string>;
+  // "set-cookie" may be a single string or an array -- real fetch responses
+  // can carry multiple Set-Cookie headers, which is exactly the case
+  // getSetCookie() (vs. the lossy headers.get) exists to handle correctly.
+  headers?: Record<string, string | string[]>;
   json?: () => Promise<unknown>;
 }
 
@@ -60,10 +64,19 @@ function createMockFetch(responses: MockResponseSpec[]) {
     if (!spec) {
       throw new Error(`mock fetch invoked more times than expected (call #${i}): ${String(url)}`);
     }
+    const setCookie = spec.headers?.["set-cookie"];
+    const setCookieArray = setCookie === undefined ? [] : Array.isArray(setCookie) ? setCookie : [setCookie];
     return {
       ok: spec.ok,
       status: spec.status ?? (spec.ok ? 200 : 500),
-      headers: { get: (name: string) => spec.headers?.[name.toLowerCase()] ?? null },
+      headers: {
+        get: (name: string) => {
+          const v = spec.headers?.[name.toLowerCase()];
+          if (v === undefined) return null;
+          return Array.isArray(v) ? v.join(", ") : v;
+        },
+        getSetCookie: () => setCookieArray,
+      },
       json: async () => (spec.json ? await spec.json() : {}),
       text: async () => "",
     };
@@ -184,14 +197,17 @@ describe("telegramSink", () => {
 // -- crmSink -----------------------------------------------------------
 
 describe("crmSink", () => {
-  it("logs in with CF Access + Origin headers, then creates a lead carrying cookie + bearer token", async () => {
+  it("logs in with CF Access + Origin headers at /api/auth/login, then creates a lead at /api/leads carrying every session cookie", async () => {
     const { fetchImpl, calls } = createMockFetch([
       {
         ok: true,
-        headers: { "set-cookie": "crm_session=abc123; Path=/; HttpOnly" },
-        json: async () => ({ token: "jwt-xyz" }),
+        headers: {
+          // Real login sets two: the app's session cookie AND Cloudflare
+          // Access's own CF_Authorization cookie (confirmed live, Task 4).
+          "set-cookie": ["crm_session=abc123; Path=/; HttpOnly", "CF_Authorization=xyz; Path=/; HttpOnly"],
+        },
       },
-      { ok: true },
+      { ok: true, json: async () => ({ id: "lead-1" }) },
     ]);
 
     const result = await crmSink(makeLead(), makeEnv(), fetchImpl);
@@ -199,7 +215,7 @@ describe("crmSink", () => {
     expect(calls).toHaveLength(2);
 
     // Login request
-    expect(calls[0].url).toBe("https://crm.uptimizeconsulting.ai/auth/login");
+    expect(calls[0].url).toBe("https://crm.uptimizeconsulting.ai/api/auth/login");
     expect(calls[0].init.method).toBe("POST");
     expect(calls[0].init.headers?.["CF-Access-Client-Id"]).toBe("cf-id");
     expect(calls[0].init.headers?.["CF-Access-Client-Secret"]).toBe("cf-secret");
@@ -209,27 +225,37 @@ describe("crmSink", () => {
     expect(loginBody.password).toBe("supersecret");
 
     // Lead-create request
-    expect(calls[1].url).toBe("https://crm.uptimizeconsulting.ai/leads");
+    expect(calls[1].url).toBe("https://crm.uptimizeconsulting.ai/api/leads");
     expect(calls[1].init.headers?.["CF-Access-Client-Id"]).toBe("cf-id");
     expect(calls[1].init.headers?.["CF-Access-Client-Secret"]).toBe("cf-secret");
     expect(calls[1].init.headers?.Origin).toBe("https://crm.uptimizeconsulting.ai");
-    expect(calls[1].init.headers?.Cookie).toBe("crm_session=abc123");
-    expect(calls[1].init.headers?.Authorization).toBe("Bearer jwt-xyz");
+    expect(calls[1].init.headers?.Cookie).toBe("crm_session=abc123; CF_Authorization=xyz");
+    expect(calls[1].init.headers?.Authorization).toBeUndefined();
     const leadBody = body(calls[1]);
-    expect(leadBody.title).toBe("Phone intake — Jane Doe");
+    expect(leadBody.title).toBeUndefined();
+    expect(leadBody.source).toBeUndefined();
     expect(leadBody.name).toBe("Jane Doe");
     expect(leadBody.email).toBe("jane@doeconsulting.com");
     expect(leadBody.phone).toBe("+15551234567");
-    expect(leadBody.source).toBe("phone-intake");
+    expect(leadBody.company).toBe("Doe Consulting");
+    expect(leadBody.sourceId).toBe("lead-source-id");
+    expect(leadBody.notes as string).toContain("Phone intake — Jane Doe");
     expect(leadBody.notes as string).toContain("Wants a new site built.");
     expect(leadBody.notes as string).toContain("Need a marketing site");
     expect(leadBody.notes as string).toContain("https://elevenlabs.io/app/agents/history/conv_full");
   });
 
-  it("falls back to callback_number in the title when name is blank", async () => {
+  it("falls back to callback_number in the name/notes header when name is blank", async () => {
     const { fetchImpl, calls } = createMockFetch([{ ok: true }, { ok: true }]);
     await crmSink(makeLead({ name: "" }), makeEnv(), fetchImpl);
-    expect(body(calls[1]).title).toBe("Phone intake — +15551234567");
+    expect(body(calls[1]).name).toBe("+15551234567");
+    expect(body(calls[1]).notes as string).toContain("Phone intake — +15551234567");
+  });
+
+  it("omits sourceId when CRM_LEAD_SOURCE_ID isn't configured", async () => {
+    const { fetchImpl, calls } = createMockFetch([{ ok: true }, { ok: true }]);
+    await crmSink(makeLead(), makeEnv({ CRM_LEAD_SOURCE_ID: undefined }), fetchImpl);
+    expect(body(calls[1]).sourceId).toBeUndefined();
   });
 
   it("skips (no fetch call) for openai-lab leads", async () => {
