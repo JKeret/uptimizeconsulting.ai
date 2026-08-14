@@ -7,8 +7,10 @@ Last verified: TBD (Task 8 — end-to-end call test not yet run).
   the prior carrier is in progress by Jonathan; the number is not live on
   ElevenLabs yet.
 - **Lab number:** TBD — not yet purchased. Will route to the OpenAI agent
-  (Task 7), kept separate from prod so lab testing never touches the number
-  clients get.
+  (Task 7 — worker route + `LAB_TOKEN` gate live at `/lab/postcall`; full
+  setup path in `voice/lab/README.md`, JONATHAN-GATED on an OpenAI API key +
+  billing + the temp number itself), kept separate from prod so lab testing
+  never touches the number clients get.
 - **Worker:** CF Worker `uptimize-voice-hook` —
   https://uptimize-voice-hook.jonathanke.workers.dev — call → lead fan-out
   (Telegram + Netlify Forms `starter-project`, tagged `source=phone-intake`,
@@ -69,7 +71,9 @@ Last verified: TBD (Task 8 — end-to-end call test not yet run).
       exists; checklist to go from key-in-hand to live agent is in
       `voice/agent/test-calls.md`.
 - [ ] 630-445-1958 port/unlock completion.
-- [ ] Lab number purchase (Task 7, OpenAI route).
+- [ ] Lab number purchase + bridge build (Task 7, OpenAI route) — worker
+      side (`/lab/postcall`, `LAB_TOKEN` gate) is done; `voice/lab/README.md`
+      has the rest of the path, all JONATHAN-GATED.
 - [ ] Delete test CRM lead `08b2d63f-dde1-40ef-a403-94fd22fd03bf` ("TEST —
       voice-hook provisioning", workspace
       `97e25975-ede3-4ce2-b463-a6986c713355`) — the `voice-hook` service

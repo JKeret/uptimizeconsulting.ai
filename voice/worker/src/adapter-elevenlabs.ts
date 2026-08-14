@@ -31,13 +31,17 @@ function extractRawFields(payload: unknown): Partial<Record<FieldId, unknown>> {
   return fields;
 }
 
-function asString(value: unknown): string {
+// Exported so other adapters (e.g. adapter-openai.ts's `parseOpenAILab`)
+// can reuse the same defensive coercion instead of duplicating it -- every
+// brain's payload degrades missing/malformed fields to "" / false the same
+// way.
+export function asString(value: unknown): string {
   return typeof value === "string" ? value : "";
 }
 
 /** Coerces true/false, "true"/"false", "yes"/"no" (case-insensitive) to a
  * boolean. Any other value (including missing) is falsy. */
-function asBoolean(value: unknown): boolean {
+export function asBoolean(value: unknown): boolean {
   if (typeof value === "boolean") return value;
   if (typeof value === "string") {
     const normalized = value.trim().toLowerCase();

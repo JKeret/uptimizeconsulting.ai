@@ -31,3 +31,6 @@ CRM_LEAD_SOURCE_ID = "649d8b9b-2f0f-4f73-8d7a-769dc2e3e6b9"
 #   TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID
 #   CRM_BASE_URL / CRM_EMAIL / CRM_PASSWORD
 #   CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET
+#   LAB_TOKEN  (shared secret for POST /lab/postcall, the OpenAI-lab route,
+#               Task 7; unset = route OFF -- `wrangler secret put LAB_TOKEN`
+#               with a generated value activates it; see voice/lab/README.md)
