@@ -142,7 +142,7 @@ Once a call reaches the bridge and a Realtime session opens, configure it
 ## Activating the route
 
 The worker already has the route (`POST /lab/postcall` in
-`voice/worker/src/index.ts`), but it ships **dark**: `env.LAB_TOKEN` is
+`voice/worker/src/index.ts`) (in the repo — confirm the deployed worker is current per voice/RUNBOOK.md's redeploy item before testing; a 404 on /lab/postcall means it isn't), but it ships **dark**: `env.LAB_TOKEN` is
 unset by default, and the route hard-401s on every request whenever that's
 true — unset must mean off, never open. To turn it on:
 

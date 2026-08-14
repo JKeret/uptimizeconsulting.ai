@@ -64,6 +64,7 @@ Last verified: TBD (Task 8 — end-to-end call test not yet run).
   fails.
 
 ## Pending items (clear before calling this fully live)
+- [ ] Redeploy the worker from merged main (`CLOUDFLARE_API_TOKEN=$(cat ~/.cloudflare/admin-token) CLOUDFLARE_ACCOUNT_ID=d47964e01812b7a90536c6c5b47d1d2b npx wrangler deploy` from voice/worker/) — the currently-deployed build predates the /lab/postcall route and the timing-safe token compare; setting LAB_TOKEN alone does NOT ship code.
 - [ ] CF Access service token `uptimize-voice-hook` — needs Jonathan's admin
       token permission bump (see "Sinks status"), then `CF_ACCESS_CLIENT_ID`/
       `CF_ACCESS_CLIENT_SECRET` worker secrets + the CRM Access policy.
