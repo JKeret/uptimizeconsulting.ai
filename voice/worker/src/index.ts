@@ -1,4 +1,4 @@
-import { verifySignature } from "./hmac";
+import { verifySignature, timingSafeEqualString } from "./hmac";
 import { parseElevenLabs } from "./adapter-elevenlabs";
 import { parseOpenAILab } from "./adapter-openai";
 import { deliverLead } from "./sinks";
@@ -67,14 +67,17 @@ async function handlePostcall(request: Request, env: Env, ctx: ExecutionContext)
 /** POST /lab/postcall -- the OpenAI-lab route (Task 7). The lab bridge is
  * our own code (not a third-party webhook sender), so it's guarded by a
  * shared secret instead of an HMAC signature: `X-Lab-Token` must equal
- * `env.LAB_TOKEN` exactly. `env.LAB_TOKEN` unset always 401s, regardless of
- * what header the caller sends -- the route is OFF until a token is
+ * `env.LAB_TOKEN` exactly, compared via `timingSafeEqualString` (not `!==`)
+ * so a mismatched-but-close guess can't be distinguished by response
+ * timing -- same constant-time posture as `hmac.ts`'s webhook-signature
+ * check. `env.LAB_TOKEN` unset OR empty always 401s, regardless of what
+ * header the caller sends -- the route is OFF until a real token is
  * provisioned (`wrangler secret put LAB_TOKEN`), never implicitly open.
  * Leads parsed via `parseOpenAILab` carry `brain: "openai-lab"`, which the
  * sinks (Task 3) already fence off from Netlify/CRM -- Telegram-only. */
 async function handleLabPostcall(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const tokenHeader = request.headers.get(LAB_TOKEN_HEADER);
-  if (!env.LAB_TOKEN || !tokenHeader || tokenHeader !== env.LAB_TOKEN) {
+  if (!env.LAB_TOKEN || !tokenHeader || !(await timingSafeEqualString(tokenHeader, env.LAB_TOKEN))) {
     return new Response("Unauthorized", { status: 401 });
   }
 

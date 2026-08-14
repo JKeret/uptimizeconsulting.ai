@@ -27,6 +27,63 @@ function timingSafeEqualHex(a: string, b: string): boolean {
   return mismatch === 0;
 }
 
+// A random key, generated once per isolate and reused for every call to
+// `timingSafeEqualString` below. It never needs to be a secret itself --
+// its only job is to map both comparison inputs onto fixed-length (32-byte)
+// digests so the final comparison doesn't leak either input's length.
+let compareKeyPromise: Promise<CryptoKey> | undefined;
+
+function getCompareKey(): Promise<CryptoKey> {
+  if (!compareKeyPromise) {
+    compareKeyPromise = crypto.subtle.importKey(
+      "raw",
+      crypto.getRandomValues(new Uint8Array(32)),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+  }
+  return compareKeyPromise;
+}
+
+function timingSafeEqualBytes(a: Uint8Array, b: Uint8Array): boolean {
+  // Both inputs are always 32-byte HMAC-SHA256 digests by construction
+  // (see timingSafeEqualString), so this length check never itself leaks
+  // anything about the original, pre-digest inputs.
+  if (a.length !== b.length) return false;
+  let mismatch = 0;
+  for (let i = 0; i < a.length; i++) {
+    mismatch |= a[i] ^ b[i];
+  }
+  return mismatch === 0;
+}
+
+/**
+ * Constant-time equality for arbitrary UTF-8 strings -- e.g. a caller-
+ * supplied shared-secret header compared against its expected value
+ * (`index.ts`'s `X-Lab-Token` check). Unlike `timingSafeEqualHex` above
+ * (which assumes two already-equal-length hex-encoded MACs and is only
+ * used to compare a webhook signature against its locally recomputed
+ * expected value), this handles variable-length, non-hex inputs safely: a
+ * naive `a.length !== b.length` short-circuit -- or even a naive
+ * charCode-XOR loop bounded by one string's length -- leaks the true
+ * secret's length through both control flow and wall-clock time.
+ *
+ * Both inputs are first HMAC'd with a random key generated once per
+ * isolate (`getCompareKey`); the two resulting digests are always 32 bytes
+ * regardless of the inputs' original lengths, so the final byte-by-byte
+ * comparison leaks neither a length mismatch nor any length-dependent
+ * timing signal about the real secret.
+ */
+export async function timingSafeEqualString(a: string, b: string): Promise<boolean> {
+  const key = await getCompareKey();
+  const [macA, macB] = await Promise.all([
+    crypto.subtle.sign("HMAC", key, new TextEncoder().encode(a)),
+    crypto.subtle.sign("HMAC", key, new TextEncoder().encode(b)),
+  ]);
+  return timingSafeEqualBytes(new Uint8Array(macA), new Uint8Array(macB));
+}
+
 /**
  * Verifies the `ElevenLabs-Signature` header value against the raw request
  * body string.

@@ -184,6 +184,16 @@ describe("POST /lab/postcall route", () => {
     expect(res.status).toBe(401);
   });
 
+  it("returns 401 (route OFF) when env.LAB_TOKEN is an empty string, even if a matching empty header is sent", async () => {
+    const request = new Request("https://voice.example.com/lab/postcall", {
+      method: "POST",
+      headers: { "X-Lab-Token": "" },
+      body: labPayload(),
+    });
+    const res = await worker.fetch(request, baseEnv({ LAB_TOKEN: "" }), testCtx().ctx);
+    expect(res.status).toBe(401);
+  });
+
   it("returns 404 for a GET on /lab/postcall", async () => {
     const request = new Request("https://voice.example.com/lab/postcall", { method: "GET" });
     const res = await worker.fetch(request, baseEnv(), testCtx().ctx);
