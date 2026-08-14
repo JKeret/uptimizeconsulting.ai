@@ -15,17 +15,9 @@ const strip = (html) => html
   .replace(/\s+/g, " ").trim();
 
 const sections = [];
-sections.push(`# Uptimize Consulting — site knowledge for the chat bot
-Generated ${new Date().toISOString().slice(0, 10)} from the live /answers/ pages. This document is the bot's ONLY source of truth for pricing and timelines.
-
-## Canonical facts (never contradict these)
-- Starter project: a flat $1,000, one painful manual process automated, delivered in about two weeks. This is how most engagements begin. Page: https://uptimizeconsulting.ai/starter/
-- Typical multi-process platform build: $10,000 to $25,000+, four to eight weeks.
-- Compliance-heavy or multi-system builds: $30,000 to $75,000 and up.
-- Ongoing care: $300 to $1,500 per month.
-- Founder: Jonathan Keret, based in Naperville, IL, working nationwide. Email JKeret@uptimizeconsulting.ai. First call is a free 30-minute discovery call.
-- When a visitor asks about cost, timelines, or where to start: answer from the facts above and point them to https://uptimizeconsulting.ai/starter/ or the relevant answers page below.
-`);
+sections.push(readFileSync("docs/marketing/kb-base.md", "utf8").trim());
+sections.push(`## 8. The Answers hub — question-by-question knowledge
+Generated ${new Date().toISOString().slice(0, 10)} from the live /answers/ pages. When a visitor's question matches one below, answer from it and link the page.`);
 
 for (const slug of readdirSync("answers", { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort()) {
   const path = `answers/${slug}/index.html`;
@@ -45,5 +37,7 @@ for (const slug of readdirSync("answers", { withFileTypes: true }).filter((d) =>
   sections.push(`## ${h1}\nPage: https://uptimizeconsulting.ai/answers/${slug}/\n\n${answer}\n\n${faqs.join("\n\n")}`);
 }
 
-writeFileSync("docs/marketing/bot-knowledge.md", sections.join("\n\n---\n\n") + "\n");
-console.log(`Wrote docs/marketing/bot-knowledge.md (${sections.length - 1} pages compiled)`);
+const out = sections.join("\n\n---\n\n") + "\n";
+writeFileSync("docs/marketing/bot-knowledge.md", out);
+writeFileSync("docs/marketing/Uptimize_KB_v2.md", out); // the file uploaded to the InstantAIGuru dashboard
+console.log(`Wrote docs/marketing/bot-knowledge.md + Uptimize_KB_v2.md (${sections.length - 2} answers pages compiled)`);
