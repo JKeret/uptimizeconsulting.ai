@@ -30,6 +30,9 @@ Build process for every new page:
   `docs/marketing/bot-knowledge.md` to the InstantAIGuru dashboard. The site bot's
   knowledge is static: it knows nothing about a new page (or a pricing change) until
   this file is rebuilt and re-uploaded.
+  The same command regenerates `voice-canon.md`; if canon or FAQs changed, re-run
+  `voice/agent/build-prompt.mjs` and `voice/agent/create-agent.sh` so the phone agent
+  matches the site word for word.
 - Run `node scripts/check-answers.mjs` — it must pass (canonical URL, Umami
   script + `answer-cta-click` event with the right slug, `/starter/` CTA,
   JSON-LD parses, listed on the answers index, no em-dash in the page copy)
