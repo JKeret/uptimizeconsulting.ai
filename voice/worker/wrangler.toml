@@ -1,0 +1,19 @@
+name = "uptimize-voice-hook"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+# No compatibility_flags needed: the worker uses only Web Crypto (crypto.subtle)
+# and standard fetch/Request/Response/Headers, all native to the Workers
+# runtime -- zero Node.js builtins, so nodejs_compat is intentionally omitted.
+
+# Workers Logs (free tier): persists console.log/console.error output and
+# makes it queryable/filterable under this worker's "Logs" tab in the
+# Cloudflare dashboard.
+[observability]
+enabled = true
+
+# No route configured yet -- deploys to the default *.workers.dev subdomain.
+# A custom route is decided at deploy time (Task 4).
+
+# Secrets (set via `wrangler secret put <NAME>`, never committed):
+#   ELEVENLABS_WEBHOOK_SECRET  (HMAC secret for the ElevenLabs post-call webhook)
