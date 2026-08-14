@@ -53,6 +53,41 @@ ads are judged by Umami event counts per source.
    **Body:** Let's fix that. Starter projects from $1,000, fixed price,
    working software in about two weeks.
 
+## Google ad assets (RSA-ready)
+
+The three variants above are Facebook-shaped and exceed Google's limits
+(headlines max 30 chars, descriptions max 90). For the Google campaign,
+paste these into one Responsive Search Ad and let Google mix them:
+
+**Headlines (≤30 chars each)**
+1. `$1,000 Fixed-Price Automation`
+2. `Custom Apps for Small Business`
+3. `Automated in About Two Weeks`
+4. `Stop Retyping Into 3 Systems`
+5. `Naperville Software Developer`
+6. `Fixed Price. No Surprises.`
+7. `Your Weekend Back From Billing`
+8. `Free 30-Minute Honest Call`
+
+**Descriptions (≤90 chars each)**
+1. `One painful manual process automated for a flat $1,000, delivered in about two weeks.`
+2. `I build custom apps for small businesses. Fixed scope, fixed price, working software.`
+3. `Running the business on spreadsheets and memory? Pick one process. I automate it.`
+4. `Local Naperville developer. Free 30-minute call, honest answer on whether AI helps.`
+
+**Assets (extensions)**
+- Sitelinks: `The $1,000 Starter` → /starter/ · `What does it cost?` →
+  /answers/how-much-does-ai-workflow-automation-cost/ · `What to automate first` →
+  /answers/what-should-a-small-business-automate-first/ · `Answers hub` → /answers/
+- Callouts: `$1,000 Fixed Price` · `About Two Weeks` · `No Retainers` · `Senior-Led`
+- Location asset: attach once the Google Business Profile is live
+  (see local-listings.md) — it upgrades the search ad to a local-feeling one.
+
+**Bidding:** Maximize Clicks with a modest CPC cap. Do NOT enable
+conversion-based bidding — by design there is no Google conversion tag
+(ads are judged by Umami `starter-form-submit` per utm_source), so Google
+has no conversion signal to optimize on.
+
 ## Setup checklist (Jonathan)
 
 - [ ] Verify Facebook Business Manager access + payment method
