@@ -7,6 +7,7 @@ const errors = [];
 const dirs = existsSync("answers")
   ? readdirSync("answers", { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name)
   : [];
+const indexHtml = existsSync("answers/index.html") ? readFileSync("answers/index.html", "utf8") : "";
 for (const slug of dirs) {
   const path = `answers/${slug}/index.html`;
   if (!existsSync(path)) { errors.push(`${slug}: missing index.html`); continue; }
@@ -29,6 +30,7 @@ for (const slug of dirs) {
   }
   // copy rules: em-dash ban applies to visible copy; strip tags' attributes first is overkill — em-dash anywhere is banned on these pages
   if (html.includes("—")) err("em-dash in page");
+  if (!indexHtml.includes(`href="/answers/${slug}/"`)) err("not listed on the answers index");
 }
 if (errors.length) { console.error(errors.join("\n")); process.exit(1); }
-console.log(`${dirs.length} pages OK`);
+console.log(`${dirs.length} pages OK, all listed on the answers index`);

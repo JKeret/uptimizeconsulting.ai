@@ -14,7 +14,7 @@ Assets live: https://uptimizeconsulting.ai/starter/ (+ one-pager PDF, /insights/
 The original /insights/ articles stay live and still count as Tier-3 output:
 1. "How much does a custom app for a small business cost?" (2026-07-29)
 2. "Custom software vs. off-the-shelf for a small business" (2026-08-06)
-Go forward, Tier-3 content is `/answers/` pages pulled from the backlog below
+Going forward, Tier-3 content is `/answers/` pages pulled from the backlog below
 instead of insights articles. Cadence: draft one page Wednesday, publish it
 plus one more before the week is out (2/week).
 
@@ -22,9 +22,14 @@ Build process for every new page:
 - Copy `answers/_template.html` into a new `answers/<slug>/index.html`
 - Fill in the question title, meta description, direct-answer box, FAQ
   JSON-LD, and at least 2 related-answer links to other live pages
+- Set the Article JSON-LD `datePublished` to the actual publish date (the
+  template hardcodes 2026-08-14, which is only correct on that date)
+- Add the new page's `<li>` to `answers/index.html`, after the
+  `<!-- ANSWERS-LIST -->` marker, in the same order as the backlog/published list
 - Run `node scripts/check-answers.mjs` — it must pass (canonical URL, Umami
   script + `answer-cta-click` event with the right slug, `/starter/` CTA,
-  JSON-LD parses, no em-dash in the page copy) before the page goes live
+  JSON-LD parses, listed on the answers index, no em-dash in the page copy)
+  before the page goes live
 Pattern: answer the question directly in the first paragraph, real numbers,
 one anonymized example, FAQ JSON-LD, CTA to /starter/.
 
