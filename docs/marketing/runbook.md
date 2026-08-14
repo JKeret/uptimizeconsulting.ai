@@ -26,6 +26,10 @@ Build process for every new page:
   template hardcodes 2026-08-14, which is only correct on that date)
 - Add the new page's `<li>` to `answers/index.html`, after the
   `<!-- ANSWERS-LIST -->` marker, in the same order as the backlog/published list
+- Regenerate the bot knowledge pack: `node scripts/build-bot-knowledge.mjs`, then re-upload
+  `docs/marketing/bot-knowledge.md` to the InstantAIGuru dashboard. The site bot's
+  knowledge is static: it knows nothing about a new page (or a pricing change) until
+  this file is rebuilt and re-uploaded.
 - Run `node scripts/check-answers.mjs` — it must pass (canonical URL, Umami
   script + `answer-cta-click` event with the right slug, `/starter/` CTA,
   JSON-LD parses, listed on the answers index, no em-dash in the page copy)
