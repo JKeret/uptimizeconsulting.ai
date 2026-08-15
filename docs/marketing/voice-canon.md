@@ -8,6 +8,8 @@ A: Most engagements begin with the $1,000 Starter: one painful manual process au
 **Q: How long does a project take?**
 A: The $1,000 Starter is delivered in about two weeks. A typical platform build takes four to eight weeks. Larger compliance-heavy builds take longer and get an explicit timeline in the proposal.
 
+The AI Front Desk product has one additional canonical price: a $1,000 setup plus the platform subscription from $95 per month, billed directly by instantAIguru.
+
 Never quote any other price ranges or timelines. If someone asks about a project bigger or unusual, say pricing is scoped on a free 30-minute call.
 
 ---

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- EmailJS handles form submissions -->
-<title>Uptimize Consulting AI — Workflow Automation, Systems Optimization & Integrations</title>
+<title>Uptimize Consulting AI — Workflow Automation, Systems Optimization, Integrations & AI Front Desk</title>
 <meta name="description" content="We help mid-market and growing businesses automate workflows, optimize systems, and integrate the tools they already run on — AI that improves real work, without the enterprise price tag.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +67,11 @@ nav .cta-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,195,1
 .card p{color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:20px}
 .card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .card ul li{background:var(--light);color:var(--dark-text);font-size:.8rem;font-weight:500;padding:6px 14px;border-radius:100px}
+.card-wide{grid-column:1/-1;display:flex;align-items:center;gap:28px}
+.card-wide .card-icon{margin-bottom:0;flex-shrink:0}
+.card-wide .card-body{flex:1;min-width:0}
+.card-wide .card-body p{margin-bottom:0}
+.card-wide .card-wide-link{flex-shrink:0;color:var(--blue);font-weight:700;white-space:nowrap}
 
 /* PLATFORMS */
 .platforms{margin-top:56px;text-align:center}
@@ -192,6 +197,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   .contact .info{flex-direction:column;gap:16px}
   footer .container{flex-direction:column;text-align:center}
   .cards{grid-template-columns:1fr}
+  .card-wide{flex-direction:column;align-items:flex-start;text-align:left}
 }
 </style>
 </head>
@@ -243,7 +249,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
   <div class="container">
     <div class="header">
       <span class="section-label">What We Do</span>
-      <h2 class="section-title">Three Pillars of Transformation</h2>
+      <h2 class="section-title">The Pillars of Transformation</h2>
       <p class="section-sub">Enterprise-grade AI, built for businesses that actually need it.</p>
     </div>
     <div class="cards">
@@ -279,6 +285,14 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
           <li>APIs &amp; data pipelines</li>
           <li>AI inside the tools you already use</li>
         </ul>
+      </div>
+      <div class="card card-wide">
+        <span class="card-icon">🛎️</span>
+        <div class="card-body">
+          <h3>AI Front Desk</h3>
+          <p>Chat, WhatsApp, and phone answered 24/7 by an AI trained on your business. $1,000 setup.</p>
+        </div>
+        <a href="/ai-front-desk/" class="card-wide-link">Learn more →</a>
       </div>
     </div>
     <div class="platforms">
@@ -564,7 +578,7 @@ footer .formerly{color:rgba(255,255,255,.2);font-size:.75rem;font-style:italic}
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>© 2026 Uptimize Consulting AI — Naperville, IL · <a href="/insights/" style="color:rgba(255,255,255,.5)">Insights</a> · <a href="/answers/" style="color:rgba(255,255,255,.5)">Answers</a></p>
+    <p>© 2026 Uptimize Consulting AI — Naperville, IL · <a href="/insights/" style="color:rgba(255,255,255,.5)">Insights</a> · <a href="/answers/" style="color:rgba(255,255,255,.5)">Answers</a> · <a href="/ai-front-desk/" style="color:rgba(255,255,255,.5)">AI Front Desk</a></p>
     <p class="formerly">Formerly Uptimize Consulting</p>
   </div>
 </footer>
