@@ -11,6 +11,8 @@ A: Most engagements begin with the $1,000 Starter: one painful manual process au
 **Q: How long does a project take?**
 A: The $1,000 Starter is delivered in about two weeks. A typical platform build takes four to eight weeks. Larger compliance-heavy builds take longer and get an explicit timeline in the proposal.
 
+The AI Front Desk product has one additional canonical price: a $1,000 setup plus the platform subscription from $95 per month, billed directly by instantAIguru.
+
 Never quote any other price ranges or timelines. If someone asks about a project bigger or unusual, say pricing is scoped on a free 30-minute call.
 
 ---
@@ -112,7 +114,7 @@ A: Yes. We build operational systems for restaurants: ordering, scheduling, inve
 A: Yes, that's the AI Front Desk: an AI assistant that answers your customers 24/7 on your website chat and WhatsApp, and on the phone too if you want, trained on your own business content, and always open about being an AI. Setup is a $1,000 fixed price, about two weeks, and covers a knowledge base built from your site, documents, and a short interview with you, a persona, name, and greeting for the assistant, the website widget install, your WhatsApp Business connection, pricing and FAQ tuning, test conversations run and passed before it goes live, and a handoff walkthrough. The platform itself runs from $95 per month, billed directly by instantAIguru; we set it up but do not resell, bill, or mark up the subscription. You're talking to the demo right now, since this same setup runs Ava here on our own site. Details: https://uptimizeconsulting.ai/ai-front-desk/
 
 **Q: What is the AI Front Desk?**
-A: The AI Front Desk is our productized version of what you're talking to right now: an AI assistant that answers a business's customers 24/7 across website chat, WhatsApp, and phone, trained on that business's own content, always open about being an AI, and escalating anything it can't handle to the owner with a summary. We set it up for a $1,000 fixed price in about two weeks; the platform itself is from $95 per month, billed directly by instantAIguru, not by us. Ongoing changes and support once it's live are covered by our regular care plans ($300 to $1,500 per month). Details: https://uptimizeconsulting.ai/ai-front-desk/
+A: The AI Front Desk is our productized version of what you're talking to right now: an AI assistant that answers a business's customers 24/7 across website chat, WhatsApp, and phone where wanted, trained on that business's own content, always open about being an AI, and escalating anything it can't handle to the owner with a summary. We set it up for a $1,000 fixed price in about two weeks; the platform itself is from $95 per month, billed directly by instantAIguru, not by us. Ongoing changes and support once it's live are covered by our regular care plans ($300 to $1,500 per month). Details: https://uptimizeconsulting.ai/ai-front-desk/
 
 **Q: Do you build mobile apps?**
 A: Yes, when a mobile app is genuinely the right answer. We will tell you honestly if a mobile web experience would do the job for less money.
