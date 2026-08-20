@@ -236,16 +236,22 @@ effect of the live webhook tests — low-impact, matches real traffic shape.
 
 ## Outstanding / PENDING
 
-1. **CF Access service token (`uptimize-voice-hook`) creation is blocked**
-   on the admin token's permissions (needs "Access: Service Tokens" Edit
-   added — see Step 1). Until then:
-   - `CF_ACCESS_CLIENT_ID` / `CF_ACCESS_CLIENT_SECRET` are unset on the
-     worker → the CRM sink will fail closed on every real call (Telegram +
-     Netlify still work).
-   - The new Access policy for that token (Step 2) can't be added yet.
-2. **Test lead** `08b2d63f-dde1-40ef-a403-94fd22fd03bf` ("TEST —
-   voice-hook provisioning") exists in the CRM, workspace
-   `97e25975-ede3-4ce2-b463-a6986c713355` — the `voice-hook` user's `User`
-   role can't delete it; delete manually or leave it (clearly labeled).
-3. `ELEVENLABS_WEBHOOK_SECRET` is the placeholder `pending-elevenlabs-setup`
-   — Task 5 replaces it with the real ElevenLabs-issued value.
+None — all three resolved 2026-08-20:
+
+1. **Steps 1+2 UNBLOCKED and DONE.** The `~/.cloudflare/access-token` (not
+   the admin token) turned out to hold "Access: Service Tokens — Edit".
+   Service token `uptimize-voice-hook` created
+   (`b8aac8d0-0b5b-4991-a506-7ce1b8a4bfb7`, client_id
+   `6cc44fec1e0a1ad2e052fce83ff35801.access`), secret captured via the
+   `/rotate` endpoint (the create response's secret wasn't kept) and piped
+   straight into `wrangler secret put CF_ACCESS_CLIENT_ID/SECRET`. Additive
+   non_identity policy `8033b0a3-2e35-420a-b96f-2d848b9afc2e` added to the
+   CRM Access app; the two pre-existing policies untouched. **CRM sink
+   verified live end-to-end:** signed synthetic postcall → worker 200 →
+   lead created in `uptimize_crm_prod` by the voice-hook user (ground-truth
+   psql check on Zima's `crm-postgres`).
+2. **Both test leads deleted** (the 8/14 provisioning lead and the 8/20
+   sink-check lead) via the CRM's own API using the fleet's Manager-level
+   CRM identity — DELETE `/api/leads/:id` → 204; the CRM soft-deletes
+   (`deleted_at` stamped), rows stay for audit. No SQL writes.
+3. `ELEVENLABS_WEBHOOK_SECRET` — real value installed 2026-08-14 (Task 5).
