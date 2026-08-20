@@ -94,6 +94,83 @@ function formBody(call: CapturedCall): URLSearchParams {
 
 // -- netlifySink ---------------------------------------------------------
 
+describe("netlifySink spam-queue rescue", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  const rescueEnv = () =>
+    makeEnv({ NETLIFY_API_TOKEN: "nf_token", NETLIFY_FORM_ID: "form123" });
+
+  it("marks phone-intake spam entries as ham, leaves others alone", async () => {
+    const { fetchImpl, calls } = createMockFetch([
+      { ok: true }, // form POST
+      {
+        ok: true, // spam-queue list
+        json: async () => [
+          { id: "sub_phone", data: { source: "phone-intake" } },
+          { id: "sub_other", data: { source: "web" } },
+          { id: "sub_nodata" },
+        ],
+      },
+      { ok: true }, // ham PUT for sub_phone only
+    ]);
+
+    const pending = netlifySink(makeLead(), rescueEnv(), fetchImpl);
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(await pending).toBe(true);
+
+    expect(calls).toHaveLength(3);
+    expect(calls[1].url).toBe(
+      "https://api.netlify.com/api/v1/forms/form123/submissions?state=spam&per_page=20"
+    );
+    expect(calls[2].url).toBe("https://api.netlify.com/api/v1/submissions/sub_phone/ham");
+    expect(calls[2].init.method).toBe("PUT");
+    expect(calls[2].init.headers?.["Authorization"]).toBe("Bearer nf_token");
+  });
+
+  it("retries a failed sweep and never fails the sink when all attempts error", async () => {
+    const { fetchImpl, calls } = createMockFetch([
+      { ok: true }, // form POST
+      { ok: false, status: 500 }, // sweep attempt 1: list fails
+      { ok: false, status: 404 }, // sweep attempt 2: list fails (e.g. CF 1042)
+      { ok: false, status: 500 }, // sweep attempt 3: list fails
+    ]);
+
+    const pending = netlifySink(makeLead(), rescueEnv(), fetchImpl);
+    await vi.advanceTimersByTimeAsync(9000);
+    expect(await pending).toBe(true);
+    expect(calls).toHaveLength(4);
+  });
+
+  it("recovers on a retry after a transient list failure", async () => {
+    const { fetchImpl, calls } = createMockFetch([
+      { ok: true }, // form POST
+      { ok: false, status: 404 }, // sweep attempt 1: transient edge failure
+      {
+        ok: true, // sweep attempt 2: list succeeds
+        json: async () => [{ id: "sub_phone", data: { source: "phone-intake" } }],
+      },
+      { ok: true }, // ham PUT succeeds -> done, no third attempt
+    ]);
+
+    const pending = netlifySink(makeLead(), rescueEnv(), fetchImpl);
+    await vi.advanceTimersByTimeAsync(9000);
+    expect(await pending).toBe(true);
+    expect(calls).toHaveLength(4);
+    expect(calls[3].url).toBe("https://api.netlify.com/api/v1/submissions/sub_phone/ham");
+  });
+
+  it("skips the rescue entirely without NETLIFY_API_TOKEN", async () => {
+    const { fetchImpl, calls } = createMockFetch([{ ok: true }]);
+    expect(await netlifySink(makeLead(), makeEnv(), fetchImpl)).toBe(true);
+    expect(calls).toHaveLength(1);
+  });
+});
+
 describe("netlifySink", () => {
   it("posts a urlencoded form to NETLIFY_SITE_URL", async () => {
     const { fetchImpl, calls } = createMockFetch([{ ok: true }]);

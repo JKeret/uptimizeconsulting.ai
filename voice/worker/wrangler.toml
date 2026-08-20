@@ -18,6 +18,9 @@ enabled = true
 [vars]
 # Non-secret config, safe to commit.
 NETLIFY_SITE_URL = "https://uptimizeconsulting.ai"
+# The starter-project Netlify Form's id (spam-queue rescue pass; see
+# sinks.ts). Confirmed live via GET /api/v1/sites/<site>/forms 2026-08-20.
+NETLIFY_FORM_ID = "6a6a0b11976cca0008ee0ace"
 # The CRM's pre-seeded "Inbound Call" lead_source row (workspace
 # 97e25975-ede3-4ce2-b463-a6986c713355) -- confirmed live via
 # GET /api/lead-sources during Task 4 provisioning. Optional on the CRM's

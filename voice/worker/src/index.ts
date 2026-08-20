@@ -9,6 +9,12 @@ export interface Env {
   TELEGRAM_BOT_TOKEN: string;
   TELEGRAM_CHAT_ID: string;
   NETLIFY_SITE_URL?: string;
+  // Optional pair enabling the Netlify spam-queue rescue pass (see
+  // sinks.ts `rescuePhoneIntakeFromSpam`): a Netlify personal access token
+  // (secret) and the starter-project form's id (committed var). Unset =
+  // rescue silently skipped.
+  NETLIFY_API_TOKEN?: string;
+  NETLIFY_FORM_ID?: string;
   CRM_BASE_URL?: string;
   CRM_EMAIL?: string;
   CRM_PASSWORD?: string;
