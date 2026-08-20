@@ -40,9 +40,21 @@ export async function netlifySink(lead: Lead, env: Env, fetchImpl: typeof fetch)
     source: "phone-intake",
   });
 
+  // Netlify runs submissions through Akismet, and a server-to-server POST
+  // with no User-Agent and no Referer is a textbook spam signature -- every
+  // phone-intake lead through 2026-08-20 landed in the spam queue this way
+  // (invisible to the sales agent, no email notification). A browser-like
+  // UA plus the on-site form page as Referer makes the submission look like
+  // what it semantically is: the starter form being filled on the caller's
+  // behalf.
   const res = await fetchImpl(new URL("/", env.NETLIFY_SITE_URL).toString(), {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+      Referer: new URL("/starter/", env.NETLIFY_SITE_URL).toString(),
+    },
     body: form.toString(),
   });
   if (!res.ok) throw new Error(`Netlify sink failed: HTTP ${res.status}`);

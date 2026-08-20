@@ -58,12 +58,18 @@ export function parseElevenLabs(payload: unknown): Lead {
   const fields = extractRawFields(payload);
   const conversationId = asString((payload as any)?.data?.conversation_id);
   const summary = asString((payload as any)?.data?.analysis?.transcript_summary);
+  // Callers routinely say "call me back on this number" instead of reciting
+  // digits, so the data-collection field comes back empty even though the
+  // agent confirmed the number (happened on the first real inbound call,
+  // 2026-08-20). The caller ID lives in the payload's phone metadata; use it
+  // whenever nothing was explicitly dictated.
+  const callerId = asString((payload as any)?.data?.metadata?.phone_call?.external_number);
 
   return {
     name: asString(fields.caller_name),
     business: asString(fields.business_name),
     process: asString(fields.process_description),
-    callback_number: asString(fields.callback_number),
+    callback_number: asString(fields.callback_number) || callerId,
     email: asString(fields.email),
     urgent: asBoolean(fields.urgent),
     existing_client: asBoolean(fields.existing_client),

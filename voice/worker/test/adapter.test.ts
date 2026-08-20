@@ -57,6 +57,30 @@ describe("parseElevenLabs", () => {
     });
   });
 
+  it("falls back to caller ID when callback_number was not dictated", () => {
+    const payload = fixture({
+      conversation_id: "conv_callerid",
+      results: { caller_name: { value: "Dave" } },
+    }) as any;
+    payload.data.metadata = { phone_call: { external_number: "+13102545188" } };
+
+    const lead = parseElevenLabs(payload);
+
+    expect(lead.callback_number).toBe("+13102545188");
+  });
+
+  it("prefers a dictated callback_number over caller ID", () => {
+    const payload = fixture({
+      conversation_id: "conv_dictated",
+      results: { callback_number: { value: "+15551234567" } },
+    }) as any;
+    payload.data.metadata = { phone_call: { external_number: "+13102545188" } };
+
+    const lead = parseElevenLabs(payload);
+
+    expect(lead.callback_number).toBe("+15551234567");
+  });
+
   it("defaults missing fields to empty strings / false", () => {
     const payload = fixture({ conversation_id: "conv_missing", results: {}, transcript_summary: "" });
 
