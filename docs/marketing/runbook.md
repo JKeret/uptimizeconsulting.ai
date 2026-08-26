@@ -40,7 +40,7 @@ Build process for every new page:
 Pattern: answer the question directly in the first paragraph, real numbers,
 one anonymized example, FAQ JSON-LD, CTA to /starter/.
 
-Published (12 live at `/answers/<slug>/`):
+Published (16 live at `/answers/<slug>/`):
 1. how-much-does-ai-workflow-automation-cost
 2. what-should-a-small-business-automate-first
 3. how-long-does-a-custom-business-app-take
@@ -53,6 +53,10 @@ Published (12 live at `/answers/<slug>/`):
 10. ai-chatbots-for-small-business-customer-support
 11. how-to-choose-an-ai-consultant-in-chicago
 12. affordable-ai-consulting-near-naperville
+13. who-owns-the-software-after-a-custom-app-is-built
+14. is-the-1000-starter-project-standalone
+15. what-happens-after-the-project-ends
+16. do-i-need-to-replace-my-erp-or-systems-to-use-ai
 
 Backlog (next up), from the `uptimize-consulting` AEO audit
 (`ai-visibility/tenants/uptimize-consulting.json`, audiences[].queries, minus

@@ -163,7 +163,7 @@ A: In business since July 2022, a growing client base, and decades of experience
 ---
 
 ## 8. The Answers hub — question-by-question knowledge
-Generated 2026-08-15 from the live /answers/ pages. When a visitor's question matches one below, answer from it and link the page.
+Generated 2026-08-26 from the live /answers/ pages. When a visitor's question matches one below, answer from it and link the page.
 
 ---
 
@@ -246,6 +246,25 @@ No. You don't need technical skills to use AI tools yourself, and you don't need
 
 ---
 
+## Do I need to replace my ERP, CRM, or accounting system to use AI automation?
+Page: https://uptimizeconsulting.ai/answers/do-i-need-to-replace-my-erp-or-systems-to-use-ai/
+
+No. AI automation sits next to the systems you already run and connects through whatever door they offer: an API, a scheduled export, an email the system already sends, or reading the same PDFs and screens your staff read today. I'm Jonathan at Uptimize Consulting, and in the projects I build, replacing a core system is the rare exception, not the starting point.
+
+**Do I need to replace my ERP, CRM, or accounting system to use AI automation?** No. AI automation sits next to the systems you already run and connects through whatever door they offer: an API, a scheduled export, email, or reading the PDFs and screens your staff already look at. Replacing a core system is rarely the right first move and is almost never required to automate one process.
+
+**How does AI connect to systems like QuickBooks, Google Sheets, or an industry CRM?** QuickBooks Online and Google Sheets have documented APIs, so an automation can read and write records directly. Industry-specific CRMs vary: some have APIs, some offer scheduled CSV exports, and some only produce reports or PDFs, which an automation can still read.
+
+**What if my system has no API?** There is almost always another door: a scheduled CSV or Excel export, an email notification the system already sends, a printable report, or a PDF. AI is good at reading those. True dead ends, where a system produces nothing a computer can read, are rare.
+
+**Will AI automation break my existing data?** Not if it is built carefully. I start read-only wherever possible, write back only to fields we agree on, test against a copy or a sandbox first, and log every change so it can be traced and reversed. The system of record stays the system of record.
+
+**How do you handle security and permissions?** The automation gets its own user account with the minimum permissions the job needs, never an owner login. Credentials live in a secrets store in your name, not in code or a shared document, and can be revoked at any time. For regulated data the build follows the compliance rules that already apply to you.
+
+**When is replacing a system actually the right call?** When the system is no longer supported, when the vendor is sunsetting it, when its data is so unreliable that automating around it would just move bad data faster, or when you already planned to replace it within a few months. In that case, automate after the switch, not before.
+
+---
+
 ## How can AI help a local business generate leads?
 Page: https://uptimizeconsulting.ai/answers/how-can-ai-help-a-local-business-generate-leads/
 
@@ -308,6 +327,21 @@ Ask what specific process they'd automate first, what it costs as a fixed price,
 
 ---
 
+## Is the $1,000 starter project a standalone deliverable, or do I have to buy a full platform afterwards?
+Page: https://uptimizeconsulting.ai/answers/is-the-1000-starter-project-standalone/
+
+It stands alone. The $1,000 starter project is a fixed price for one working automation, delivered in about two weeks, that you own and keep whether or not we ever work together again. I'm Jonathan at Uptimize Consulting, and there is no platform contract behind it, no subscription, and no second invoice waiting. Most clients do continue, but only because the first thing proved it was worth continuing.
+
+**Is the $1,000 starter project a standalone deliverable, or do I have to buy a full platform afterwards?** It is a standalone deliverable. For a fixed $1,000 the client gets one working automation in about two weeks, owned outright, with no obligation to buy a platform, a care plan, or anything else afterwards. Expansion into a $10,000 to $25,000 platform happens only if the first project proves its value and the client asks for more.
+
+**What if the starter project does not work out?** Then it ends there. The client keeps the software and the $1,000 was the whole cost of finding out. If the build reveals the process is not a good fit for automation, that gets said on the scoping call or in the first few days, before the two weeks are spent. There is no penalty for stopping and no pressure to try again.
+
+**What does "about two weeks" include in the starter project?** A 30-minute scoping call that pins down exactly what the app must do, the build itself, a working version the client tests on real work, one round of adjustments, and a handoff with the code and accounts in the client's name. It does not include a second process, integrations beyond the one agreed on the call, or ongoing support after handoff.
+
+**Can I do a second starter project instead of a platform?** Yes. Some clients run two or three separate $1,000 projects on unrelated processes rather than committing to a platform, and that is a fine way to work. A platform makes more sense only when the processes need to share data or talk to each other, since separate starters stay separate by design.
+
+---
+
 ## What can an AI employee actually do?
 Page: https://uptimizeconsulting.ai/answers/what-can-an-ai-employee-actually-do/
 
@@ -320,6 +354,25 @@ Not a replacement worker: a set of narrow, bounded tasks done reliably. Reading 
 **What tasks work well for an AI employee?** Data entry from documents, follow-up emails triggered by an event, inbox monitoring and routing, and scheduled reports work well because they are repetitive, rule-based, and don't require reading a room.
 
 **What tasks don't work well for an AI employee yet?** Anything requiring real judgment calls, relationship-building with a client, or handling a situation nobody anticipated still needs a person. Automation handles the repeatable ninety percent, not the exception.
+
+---
+
+## What happens after a custom app project ends? Support, changes, and keeping it running.
+Page: https://uptimizeconsulting.ai/answers/what-happens-after-the-project-ends/
+
+You own the app, the code, and every account it runs on, and it keeps working whether or not I am involved. Most clients keep an optional care plan, $300 to $1,500 a month depending on how much software is under care, for monitoring, small changes, updates, and a person to call. I'm Jonathan at Uptimize Consulting, and I would rather you stay because the plan is useful than because you are stuck.
+
+**What happens after a custom app project ends?** You own the app, the code, and the accounts it runs on, and you can keep it running without me. Most clients choose an optional care plan, $300 to $1,500 a month depending on how much software is under care, which covers monitoring, small changes, updates, and a person to call. It is optional, and the app keeps working if you stop.
+
+**What does a care plan include, and what counts as a new project?** A care plan covers uptime monitoring, security and dependency updates, small changes that take under a few hours, fixes when a connected service changes, and a direct line to me. A new screen, a new integration, or a new workflow is scoped and priced as its own project, usually starting from the $1,000 starter.
+
+**How does the handover work?** Every project ends with a written handover: where the code lives, which accounts and keys it uses, how to restart it, and what to check if something looks wrong. All accounts are in your name, so you can hand the whole thing to another developer at any point.
+
+**What if I cancel the care plan?** Nothing changes on the day you cancel. The app keeps running, you keep all the code and accounts. You lose monitoring and the fast path for fixes; if something breaks later, you can bring me back on a per-project basis or use the handover notes with any developer.
+
+**Who fixes it if a third-party API changes?** On a care plan, I do, and that is the most common thing a plan actually pays for. Without a plan, it is a small paid fix, usually a few hours of work.
+
+**How fast do small changes happen?** On a care plan, most small changes ship within a few business days, and anything that stops work gets attention the same day. Without a plan I schedule them around current projects, typically within one to two weeks.
 
 ---
 
@@ -350,3 +403,18 @@ Automate the process that happens most often, follows the same steps every time,
 **What are common first automation projects for small businesses?** Invoice and receipt entry, lead follow-up emails, appointment reminders, weekly reports that get rebuilt by hand, and order entry from forms or emails are the most common starting points because they are high volume and rule-based.
 
 **Why start with one small automation instead of a bigger platform?** A small first project tests whether automation actually helps before you commit real money. It is cheap to be wrong about a $1,000 pilot. It is expensive to be wrong about a $20,000 platform.
+
+---
+
+## Who owns the software after a custom app is built for my small business?
+Page: https://uptimizeconsulting.ai/answers/who-owns-the-software-after-a-custom-app-is-built/
+
+You own it. When I build a custom app for a small business, the code, the data, and the hosting accounts are all in your name from the first week, and you can hand the whole thing to any other developer whenever you like. I'm Jonathan at Uptimize Consulting, and I put that in writing because the most common fear I hear on a scoping call is "what happens if you get hit by a bus, or we fall out."
+
+**Who owns the software after a custom app is built for my small business?** The client owns it. The source code, the database and every record in it, and the hosting and service accounts are all in the client's name from day one. There is no license to renew, no lock-in, and the client can take the software to any other developer at any time.
+
+**Can I move my custom app to another developer?** Yes. The code lives in a repository the client owns, it runs in hosting accounts the client owns, and it uses standard tools rather than a private framework, so any competent developer can pick it up. The handoff is a matter of adding them to the accounts, not negotiating a release.
+
+**What about third-party services and APIs the app depends on?** Those accounts are opened in the client's name as well, with the client as the billing contact and administrator. A custom app usually rents a few outside services, such as email delivery, an AI model, or document storage, and the client keeps control of every one of them. Nothing routes through an account the developer controls.
+
+**Who pays for hosting a custom small business app?** The client does, directly to the provider, and for one automated process it is usually a few dollars to a few tens of dollars a month. Because the accounts are the client's, there is no markup and no dependency. Ongoing care of $300 to $1,500 a month is optional and covers keeping the software working, not renting access to it.
