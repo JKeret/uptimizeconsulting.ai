@@ -15,6 +15,8 @@ const DATA_COLLECTION_FIELD_IDS = [
   "email",
   "urgent",
   "existing_client",
+  "call_type",
+  "message",
 ] as const;
 
 type FieldId = (typeof DATA_COLLECTION_FIELD_IDS)[number];
@@ -41,6 +43,17 @@ export function asString(value: unknown): string {
 
 /** Coerces true/false, "true"/"false", "yes"/"no" (case-insensitive) to a
  * boolean. Any other value (including missing) is falsy. */
+/** Coerces the triage field to the contract's call_type. Anything that
+ * isn't clearly a message ("message", "vendor", "note", "other", ...) is a
+ * lead -- the safe default, since a mis-filed lead is far worse than a
+ * mis-filed message. */
+export function asCallType(value: unknown): "lead" | "message" {
+  if (typeof value !== "string") return "lead";
+  const v = value.trim().toLowerCase();
+  if (["message", "vendor", "note", "other", "personal", "partner"].includes(v)) return "message";
+  return "lead";
+}
+
 export function asBoolean(value: unknown): boolean {
   if (typeof value === "boolean") return value;
   if (typeof value === "string") {
@@ -73,6 +86,8 @@ export function parseElevenLabs(payload: unknown): Lead {
     email: asString(fields.email),
     urgent: asBoolean(fields.urgent),
     existing_client: asBoolean(fields.existing_client),
+    call_type: asCallType(fields.call_type),
+    message: asString(fields.message),
     summary,
     transcript_url: `https://elevenlabs.io/app/agents/history/${conversationId}`,
     source: "phone-intake",

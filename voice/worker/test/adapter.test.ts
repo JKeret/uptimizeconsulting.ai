@@ -50,6 +50,8 @@ describe("parseElevenLabs", () => {
       email: "jane@doeconsulting.com",
       urgent: true,
       existing_client: false,
+      call_type: "lead",
+      message: "",
       summary: "Wants a new site built.",
       transcript_url: "https://elevenlabs.io/app/agents/history/conv_full",
       source: "phone-intake",
@@ -94,6 +96,8 @@ describe("parseElevenLabs", () => {
       email: "",
       urgent: false,
       existing_client: false,
+      call_type: "lead",
+      message: "",
       summary: "",
       transcript_url: "https://elevenlabs.io/app/agents/history/conv_missing",
       source: "phone-intake",
@@ -144,5 +148,33 @@ describe("parseElevenLabs", () => {
 
     expect(lead.urgent).toBe(true);
     expect(lead.existing_client).toBe(true);
+  });
+
+  it("maps call_type/message for a message call; vendor/note aliases count as message", () => {
+    const lead = parseElevenLabs(
+      fixture({
+        conversation_id: "conv_msg",
+        transcript_summary: "Vendor pitching payroll software.",
+        results: {
+          caller_name: { value: "Sam Seller" },
+          business_name: { value: "PayrollCo" },
+          call_type: { value: "message" },
+          message: { value: "Wants 15 minutes about their payroll product." },
+        },
+      })
+    );
+    expect(lead.call_type).toBe("message");
+    expect(lead.message).toBe("Wants 15 minutes about their payroll product.");
+    expect(lead.process).toBe("");
+
+    for (const alias of ["vendor", "Note", "OTHER", "partner"]) {
+      expect(parseElevenLabs(fixture({ conversation_id: "c", results: { call_type: { value: alias } } })).call_type).toBe("message");
+    }
+  });
+
+  it("defaults call_type to lead for anything unrecognised", () => {
+    for (const v of ["lead", "prospect", "", 42, undefined]) {
+      expect(parseElevenLabs(fixture({ conversation_id: "c", results: { call_type: { value: v } } })).call_type).toBe("lead");
+    }
   });
 });

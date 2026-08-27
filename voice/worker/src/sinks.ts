@@ -6,6 +6,11 @@
 // Promise.allSettled fan-out), and none may ever throw back into the
 // webhook handler -- `deliverLead` always resolves.
 //
+// Global constraint: `call_type === "message"` calls (vendors, partners,
+// anyone who just wants Jonathan to know they called) go to Telegram ONLY --
+// they must never enter the leads funnel (Netlify form -> sales agent's
+// daily check) or the CRM as a lead.
+//
 // Global constraint: `brain === "openai-lab"` leads are a test/lab route --
 // they skip Netlify and the CRM entirely (no point polluting the real
 // pipeline or the CRM with lab traffic) but still ping Telegram, tagged
@@ -28,6 +33,7 @@ export interface DeliveryResult {
  * decides what to do with a failure. */
 export async function netlifySink(lead: Lead, env: Env, fetchImpl: typeof fetch): Promise<boolean> {
   if (lead.brain === "openai-lab") return false;
+  if (lead.call_type === "message") return false;
   if (!env.NETLIFY_SITE_URL) return false;
 
   const form = new URLSearchParams({
@@ -126,10 +132,23 @@ async function rescuePhoneIntakeFromSpam(env: Env, fetchImpl: typeof fetch): Pro
 
 function telegramText(lead: Lead): string {
   const prefixes: string[] = [];
+  if (lead.call_type === "message") prefixes.push("📝 MESSAGE FOR JONATHAN");
   if (lead.urgent) prefixes.push("🔴 URGENT");
   if (lead.existing_client) prefixes.push("🔴 EXISTING CLIENT");
   if (lead.brain === "openai-lab") prefixes.push("🧪 LAB");
   const header = prefixes.length > 0 ? `${prefixes.join(" — ")}\n` : "";
+
+  if (lead.call_type === "message") {
+    return (
+      `${header}${lead.summary || "(no summary)"}\n\n` +
+      `Name: ${lead.name || "(not given)"}\n` +
+      `Company: ${lead.business || "(not given)"}\n` +
+      `Message: ${lead.message || "(none left)"}\n` +
+      `Phone: ${lead.callback_number || "(not given)"}\n` +
+      `Email: ${lead.email || "(not given)"}\n\n` +
+      `Transcript: ${lead.transcript_url}`
+    );
+  }
 
   return (
     `${header}${lead.summary || "(no summary)"}\n\n` +
@@ -223,6 +242,7 @@ async function crmLogin(env: Env, fetchImpl: typeof fetch): Promise<string | und
  * instead. */
 export async function crmSink(lead: Lead, env: Env, fetchImpl: typeof fetch): Promise<boolean> {
   if (lead.brain === "openai-lab") return false;
+  if (lead.call_type === "message") return false;
   if (!env.CRM_BASE_URL || !env.CRM_EMAIL || !env.CRM_PASSWORD) return false;
 
   const cookie = await crmLogin(env, fetchImpl);

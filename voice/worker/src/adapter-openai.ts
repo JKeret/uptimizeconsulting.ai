@@ -1,5 +1,5 @@
 import type { Lead } from "./contract";
-import { asBoolean, asString } from "./adapter-elevenlabs";
+import { asBoolean, asString, asCallType } from "./adapter-elevenlabs";
 
 // OpenAI-lab post-call payload shape (we control this -- it's emitted by
 // the lab bridge/tool call we write in voice/lab/, not a third-party
@@ -14,6 +14,8 @@ interface OpenAILabFields {
   email?: unknown;
   urgent?: unknown;
   existing_client?: unknown;
+  call_type?: unknown;
+  message?: unknown;
 }
 
 /** Parses an OpenAI-lab postcall payload into the stack-agnostic `Lead`
@@ -33,6 +35,8 @@ export function parseOpenAILab(payload: unknown): Lead {
     email: asString(fields.email),
     urgent: asBoolean(fields.urgent),
     existing_client: asBoolean(fields.existing_client),
+    call_type: asCallType(fields.call_type),
+    message: asString(fields.message),
     summary: asString((payload as any)?.summary),
     transcript_url: asString((payload as any)?.transcript_url),
     source: "phone-intake",

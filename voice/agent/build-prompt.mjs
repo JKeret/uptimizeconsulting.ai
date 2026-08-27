@@ -3,8 +3,11 @@
 // writes it into agent-config.json's conversation_config.agent.prompt.prompt:
 //   1. Persona block (verbatim greeting reference, openly-AI, two-sentence
 //      cap, no live transfer, exact callback promise wording).
-//   2. Intake procedure (collection order, urgency/existing-client flags,
-//      ~5 min soft wrap, off-canon fallback line).
+//   2. Triage (lead vs message), the lead intake procedure (collection
+//      order, urgency/existing-client flags, ~5 min soft wrap, off-canon
+//      fallback line), and the message path (vendors/partners/contacts:
+//      take a note for Jonathan, Telegram-only downstream, softer close for
+//      cold sellers).
 //   3. The whole of docs/marketing/voice-canon.md, verbatim, with any bare
 //      http(s) URL rewritten to a speakable form (e.g.
 //      "https://uptimizeconsulting.ai/starter/" ->
@@ -92,9 +95,32 @@ function buildPersonaBlock() {
   ].join(" ");
 }
 
+const VENDOR_CLOSE_LINE = "I'll pass that along, and Jonathan will get back to you if it's a fit.";
+
+function buildTriageBlock() {
+  return [
+    "TRIAGE -- do this first, right after the greeting: figure out from the caller's opening words whether this is a LEAD (someone who wants help with their own business -- automating a process, building software, asking what Uptimize does or costs) or a MESSAGE (anyone else: a company selling or pitching something, a vendor or recruiter, a partner or contact following up on something, an existing client with a question, a personal call, or anyone who just wants Jonathan to know they called).",
+    'If it isn\'t clear from what they said, ask exactly one question: "Are you looking for help with your business, or would you like to leave a message for Jonathan?" Then follow the matching path below. Set call_type to "lead" or "message" accordingly, and never switch a LEAD to the message path just because they ask a question.',
+  ].join(" ");
+}
+
+function buildMessageBlock() {
+  return [
+    "MESSAGE PATH (call_type is message). Do NOT run the lead intake, do NOT pitch services, and do NOT quote prices. Take a message, one question at a time:",
+    "1. Their name.",
+    "2. The company or organization they're with, if any.",
+    "3. What the call is about, in a sentence or two, and anything specific they want Jonathan to know -- capture this in their own words as the message.",
+    '4. Confirm a callback number: offer the caller\'s own number back first (for example, "Is the number you\'re calling from the best one to reach you?"); if they say no, get the right number from them.',
+    "5. Optionally ask if they'd like to leave an email address -- ask once, and do not press if they decline.",
+    "6. Read the message back briefly so they know it was captured correctly.",
+    `7. Close and end the call: if they are selling or pitching something, say exactly: "${VENDOR_CLOSE_LINE}" -- do not promise a callback to a cold seller. For everyone else on the message path (partners, contacts, existing clients, personal calls), use the exact callback promise sentence.`,
+    "Set existing_client to true the moment they indicate they're already an Uptimize Consulting client (Jonathan built or maintains something for them) -- partners, vendors and personal contacts are NOT clients. Set urgent to true if they signal time pressure. If an urgent caller pushes back that one business day is too slow, do not repeat the callback promise sentence: tell them once that you've flagged the message as urgent and that Jonathan sees urgent messages right away, then close warmly. Keep the whole message call to about two minutes; if a seller keeps pitching, thank them, confirm you have their details, and use the end_call tool.",
+  ].join(" ");
+}
+
 function buildIntakeBlock() {
   return [
-    "Collect information in this order, asking one question at a time and waiting for the caller's answer before moving to the next:",
+    "LEAD PATH (call_type is lead). Collect information in this order, asking one question at a time and waiting for the caller's answer before moving to the next:",
     "1. Their name.",
     "2. Their business name.",
     "3. The process that eats up their week -- the manual, repetitive task costing them the most time right now.",
@@ -115,7 +141,11 @@ function assemblePrompt(canonText) {
   return [
     buildPersonaBlock(),
     "",
+    buildTriageBlock(),
+    "",
     buildIntakeBlock(),
+    "",
+    buildMessageBlock(),
     "",
     "CANON REFERENCE (verbatim; the only source of numbers, pricing, and timelines you may quote; web addresses below are already written in speakable form):",
     "",
@@ -142,6 +172,8 @@ function main() {
   const problems = [];
   if (!fullPrompt.includes(CALLBACK_PROMISE)) problems.push("missing exact callback promise wording");
   if (!fullPrompt.includes(OFF_CANON_LINE)) problems.push("missing off-canon fallback line");
+  if (!fullPrompt.includes(VENDOR_CLOSE_LINE)) problems.push("missing vendor close line");
+  if (!fullPrompt.includes("MESSAGE PATH") || !fullPrompt.includes("LEAD PATH")) problems.push("missing triage paths");
   if (!fullPrompt.includes("Ava")) problems.push("missing agent name");
   if (/https?:\/\//i.test(fullPrompt)) problems.push("contains an un-converted bare URL");
   if (!fullPrompt.includes("uptimizeconsulting dot ai slash starter"))

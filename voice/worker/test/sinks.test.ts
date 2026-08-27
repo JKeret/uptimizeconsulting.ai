@@ -14,6 +14,8 @@ function makeLead(overrides: Partial<Lead> = {}): Lead {
     email: "jane@doeconsulting.com",
     urgent: false,
     existing_client: false,
+    call_type: "lead",
+    message: "",
     summary: "Wants a new site built.",
     transcript_url: "https://elevenlabs.io/app/agents/history/conv_full",
     source: "phone-intake",
@@ -192,6 +194,13 @@ describe("netlifySink", () => {
     expect(form.get("source")).toBe("phone-intake");
   });
 
+  it("skips (no fetch call) for message calls", async () => {
+    const { fetchImpl, calls } = createMockFetch([]);
+    const result = await netlifySink(makeLead({ call_type: "message" }), makeEnv(), fetchImpl);
+    expect(result).toBe(false);
+    expect(calls).toHaveLength(0);
+  });
+
   it("skips (no fetch call) for openai-lab leads", async () => {
     const { fetchImpl, calls } = createMockFetch([]);
     const result = await netlifySink(makeLead({ brain: "openai-lab" }), makeEnv(), fetchImpl);
@@ -246,6 +255,20 @@ describe("telegramSink", () => {
     const { fetchImpl, calls } = createMockFetch([{ ok: true }]);
     await telegramSink(makeLead({ existing_client: true }), makeEnv(), fetchImpl);
     expect((body(calls[0]).text as string).startsWith("🔴 EXISTING CLIENT")).toBe(true);
+  });
+
+  it("renders a MESSAGE FOR JONATHAN ping with the message body and no Process line", async () => {
+    const { fetchImpl, calls } = createMockFetch([{ ok: true }]);
+    await telegramSink(
+      makeLead({ call_type: "message", message: "Call me about the payroll demo.", business: "PayrollCo", process: "" }),
+      makeEnv(),
+      fetchImpl
+    );
+    const text = body(calls[0]).text as string;
+    expect(text.startsWith("📝 MESSAGE FOR JONATHAN")).toBe(true);
+    expect(text).toContain("Message: Call me about the payroll demo.");
+    expect(text).toContain("Company: PayrollCo");
+    expect(text).not.toContain("Process:");
   });
 
   it("prefixes text with LAB when brain is openai-lab", async () => {
@@ -335,6 +358,13 @@ describe("crmSink", () => {
     expect(body(calls[1]).sourceId).toBeUndefined();
   });
 
+  it("skips (no fetch call) for message calls", async () => {
+    const { fetchImpl, calls } = createMockFetch([]);
+    const result = await crmSink(makeLead({ call_type: "message" }), makeEnv(), fetchImpl);
+    expect(result).toBe(false);
+    expect(calls).toHaveLength(0);
+  });
+
   it("skips (no fetch call) for openai-lab leads", async () => {
     const { fetchImpl, calls } = createMockFetch([]);
     const result = await crmSink(makeLead({ brain: "openai-lab" }), makeEnv(), fetchImpl);
@@ -392,6 +422,14 @@ describe("deliverLead", () => {
 
     expect(result).toEqual({ netlify: true, telegram: true, crm: true });
     expect(calls).toHaveLength(4); // no extra error ping
+  });
+
+  it("message calls go to Telegram only -- no netlify, no crm, no error ping", async () => {
+    const { fetchImpl, calls } = createMockFetch([{ ok: true }]);
+    const result = await deliverLead(makeLead({ call_type: "message", message: "hi" }), makeEnv(), fetchImpl);
+    expect(result).toEqual({ netlify: false, telegram: true, crm: false });
+    expect(calls).toHaveLength(1);
+    expect(calls[0].url).toContain("api.telegram.org");
   });
 
   it("lab leads skip netlify and crm without an error ping; telegram still fires with LAB prefix", async () => {

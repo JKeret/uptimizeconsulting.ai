@@ -15,6 +15,23 @@ Last verified: TBD (Task 8 — end-to-end call test not yet run).
   https://uptimize-voice-hook.jonathanke.workers.dev — call → lead fan-out
   (Telegram + Netlify Forms `starter-project`, tagged `source=phone-intake`,
   + CRM lead in workspace `97e25975-ede3-4ce2-b463-a6986c713355`).
+- **Message path (2026-08-27):** Ava triages LEAD vs MESSAGE after the
+  greeting (vendors, partners, contacts, existing clients, personal calls =
+  MESSAGE). Message calls collect name/company/message/callback/email and go
+  to **Telegram ONLY** (📝 MESSAGE FOR JONATHAN) — never Netlify, never CRM.
+  Cold sellers get "I'll pass that along, and Jonathan will get back to you if
+  it's a fit." instead of the callback promise. Fields `call_type` + `message`
+  in data_collection; worker routes on `lead.call_type`. Edit
+  `voice/agent/build-prompt.mjs` → `node voice/agent/build-prompt.mjs` →
+  `ELEVENLABS_API_KEY=$(cat ~/.elevenlabs-uptimize) ./voice/agent/create-agent.sh`
+  (PATCHes the live agent) → re-run simulations (POST
+  /v1/convai/agents/:id/simulate-conversation with
+  `{simulation_specification:{simulated_user_config:{prompt:{prompt:"..."}}}}`).
+- **Split-brain gotcha (2026-08-27):** if Zima's `uptimize-crm-*` containers
+  come back, the `uptimize-crm` tunnel gets 8 connections and CF round-robins
+  per request → worker login lands on one host, lead POST on the other → 401,
+  silently lost lead. Check the tunnel's connection count = 4; stop the Zima
+  stack.
 - **CRM:** https://crm.uptimizeconsulting.ai — service user
   `voice-hook@uptimize.local` creates leads via `/api/leads`.
 - **Canon:** `docs/marketing/voice-canon.md` — the only source of truth for

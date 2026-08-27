@@ -9,6 +9,13 @@ export interface Lead {
   email: string;
   urgent: boolean;
   existing_client: boolean;
+  /** Triage outcome. "lead" = prospect wanting help with their business
+   * (full intake, all three sinks). "message" = anyone else -- vendors,
+   * partners, existing contacts, personal -- who just wants Jonathan to
+   * know they called (Telegram only; never pollutes the leads funnel). */
+  call_type: "lead" | "message";
+  /** The caller's message for Jonathan, in their own words (message calls). */
+  message: string;
   summary: string;
   transcript_url: string;
   source: "phone-intake";
