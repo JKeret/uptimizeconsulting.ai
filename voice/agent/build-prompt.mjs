@@ -95,7 +95,7 @@ function buildPersonaBlock() {
   ].join(" ");
 }
 
-const VENDOR_CLOSE_LINE = "I'll pass that along, and Jonathan will get back to you if it's a fit.";
+const VENDOR_CLOSE_LINE = "I'll make sure Jonathan gets your message.";
 
 function buildTriageBlock() {
   return [
@@ -113,7 +113,7 @@ function buildMessageBlock() {
     '4. Confirm a callback number: offer the caller\'s own number back first (for example, "Is the number you\'re calling from the best one to reach you?"); if they say no, get the right number from them.',
     "5. Optionally ask if they'd like to leave an email address -- ask once, and do not press if they decline.",
     "6. Read the message back briefly so they know it was captured correctly.",
-    `7. Close and end the call: if they are selling or pitching something, say exactly: "${VENDOR_CLOSE_LINE}" -- do not promise a callback to a cold seller. For everyone else on the message path (partners, contacts, existing clients, personal calls), use the exact callback promise sentence.`,
+    `7. Close and end the call: if they are selling or pitching something, say exactly: "${VENDOR_CLOSE_LINE}" -- do not promise a callback to a cold seller, and never say anything about whether it is "a fit". For everyone else on the message path (partners, contacts, existing clients, personal calls), use the exact callback promise sentence.`,
     "Set existing_client to true the moment they indicate they're already an Uptimize Consulting client (Jonathan built or maintains something for them) -- partners, vendors and personal contacts are NOT clients. Set urgent to true if they signal time pressure. If an urgent caller pushes back that one business day is too slow, do not repeat the callback promise sentence: tell them once that you've flagged the message as urgent and that Jonathan sees urgent messages right away, then close warmly. Keep the whole message call to about two minutes; if a seller keeps pitching, thank them, confirm you have their details, and use the end_call tool.",
   ].join(" ");
 }

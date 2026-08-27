@@ -19,8 +19,9 @@ Last verified: TBD (Task 8 — end-to-end call test not yet run).
   greeting (vendors, partners, contacts, existing clients, personal calls =
   MESSAGE). Message calls collect name/company/message/callback/email and go
   to **Telegram ONLY** (📝 MESSAGE FOR JONATHAN) — never Netlify, never CRM.
-  Cold sellers get "I'll pass that along, and Jonathan will get back to you if
-  it's a fit." instead of the callback promise. Fields `call_type` + `message`
+  Cold sellers get "I'll make sure Jonathan gets your message." instead of
+  the callback promise (the earlier "if it's a fit" wording was dropped 8/27
+  after Jonathan's real test call). Fields `call_type` + `message`
   in data_collection; worker routes on `lead.call_type`. Edit
   `voice/agent/build-prompt.mjs` → `node voice/agent/build-prompt.mjs` →
   `ELEVENLABS_API_KEY=$(cat ~/.elevenlabs-uptimize) ./voice/agent/create-agent.sh`
