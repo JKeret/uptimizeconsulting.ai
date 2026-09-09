@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Product Lists to Weekly Ads: A Grocery Software Case Study | Uptimize Consulting</title>
+<meta name="description" content="A grocery ad builder I built with a reusable product catalog, page layouts, collaboration, and PDF export. See the workflow behind the weekly flyer.">
+<link rel="canonical" href="https://uptimizeconsulting.ai/insights/grocery-weekly-ad-builder-case-study/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script defer src="https://analytics.uptimizeconsulting.ai/script.js" data-website-id="a163a740-7152-46d9-9206-1f292ce13579"></script>
+<script src="https://widget.instantaiguru.com/chat-widget.min.js?v=1.65" defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0F1937;--blue:#1E8CDC;--teal:#00C3A5;--white:#EFF4F9;--light:#E4EDF6;--gray:#64748B;--dark-text:#1E293B}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Montserrat',system-ui,sans-serif;color:var(--dark-text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--teal)}
+nav{background:var(--navy);padding:16px 0}
+nav .wrap{max-width:720px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+nav img{height:36px;display:block}
+nav a.back{color:rgba(255,255,255,.7);font-size:.85rem;font-weight:600}
+nav a.back:hover{color:var(--teal)}
+main{max-width:720px;margin:0 auto;padding:56px 24px 80px}
+.kicker{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00997F;margin-bottom:14px}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;line-height:1.2;letter-spacing:-.02em;color:var(--navy);margin-bottom:24px}
+h2{font-size:1.35rem;font-weight:700;color:var(--navy);margin:44px 0 14px}
+p{margin-bottom:18px;color:#334155}
+ul{margin:0 0 18px 22px}
+li{margin-bottom:8px;color:#334155}
+.answer{background:var(--light);border-left:4px solid var(--teal);border-radius:10px;padding:22px 26px;margin-bottom:28px}
+.answer p{margin:0;font-weight:600;color:var(--navy)}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0 8px}
+.price-card{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:22px}
+.price-card .amt{font-size:1.25rem;font-weight:800;color:var(--navy)}
+.price-card .lbl{font-size:.85rem;font-weight:700;color:#00997F;margin-bottom:6px}
+.price-card p{font-size:.85rem;color:var(--gray);margin:8px 0 0}
+.cta{background:linear-gradient(135deg,#0a1128,var(--navy));border-radius:14px;padding:32px;margin-top:48px;text-align:center}
+.cta h2{color:var(--white);margin:0 0 10px}
+.cta p{color:rgba(255,255,255,.7)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--navy);padding:14px 28px;border-radius:10px;font-weight:700;margin-top:8px}
+.btn:hover{transform:translateY(-2px);color:var(--navy)}
+footer{border-top:1px solid #E2E8F0;padding:28px 24px;text-align:center;color:var(--gray);font-size:.85rem}
+ol{margin:0 0 18px 22px}.example{background:var(--light);border-radius:10px;padding:20px;margin:24px 0}.example p{margin:0}.byline{font-size:.85rem;color:var(--gray);margin-bottom:24px}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From Product Lists to Weekly Ads: A Grocery Software Case Study",
+  "description": "A grocery ad builder I built with a reusable product catalog, page layouts, collaboration, and PDF export. See the workflow behind the weekly flyer.",
+  "author": {
+    "@type": "Person",
+    "name": "Jonathan Keret",
+    "url": "https://uptimizeconsulting.ai/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Uptimize Consulting",
+    "url": "https://uptimizeconsulting.ai/"
+  },
+  "mainEntityOfPage": "https://uptimizeconsulting.ai/insights/grocery-weekly-ad-builder-case-study/",
+  "datePublished": "2026-09-09"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this require replacing a POS system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No POS replacement is inherent in an ad-building workflow. Whether product information can be imported or connected directly depends on the existing system, available exports or APIs, and the fields the store needs. I confirm those details before promising an integration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a complete ad platform a $1,000 project?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A complete multi-user platform needs its own scope and quote. My $1,000 Starter Project covers one agreed process, delivered in about two weeks. A useful first step might be a narrow improvement to one part of your weekly-ad process, after I have checked what it requires."
+      }
+    }
+  ]
+}
+</script>
+</head><body>
+<nav><div class="wrap"><a href="/"><img src="/logo.jpg" alt="Uptimize Consulting"></a><a class="back" href="/insights/">← All insights</a></div></nav>
+<main><span class="kicker">Case study · Grocery retail</span>
+<h1>From Product Lists to Weekly Ads: A Grocery Software Case Study</h1><p class="byline">By Jonathan Keret · Uptimize Consulting, Naperville, Illinois<br>Published <time datetime="2026-09-09">September 9, 2026</time></p>
+<div class="answer"><p>I built a web-based weekly ad builder for an independent grocery store that had been creating promotional flyers by hand. The application brings a product catalog, reusable page layouts, collaborative editing, and PDF export into one workflow. This case study explains what the software does and which decisions stay with the store.</p></div>
+
+<p>Every new set of weekly specials needs to become something customers can read. A product list is the starting point. The finished ad also needs product images, clear prices, a consistent layout, and a review before it goes out.</p>
+<p>For this grocery project, I built software around that recurring production task. The application connects the store's product information to a layout staff can work on together and export when it is ready.</p>
+
+<h2>The starting point: weekly flyers built by hand</h2>
+<p>The store was creating its weekly promotional graphics manually. The useful question was how to make the recurring work reusable: the products, the page structure, and the steps needed to turn a new selection of specials into an export.</p>
+<p>A weekly ad contains information that changes and information that can be used again. The selected products and offers change. The product catalog and layout structure can support the next ad as well as the current one.</p>
+
+<h2>What I built</h2>
+<ul>
+<li><strong>A searchable product catalog.</strong> Products and their associated images can be found while assembling an ad.</li>
+<li><strong>Reusable, multi-page layouts.</strong> The builder uses a grid to organize products into flyer pages.</li>
+<li><strong>Drag-and-drop editing.</strong> Staff can arrange items in the layout instead of treating each page as a new design file.</li>
+<li><strong>Real-time collaboration.</strong> The application supports people working together on the ad.</li>
+<li><strong>PDF export.</strong> The completed layout can be exported for the next production step.</li>
+</ul>
+<p>The application is designed around a recurring retail task. It gives the store a way to assemble the ad using its product information and a repeatable layout.</p>
+
+<h2>How the work flows</h2>
+<ol>
+<li><strong>Select the products.</strong> The store decides which items belong in the promotion.</li>
+<li><strong>Assemble the pages.</strong> Products are placed and arranged in the ad's grid layout.</li>
+<li><strong>Review the offer.</strong> Staff check product identity, sizes, prices, units, and the promotion dates.</li>
+<li><strong>Export the ad.</strong> The reviewed layout becomes a PDF for the store's publishing or printing process.</li>
+</ol>
+<p>The store remains responsible for its offers and final approval. Software can make a price easy to place on a page; that does not establish that it is the right price for that week.</p>
+
+<h2>The result: a reusable weekly-ad workflow</h2>
+<p>The delivered result is a working ad-building application with reusable catalog and layout tools. The store has a dedicated place to assemble its promotions, and the catalog and layouts can be used again for the next set of weekly specials.</p>
+<p>For a similar project, I would record the time needed to assemble an ad, the number of corrections during review, and the effort needed to update a product or offer. Those measures help an owner decide whether the workflow is worth expanding.</p>
+
+<h2>Could this fit another independent store?</h2>
+<p>It is worth discussing when the store runs recurring promotions and staff spend time rebuilding similar pages. An independent supermarket may have a close match to this workflow. A liquor retailer may need different product fields, pack sizes, layouts, and offer rules, which should be checked before proposing the same setup.</p>
+<p>I would also check what the existing tools already do. If a current design or retail system handles the job well, there may be little reason to build another application. If a specific handoff is still manual, that is a place to investigate.</p>
+
+<h2>Does this require replacing a POS system?</h2>
+<p>No POS replacement is inherent in an ad-building workflow. Whether product information can be imported or connected directly depends on the existing system, available exports or APIs, and the fields the store needs. I confirm those details before promising an integration.</p>
+
+<h2>Is a complete ad platform a $1,000 project?</h2>
+<p>A complete multi-user platform needs its own scope and quote. My $1,000 Starter Project covers one agreed process, delivered in about two weeks. A useful first step might be a narrow improvement to one part of your weekly-ad process, after I have checked what it requires.</p>
+
+<p>For a practical starting point, read <a href="/answers/how-to-create-grocery-weekly-ads-from-a-product-list/">how to turn a grocery product list into a weekly ad</a>.</p>
+
+<div class="cta"><h2>How do you build your weekly ad?</h2>
+<p>Tell me which step takes the most work. I can help you scope a practical first improvement.</p>
+<a class="btn" href="/starter/" data-umami-event="case-study-cta-click" data-umami-event-slug="grocery-weekly-ad-builder-case-study">Discuss your weekly-ad workflow →</a>
+<p style="font-size:.85rem;margin:14px 0 0">One agreed starter process: $1,000, delivered in about two weeks.</p></div></main>
+<footer>© 2026 Uptimize Consulting · Naperville, IL · <a href="/">Home</a> · <a href="/insights/">Insights</a> · <a href="/answers/">Answers</a></footer>
+</body></html>
