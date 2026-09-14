@@ -163,7 +163,7 @@ A: In business since July 2022, a growing client base, and decades of experience
 ---
 
 ## 8. The Answers hub — question-by-question knowledge
-Generated 2026-09-09 from the live /answers/ pages. When a visitor's question matches one below, answer from it and link the page.
+Generated 2026-09-14 from the live /answers/ pages. When a visitor's question matches one below, answer from it and link the page.
 
 ---
 
@@ -262,6 +262,19 @@ No. AI automation sits next to the systems you already run and connects through 
 **How do you handle security and permissions?** The automation gets its own user account with the minimum permissions the job needs, never an owner login. Credentials live in a secrets store in your name, not in code or a shared document, and can be revoked at any time. For regulated data the build follows the compliance rules that already apply to you.
 
 **When is replacing a system actually the right call?** When the system is no longer supported, when the vendor is sunsetting it, when its data is so unreliable that automating around it would just move bad data faster, or when you already planned to replace it within a few months. In that case, automate after the switch, not before.
+
+---
+
+## How a Small Automation Project Can Pay for Itself
+Page: https://uptimizeconsulting.ai/answers/how-can-a-small-automation-project-pay-for-itself/
+
+You do not need to replace every system to improve how your business runs. A focused software or automation project can reduce repeated data entry, simplify paperwork, or connect tools your team already uses. When the task happens often enough and the improvement holds up in daily use, a small project can earn back its investment quickly.
+
+**How quickly can an automation project pay for itself?** It depends on the upfront cost, frequency of the task, benefit per run, and ongoing expenses. A frequently repeated task can support a shorter payback period, but a specific estimate should come from your own numbers. The five-to-six-week calculation above is illustrative.
+
+**Do I need a new platform?** Not necessarily. Configuring an existing tool or connecting two systems may solve the problem. A custom application is one option when the workflow cannot reasonably be handled that way.
+
+**What should the first project include?** One bounded workflow, a clear definition of success, a way to handle exceptions, and an agreed support arrangement. The scope should explain what happens when the automation cannot complete the task.
 
 ---
 
